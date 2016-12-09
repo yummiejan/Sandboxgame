@@ -5,5 +5,5 @@ package Model;
  */
 public class Cow extends Animal {
 //OIOIPOIPOIPO
-
+//ERWTKÖNHWJergslkebuköwertgpiu35zg423uh 5jhzieun
 }
