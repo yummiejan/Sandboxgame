@@ -17,6 +17,6 @@ public class MainProgram {
     }
 
     private static void setup(){
-        new MainController(new MainFrame("Card stack",50,50,800,600));
+        new MainController(new MainFrame("Sandboxgame",50,50,1280,720));
     }
 }
