@@ -1,5 +1,6 @@
 package Control;
 
+import Model.Inventory;
 import View.*;
 
 /**
@@ -8,9 +9,10 @@ import View.*;
 public class MainController {
     private MainFrame frame;
     private WorldHandler handler;
+    private InventoryHandler handler2;
 
     public MainController(MainFrame frame){
         handler = new WorldHandler(frame);
-
+        handler2 = new InventoryHandler(frame);
     }
 }

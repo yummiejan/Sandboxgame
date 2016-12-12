@@ -13,13 +13,11 @@ import java.awt.event.MouseEvent;
 public class WorldHandler implements InteractableObject{
 
     private Block allBlocks[][];
-    private Inventory inv;
-    private boolean enabled;
+
 
     public WorldHandler(MainFrame frame){
         System.out.println(frame.getActiveDrawingPanel().getWidth());
         System.out.print(frame.getActiveDrawingPanel().getHeight());
-        enabled = true;
         allBlocks = new Block[23][13];
         for (int i = 0; i < allBlocks.length; i++) {
             for (int j = 0; j < allBlocks[i].length; j++) {
@@ -29,10 +27,6 @@ public class WorldHandler implements InteractableObject{
             }
         }
         frame.getActiveDrawingPanel().addObject(new Player(100,400,this));
-        if(enabled){
-            frame.getActiveDrawingPanel().addObject(new Inventory(0,0));
-            System.out.println("laf");
-        }
     }
 
     @Override
@@ -42,12 +36,7 @@ public class WorldHandler implements InteractableObject{
 
     @Override
     public void keyReleased(int key) {
-        if(key == KeyEvent.VK_E){
-            enabled = true;
-            /**if(key == KeyEvent.VK_E){
-             enabled = false;
-             }*/
-        }
+
     }
 
     @Override
