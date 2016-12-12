@@ -63,9 +63,9 @@ public class Player extends Creature implements InteractableObject {
     }
 
     public boolean isBlock(){
-        if(wh.getAllBlocks()){
+        //if(wh.getAllBlocks()){
 
-        }
+        //}
         return false;
     }
 }
