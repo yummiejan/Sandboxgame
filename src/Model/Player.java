@@ -5,5 +5,5 @@ package Model;
  */
 public class Player extends Creature {
 
-    //ICH BINS! DER FELIX =OO/(OÜKujt4e6ho7 rnf0te arew
+    //OO
 }
