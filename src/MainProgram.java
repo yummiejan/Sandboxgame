@@ -17,6 +17,6 @@ public class MainProgram {
     }
 
     private static void setup(){
-        new MainController(new MainFrame("Fyn ist toll!",0,0,1200,700));
+        new MainController(new MainFrame("Fyn ist nichttoll!",0,0,1166,688));
     }
 }

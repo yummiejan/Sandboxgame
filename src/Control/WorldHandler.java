@@ -11,12 +11,18 @@ import java.awt.event.MouseEvent;
  */
 public class WorldHandler implements InteractableObject{
 
-    private Model.List<Block> list;
+    private Block allBlocks[][];
 
     public WorldHandler(MainFrame frame){
         System.out.println(frame.getActiveDrawingPanel().getWidth());
-        for (int i = 0; i < frame.getActiveDrawingPanel().getWidth()/50 ; i++) {
-            frame.getActiveDrawingPanel().addObject(new Dirt(i*50,frame.getActiveDrawingPanel().getHeight()-50));
+        System.out.print(frame.getActiveDrawingPanel().getHeight());
+        allBlocks = new Block[23][13];
+        for (int i = 0; i < allBlocks.length; i++) {
+            for (int j = 0; j < allBlocks[i].length; j++) {
+                if(j > 9){
+                    frame.getActiveDrawingPanel().addObject(new Dirt(i*50,j*50));
+                }
+            }
         }
 
     }
