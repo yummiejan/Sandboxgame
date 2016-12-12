@@ -1,4 +1,4 @@
-package View;
+package Model;
 
 /**
  * Created by Jean-Pierre on 15.11.2016.

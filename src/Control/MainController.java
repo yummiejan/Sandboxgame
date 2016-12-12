@@ -8,9 +8,9 @@ import View.*;
 public class MainController {
     private MainFrame frame;
     private WorldHandler handler;
-    //alsjkhdfkjasgkfjsaefdzasjdkhfoispadfhu
 
     public MainController(MainFrame frame){
         handler = new WorldHandler(frame);
+
     }
 }

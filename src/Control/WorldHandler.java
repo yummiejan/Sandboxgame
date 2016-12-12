@@ -1,9 +1,8 @@
 package Control;
 
-import View.DrawingPanel;
-import View.InteractableObject;
+import Model.*;
+import Model.List;import View.DrawingPanel;
 import View.MainFrame;
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
@@ -12,7 +11,13 @@ import java.awt.event.MouseEvent;
  */
 public class WorldHandler implements InteractableObject{
 
+    private Model.List<Block> list;
+
     public WorldHandler(MainFrame frame){
+        System.out.println(frame.getActiveDrawingPanel().getWidth());
+        for (int i = 0; i < frame.getActiveDrawingPanel().getWidth()/50 ; i++) {
+            frame.getActiveDrawingPanel().addObject(new Dirt(i*50,frame.getActiveDrawingPanel().getHeight()-50));
+        }
 
     }
 

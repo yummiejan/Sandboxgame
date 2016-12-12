@@ -1,5 +1,8 @@
 package View;
 
+import Model.DrawableObject;
+import Model.InteractableObject;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
