@@ -17,6 +17,6 @@ public class MainProgram {
     }
 
     private static void setup(){
-        new MainController(new MainFrame("Sandboxgame",50,50,1280,720));
+        new MainController(new MainFrame("Fyn ist toll!",50,50,1280,720));
     }
 }
