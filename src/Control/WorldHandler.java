@@ -24,6 +24,7 @@ public class WorldHandler implements InteractableObject{
                 }
             }
         }
+        frame.getActiveDrawingPanel().addObject(new Player(100,400));
 
     }
 
@@ -50,5 +51,13 @@ public class WorldHandler implements InteractableObject{
     @Override
     public void update(double dt) {
 
+    }
+    public Block[][] getAllBlocks(int a, int b) {
+
+        return allBlocks;
+    }
+
+    public void setAllBlocks(Block[][] allBlocks) {
+        this.allBlocks = allBlocks;
     }
 }
