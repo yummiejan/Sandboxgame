@@ -52,13 +52,13 @@ public class Inventory implements InteractableObject{
             for (int j = 0; j < itemPlace[i].length ; j++) {
                 g2d.setColor(new Color(0,0,0));
                 g2d.draw(rectangle);
-                rectangle.setFrame(i*35,j*35,35,35);
+                rectangle.setFrame(posX+i*35,posY+j*35,35,35);
             }
         }
         for (int i = 0; i < armorPlace.length; i++) {
             g2d.setColor(new Color(0,0,0));
             g2d.draw(rectangle2);
-            rectangle2.setFrame(35*itemPlace.length+20,i*35,35,35);
+            rectangle2.setFrame(posX+35*itemPlace.length+20,posY+i*35,35,35);
         }
     }
 

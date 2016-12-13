@@ -1,6 +1,5 @@
 package Control;
 
-import Model.Inventory;
 import View.*;
 
 /**

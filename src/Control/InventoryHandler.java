@@ -15,17 +15,23 @@ import java.awt.event.MouseEvent;
  */
 public class InventoryHandler implements InteractableObject{
 
+    private Inventory inventory;
+    private Hotbar hotbar;
     private boolean enabled;
+
     public InventoryHandler(MainFrame frame) {
-        enabled = true;
+        enabled = false;
+        inventory = new Inventory(0,0);
+        hotbar = new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0);
 
         if(enabled){
-            frame.getActiveDrawingPanel().addObject(new Inventory(0,0));
-            System.out.println("laf");
-        }
-        if(!enabled){
+            frame.getActiveDrawingPanel().addObject(inventory);
+            System.out.println("Inventar");
+            frame.getActiveDrawingPanel().removeObject(hotbar);
+        }else{
             frame.getActiveDrawingPanel().addObject(new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0));
-            System.out.println("fal");
+            System.out.println("Hotbar");
+            frame.getActiveDrawingPanel().removeObject(inventory);
         }
     }
 
