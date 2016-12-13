@@ -6,6 +6,6 @@ package Model;
 public class Dirt extends Block {
 
     public Dirt(double posX, double posY) {
-        super(posX, posY);
+        super(posX, posY, new int[] {84, 42, 25, 0, 0, 0});
     }
 }

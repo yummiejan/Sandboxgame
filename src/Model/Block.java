@@ -13,18 +13,20 @@ public abstract class Block extends Item implements DrawableObject {
     private Rectangle2D.Double rectangle;
     private double posX, posY;
     private double height = 50, width = 50;
+    private int[] colours = new int[5];
 
-    public Block(double posX, double posY) {
+    public Block(double posX, double posY, int[] colours) {
         this.posX = posX;
         this.posY = posY;
+        this.colours = colours;
         rectangle = new Rectangle2D.Double(posX, posY, height, width);
     }
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-        g2d.setColor(new Color(84, 42, 25));
+        g2d.setColor(new Color(colours[0],colours[1],colours[2]));
         g2d.fill(rectangle);
-        g2d.setColor(new Color(0,0,0));
+        g2d.setColor(new Color(colours[3],colours[4],colours[5]));
         g2d.draw(rectangle);
         rectangle.setFrame(posX,posY,width,height);
     }
