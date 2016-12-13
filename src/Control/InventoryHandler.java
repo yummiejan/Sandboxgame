@@ -17,7 +17,7 @@ public class InventoryHandler implements InteractableObject{
 
     private boolean enabled;
     public InventoryHandler(MainFrame frame) {
-        enabled = false;
+        enabled = true;
 
         if(enabled){
             frame.getActiveDrawingPanel().addObject(new Inventory(0,0));
