@@ -15,7 +15,7 @@ public class Inventory implements InteractableObject{
     private Rectangle2D.Double rectangle;
     private Rectangle2D.Double rectangle2;
     private Rectangle2D itemPlace[][];
-    private Rectangle2D amorPlace[];
+    private Rectangle2D armorPlace[];
     private double posX, posY;
 
     public Inventory(double posX, double posY) {
@@ -25,7 +25,7 @@ public class Inventory implements InteractableObject{
         rectangle = new Rectangle2D.Double(posX, posY, 10, 10);
         rectangle2 = new Rectangle2D.Double(posX, posY, 10, 10);
         itemPlace = new Rectangle2D[10][4];
-        amorPlace = new Rectangle2D[4];
+        armorPlace = new Rectangle2D[4];
     }
 
     @Override
@@ -55,7 +55,7 @@ public class Inventory implements InteractableObject{
                 rectangle.setFrame(i*35,j*35,35,35);
             }
         }
-        for (int i = 0; i < amorPlace.length; i++) {
+        for (int i = 0; i < armorPlace.length; i++) {
             g2d.setColor(new Color(0,0,0));
             g2d.draw(rectangle2);
             rectangle2.setFrame(35*itemPlace.length+20,i*35,35,35);
