@@ -14,12 +14,14 @@ public abstract class Block extends Item implements DrawableObject {
     private double posX, posY;
     private double height = 50, width = 50;
     private int[] colours = new int[5];
+    private boolean solid;
 
-    public Block(double posX, double posY, int[] colours) {
+    public Block(double posX, double posY, int[] colours,boolean solid) {
         this.posX = posX;
         this.posY = posY;
         this.colours = colours;
         rectangle = new Rectangle2D.Double(posX, posY, height, width);
+        this.solid = solid;
     }
 
     @Override
@@ -34,5 +36,13 @@ public abstract class Block extends Item implements DrawableObject {
     @Override
     public void update(double dt) {
 
+    }
+
+    public boolean isSolid() {
+        return solid;
+    }
+
+    public void setSolid(boolean solid) {
+        this.solid = solid;
     }
 }

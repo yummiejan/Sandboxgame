@@ -55,9 +55,9 @@ public class WorldHandler implements InteractableObject{
     public void update(double dt) {
 
     }
-    public Block[][] getAllBlocks(int a, int b) {
+    public Block getAllBlocks(int a, int b) {
 
-        return allBlocks;
+        return allBlocks[a][b];
     }
 
     public void setAllBlocks(Block[][] allBlocks) {
