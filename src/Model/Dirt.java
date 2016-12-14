@@ -10,6 +10,6 @@ public class Dirt extends Block {
     private int randomB = (int)(Math.random() * 10) + 20;
 
     public Dirt(double posX, double posY) {
-        super(posX, posY, new int[] {(int)(Math.random() * 50) + 160, (int)(Math.random() * 50) + 100, (int)(Math.random() * 50) + 100,0,0,0});
+        super(posX, posY, new int[] {(int)(Math.random() * 50) + 160, (int)(Math.random() * 50) + 100, (int)(Math.random() * 50) + 100,0,0,0,false});
     }
 }
