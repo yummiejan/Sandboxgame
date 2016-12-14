@@ -34,7 +34,7 @@ public class Player extends Creature implements InteractableObject {
         if(key ==KeyEvent.VK_A){
             posX = posX - 50;
         }else if(key ==KeyEvent.VK_D){
-            //if (isBlock())
+            if (isBlock())
             posX = posX + 50;
         }
         if(key ==KeyEvent.VK_SPACE){
@@ -65,6 +65,7 @@ public class Player extends Creature implements InteractableObject {
 
     public boolean isBlock(){
         Block b = wh.getAllBlocks((posX/50)+1,posY/50);
+        System.out.println((posX/50)+1);
         if(b == null){
             return false;
         }

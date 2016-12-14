@@ -24,8 +24,9 @@ public class WorldHandler implements InteractableObject{
             System.out.println(counter);
             for (int j = 0; j < allBlocks[i].length; j++) {
                 if(j > counter){
-                    frame.getActiveDrawingPanel().addObject(new Dirt(i*50,j*50));
-                }
+                    allBlocks[i][j] = new Dirt(i*50,j*50);
+                    frame.getActiveDrawingPanel().addObject(allBlocks[i][j]);
+                 }
             }
         }
         frame.getActiveDrawingPanel().addObject(new Player(100,400,this));
