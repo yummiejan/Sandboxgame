@@ -1,8 +1,8 @@
-package Control.GameplayHandler;
+package Control;
 
-import Model.Gameplay.Inventory.Hotbar;
+import Model.Hotbar;
 import Model.InteractableObject;
-import Model.Gameplay.Inventory.Inventory;
+import Model.Inventory;
 import View.DrawingPanel;
 import View.MainFrame;
 
@@ -15,37 +15,30 @@ import java.awt.event.MouseEvent;
  */
 public class InventoryHandler implements InteractableObject{
 
-    private Inventory inventory;
-    private Hotbar hotbar;
     private boolean enabled;
-
     public InventoryHandler(MainFrame frame) {
-        enabled = false;
-        inventory = new Inventory(0,0);
-        hotbar = new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0);
         if(enabled){
-            frame.getActiveDrawingPanel().addObject(inventory);
-            System.out.println("Inventory");
-            frame.getActiveDrawingPanel().removeObject(hotbar);
-        }else{
-            frame.getActiveDrawingPanel().addObject(hotbar);
-            System.out.println("Hotbar");
-            frame.getActiveDrawingPanel().removeObject(inventory);
+            frame.getActiveDrawingPanel().addObject(new Inventory(0,0));
+        }else {
+            frame.getActiveDrawingPanel().addObject(new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0));
         }
     }
 
     @Override
     public void keyPressed(int key) {
-        if(key == KeyEvent.VK_E){
+        if(key == KeyEvent.VK_E && enabled == false){
             enabled = true;
-            /*if(key == KeyEvent.VK_E){
-             enabled = false;
-             }*/
+            System.out.println(enabled);
+        }
+        if(key == KeyEvent.VK_I && enabled == true){
+            enabled = false;
+            System.out.println(enabled);
         }
     }
 
     @Override
     public void keyReleased(int key) {
+
 
     }
 

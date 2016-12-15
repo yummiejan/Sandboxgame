@@ -1,8 +1,6 @@
-package Model.Creatures;
+package Model;
 
-import Control.GameplayHandler.WorldHandler;
-import Model.Items.Blocks.Block;
-import Model.InteractableObject;
+import Control.WorldHandler;
 import View.DrawingPanel;
 
 import java.awt.*;
@@ -33,17 +31,17 @@ public class Player extends Creature implements InteractableObject {
 
     @Override
     public void keyReleased(int key) {
-        if(key == KeyEvent.VK_A){
+        if(key ==KeyEvent.VK_A){
             posX = posX - 50;
-        }else if(key == KeyEvent.VK_D){
+        }else if(key ==KeyEvent.VK_D){
+            if (isBlock())
             posX = posX + 50;
         }
-        if(key == KeyEvent.VK_SPACE){
+        if(key ==KeyEvent.VK_SPACE){
             posY = posY - 50;
-        }else if(key == KeyEvent.VK_SHIFT){
+        }else if(key ==KeyEvent.VK_S){
             posY = posY + 50;
         }
-        System.out.println(isBlock());
     }
 
     @Override
@@ -66,11 +64,14 @@ public class Player extends Creature implements InteractableObject {
     }
 
     public boolean isBlock(){
-        Block b = wh.getAllBlocks(posX/50,posY/50);
-        System.out.print("Position: "+(posX/50+1)+", "+(posY/50+2)+"; solid block: ");
+        Block b = wh.getAllBlocks((posX/50)+1,posY/50);
+        System.out.println((posX/50)+1);
         if(b == null){
             return false;
         }
-        return true;
+        if(b.isSolid()&& b != null){
+            return true;
+        }
+        return false;
     }
 }

@@ -15,5 +15,6 @@ public class MainController {
     public MainController(MainFrame frame){
         handler = new WorldHandler(frame);
         handler2 = new InventoryHandler(frame);
+        frame.getActiveDrawingPanel().addObject(handler2);
     }
 }
