@@ -1,8 +1,8 @@
-package Control;
+package Control.GameplayHandler;
 
-import Model.Hotbar;
+import Model.Gameplay.Inventory.Hotbar;
 import Model.InteractableObject;
-import Model.Inventory;
+import Model.Gameplay.Inventory.Inventory;
 import View.DrawingPanel;
 import View.MainFrame;
 
@@ -19,26 +19,25 @@ public class InventoryHandler implements InteractableObject{
     public InventoryHandler(MainFrame frame) {
         if(enabled){
             frame.getActiveDrawingPanel().addObject(new Inventory(0,0));
-        }else {
+        }else{
             frame.getActiveDrawingPanel().addObject(new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0));
         }
     }
 
     @Override
     public void keyPressed(int key) {
-        if(key == KeyEvent.VK_E && enabled == false){
+        if(key == KeyEvent.VK_E && !enabled){
             enabled = true;
-            System.out.println(enabled);
+            System.out.println("Inventar: "+enabled);
         }
-        if(key == KeyEvent.VK_I && enabled == true){
+        if(key == KeyEvent.VK_I && enabled){
             enabled = false;
-            System.out.println(enabled);
+            System.out.println("Inventar: "+enabled);
         }
     }
 
     @Override
     public void keyReleased(int key) {
-
 
     }
 

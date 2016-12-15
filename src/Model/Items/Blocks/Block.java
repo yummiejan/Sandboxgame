@@ -5,7 +5,6 @@ import Model.Items.Item;
 import View.DrawingPanel;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -40,9 +39,6 @@ public abstract class Block extends Item implements DrawableObject {
     public void update(double dt) {
 
     }
-
-
-
 
     public boolean isSolid() {
         return solid;
