@@ -1,8 +1,8 @@
-package Control;
+package Control.GameplayHandler;
 
-import Model.Hotbar;
+import Model.Gameplay.Inventory.Hotbar;
 import Model.InteractableObject;
-import Model.Inventory;
+import Model.Gameplay.Inventory.Inventory;
 import View.DrawingPanel;
 import View.MainFrame;
 
@@ -23,13 +23,12 @@ public class InventoryHandler implements InteractableObject{
         enabled = false;
         inventory = new Inventory(0,0);
         hotbar = new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0);
-
         if(enabled){
             frame.getActiveDrawingPanel().addObject(inventory);
-            System.out.println("Inventar");
+            System.out.println("Inventory");
             frame.getActiveDrawingPanel().removeObject(hotbar);
         }else{
-            frame.getActiveDrawingPanel().addObject(new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0));
+            frame.getActiveDrawingPanel().addObject(hotbar);
             System.out.println("Hotbar");
             frame.getActiveDrawingPanel().removeObject(inventory);
         }
@@ -39,7 +38,7 @@ public class InventoryHandler implements InteractableObject{
     public void keyPressed(int key) {
         if(key == KeyEvent.VK_E){
             enabled = true;
-            /**if(key == KeyEvent.VK_E){
+            /*if(key == KeyEvent.VK_E){
              enabled = false;
              }*/
         }

@@ -1,5 +1,7 @@
 package Control;
 
+import Control.GameplayHandler.InventoryHandler;
+import Control.GameplayHandler.WorldHandler;
 import View.*;
 
 /**

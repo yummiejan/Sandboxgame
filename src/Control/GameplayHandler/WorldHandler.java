@@ -1,10 +1,13 @@
-package Control;
+package Control.GameplayHandler;
 
 import Model.*;
-import Model.List;import View.DrawingPanel;
+import Model.Creatures.Player;
+import Model.Items.Blocks.Block;
+import Model.Items.Blocks.Dirt;
+import View.DrawingPanel;
 import View.MainFrame;
+
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 /**
@@ -14,22 +17,37 @@ public class WorldHandler implements InteractableObject{
 
     private Block allBlocks[][];
 
-
     public WorldHandler(MainFrame frame){
-        System.out.println(frame.getActiveDrawingPanel().getWidth());
-        System.out.print(frame.getActiveDrawingPanel().getHeight());
+        System.out.println("Width: "+frame.getActiveDrawingPanel().getWidth());
+        System.out.println("Height: "+frame.getActiveDrawingPanel().getHeight());
         allBlocks = new Block[23][13];
+        System.out.print("Blocks: ");
         for (int i = 0; i < allBlocks.length; i++) {
-            int counter = (int)(Math.random()*2)+8;
-            System.out.println(counter);
+            int counter = (int)(Math.random()*2)+7;
+            int console = 0;
             for (int j = 0; j < allBlocks[i].length; j++) {
                 if(j > counter){
                     allBlocks[i][j] = new Dirt(i*50,j*50);
                     frame.getActiveDrawingPanel().addObject(allBlocks[i][j]);
+                    console++;
                  }
             }
+            System.out.print(console+" ");
         }
-        frame.getActiveDrawingPanel().addObject(new Player(100,400,this));
+        System.out.println();
+        int x = (int)(Math.random()*19+2);
+        frame.getActiveDrawingPanel().addObject(new Player(x*50,xBlockLevel(x)*50,this));
+        System.out.println("Spawnposition: "+x+", "+xBlockLevel(x));
+    }
+
+    public int xBlockLevel(int x){
+        int n = 0;
+        for(int i = 0; i < allBlocks[x].length; i++){
+            if(allBlocks[x][i] == null){
+                n++;
+            }
+        }
+        return n-2;
     }
 
     @Override

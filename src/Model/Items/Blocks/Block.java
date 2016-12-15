@@ -1,5 +1,7 @@
-package Model;
+package Model.Items.Blocks;
 
+import Model.DrawableObject;
+import Model.Items.Item;
 import View.DrawingPanel;
 
 import java.awt.*;

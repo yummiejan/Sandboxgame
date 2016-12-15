@@ -1,15 +1,19 @@
-package Model;
+package Model.Gameplay.Inventory;
 
+import Control.GameplayHandler.InventoryHandler;
+import Model.InteractableObject;
 import View.DrawingPanel;
+import View.MainFrame;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
 /**
  * Created by 204g04 on 12.12.2016.
  */
-public class Inventory implements InteractableObject{
+public class Inventory implements InteractableObject {
 
     private Rectangle2D.Double backRectangle;
     private Rectangle2D.Double rectangle;

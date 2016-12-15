@@ -1,5 +1,6 @@
-package Model;
+package Model.Gameplay.Inventory;
 
+import Model.InteractableObject;
 import View.DrawingPanel;
 
 import java.awt.*;
@@ -9,7 +10,7 @@ import java.awt.geom.Rectangle2D;
 /**
  * Created by Felix on 12.12.2016.
  */
-public class Hotbar implements InteractableObject{
+public class Hotbar implements InteractableObject {
 
     private Rectangle2D.Double rectangle;
     private Rectangle2D.Double backRectangle;
@@ -23,7 +24,6 @@ public class Hotbar implements InteractableObject{
         rectangle = new Rectangle2D.Double(posX,posY,250,50);
         backRectangle = new Rectangle2D.Double(posX,posY,250,50);
     }
-
 
     @Override
     public void keyPressed(int key) {
