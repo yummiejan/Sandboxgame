@@ -21,7 +21,6 @@ public class WorldHandler implements InteractableObject{
         allBlocks = new Block[23][13];
         for (int i = 0; i < allBlocks.length; i++) {
             int counter = (int)(Math.random()*2)+8;
-            System.out.println(counter);
             for (int j = 0; j < allBlocks[i].length; j++) {
                 if(j > counter){
                     allBlocks[i][j] = new Dirt(i*50,j*50);

@@ -69,7 +69,7 @@ public class Player extends Creature implements InteractableObject {
         if(b == null){
             return false;
         }
-        if(b.isSolid()){
+        if(b.isSolid()&& b != null){
             return true;
         }
         return false;
