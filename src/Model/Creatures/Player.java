@@ -44,7 +44,7 @@ public class Player extends Creature implements InteractableObject {
                 if (!isBlock(2))
                     posY = posY - 80;
             }
-        //System.out.println(isBlock());
+//s
     }
 
     @Override
