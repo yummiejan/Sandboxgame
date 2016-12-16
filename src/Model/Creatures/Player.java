@@ -42,6 +42,7 @@ public class Player extends Creature implements InteractableObject {
             }
             if (key == KeyEvent.VK_W) {
                 if (!isBlock(2))
+                    if (isBlock(3))
                     posY = posY - 80;
             }
 //sg
