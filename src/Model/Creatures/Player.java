@@ -111,6 +111,10 @@ public class Player extends Creature implements InteractableObject {
             b = wh.getAllBlocks((posX/50)+1,posY/50+1);
             wh.getAllBlocks((posX/50)+1,posY/50+1).setDisplayed(false);
             wh.setAllBlocks((posX/50)+1,posY/50+1,null);
+        }else{
+            b = wh.getAllBlocks((posX/50)-1,posY/50+1);
+            wh.getAllBlocks((posX/50)-1,posY/50+1).setDisplayed(false);
+            wh.setAllBlocks((posX/50)-1,posY/50+1,null);
         }
         return  b;
 
