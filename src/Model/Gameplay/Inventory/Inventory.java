@@ -47,7 +47,7 @@ public class Inventory implements InteractableObject {
     public void mouseReleased(MouseEvent e) {
 
     }
-
+//
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
         if(displayed == true) {
