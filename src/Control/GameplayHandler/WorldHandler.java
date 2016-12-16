@@ -4,6 +4,7 @@ import Model.*;
 import Model.Creatures.Player;
 import Model.Items.Blocks.Block;
 import Model.Items.Blocks.Dirt;
+import Model.Items.Blocks.Furnace;
 import View.DrawingPanel;
 import View.MainFrame;
 
@@ -38,6 +39,7 @@ public class WorldHandler implements InteractableObject{
         int x = (int)(Math.random()*19+2);
         frame.getActiveDrawingPanel().addObject(new Player(x*50,xBlockLevel(x)*50,this));
         System.out.println("Spawnposition: "+x+", "+xBlockLevel(x));
+        frame.getActiveDrawingPanel().addObject(new Furnace(0,(xBlockLevel(0)+1)*50));
     }
 
     public int xBlockLevel(int x){
