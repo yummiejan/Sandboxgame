@@ -16,14 +16,16 @@ import java.awt.geom.Rectangle2D;
 public class Player extends Creature implements InteractableObject {
 
     private WorldHandler wh;
-    private Rectangle2D.Double rectangle;
+    private Rectangle2D.Double rectangle1,rectangle2,rectangle3,rectangle4;
     private int posX, posY;
     private boolean direction=true;
 
     public Player(int posX, int posY, WorldHandler wh) {
         this.posX = posX;
         this.posY = posY;
-        rectangle = new Rectangle2D.Double(posX,posY,50,100);
+        rectangle1 = new Rectangle2D.Double(posX+20,posY,10,100);
+        rectangle2 = new Rectangle2D.Double(posX+10,posY,30,30);
+
         this.wh = wh;
     }
 
@@ -66,10 +68,12 @@ public class Player extends Creature implements InteractableObject {
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
         g2d.setColor(new Color(194, 148, 24));
-        g2d.fill(rectangle);
+        g2d.fill(rectangle1);
+        //g2d.fill(rectangle2);
         g2d.setColor(new Color(0,0,0));
-        g2d.draw(rectangle);
-        rectangle.setFrame(posX,posY,50,100);
+        g2d.draw(rectangle1);
+        //g2d.draw(rectangle2);
+        rectangle1.setFrame(posX+20,posY,10,100);
     }
 
     @Override
