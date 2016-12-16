@@ -79,7 +79,7 @@ public class WorldHandler implements InteractableObject{
         return allBlocks[a][b];
     }
 
-    public void setAllBlocks(Block[][] allBlocks) {
-        this.allBlocks = allBlocks;
+    public void setAllBlocks(int a,int b,Block block) {
+        allBlocks[a][b] = block;
     }
 }

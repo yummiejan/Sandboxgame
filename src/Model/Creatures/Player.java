@@ -18,6 +18,7 @@ public class Player extends Creature implements InteractableObject {
     private WorldHandler wh;
     private Rectangle2D.Double rectangle;
     private int posX, posY;
+    private boolean direction=true;
 
     public Player(int posX, int posY, WorldHandler wh) {
         this.posX = posX;
@@ -33,18 +34,27 @@ public class Player extends Creature implements InteractableObject {
 
     @Override
     public void keyReleased(int key) {
-            if (key == KeyEvent.VK_A) {
-                if (!isBlock(1))
-                posX = posX - 50;
-            } else if (key == KeyEvent.VK_D) {
-                if (!isBlock(0))
-                posX = posX + 50;
-            }
-            if (key == KeyEvent.VK_W) {
-                if (!isBlock(2))
-                    if (isBlock(3))
-                    posY = posY - 80;
-            }
+
+        if (key == KeyEvent.VK_A) {
+            direction =false;
+            if (!isBlock(1))
+            posX = posX - 50;
+        } else if (key == KeyEvent.VK_D) {
+            direction = true;
+            if (!isBlock(0))
+            posX = posX + 50;
+        }
+        if (key == KeyEvent.VK_W) {
+            if (!isBlock(2))
+                if (isBlock(3))
+                posY = posY - 80;
+        }
+
+        if (key==KeyEvent.VK_Q){
+            abbauen();
+        }
+
+
 //sg
     }
 
@@ -89,5 +99,15 @@ public class Player extends Creature implements InteractableObject {
             return true;
         }
         return false;
+    }
+
+    public Block abbauen(){
+        Block b = null;
+        if(direction){
+            b = wh.getAllBlocks((posX/50)+1,posY/50+1);
+            wh.setAllBlocks((posX/50)+1,posY/50+1,null);
+        }
+        return  b;
+
     }
 }
