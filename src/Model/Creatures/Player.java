@@ -42,10 +42,7 @@ public class Player extends Creature implements InteractableObject {
             }
             if (key == KeyEvent.VK_W) {
                 if (!isBlock(2))
-                posY = posY - 60;
-            } else if (key == KeyEvent.VK_S) {
-                if (!isBlock(3))
-                posY = posY + 50;
+                    posY = posY - 80;
             }
         //System.out.println(isBlock());
     }
@@ -67,7 +64,7 @@ public class Player extends Creature implements InteractableObject {
     @Override
     public void update(double dt) {
         if (!isBlock(3)){
-            posY++;
+            posY = posY + 2;
         }
     }
 
