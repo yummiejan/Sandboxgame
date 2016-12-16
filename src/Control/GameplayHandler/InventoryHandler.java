@@ -16,23 +16,27 @@ import java.awt.event.MouseEvent;
 public class InventoryHandler implements InteractableObject{
 
     private boolean enabled;
+    private MainFrame frame;
+    private Inventory firstInventory;
+    private Hotbar firstHotbar;
+
     public InventoryHandler(MainFrame frame) {
-        if(enabled){
-            frame.getActiveDrawingPanel().addObject(new Inventory(0,0));
-        }else{
-            frame.getActiveDrawingPanel().addObject(new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0));
-        }
+        this.frame = frame;
+        firstInventory = new Inventory(0,0);
+        frame.getActiveDrawingPanel().addObject(firstInventory);
+        firstInventory.setDisplayed(false);
+        firstHotbar = new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0);
+        frame.getActiveDrawingPanel().addObject(firstHotbar);
+
     }
 
     @Override
     public void keyPressed(int key) {
-        if(key == KeyEvent.VK_E && !enabled){
-            enabled = true;
-            System.out.println("Inventar: "+enabled);
+        if(key == KeyEvent.VK_E && firstHotbar.isDisplayed()){
+            firstInventory.setDisplayed(true);
         }
-        if(key == KeyEvent.VK_I && enabled){
-            enabled = false;
-            System.out.println("Inventar: "+enabled);
+        if(key == KeyEvent.VK_I){
+            firstInventory.setDisplayed(false);
         }
     }
 

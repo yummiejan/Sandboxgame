@@ -17,6 +17,7 @@ public class Hotbar implements InteractableObject {
     private Rectangle2D.Double backRectangle;
     private int posX, posY;
     private Rectangle2D place[];
+    private boolean displayed;
 
     public Hotbar(int posX, int posY) {
         this.posX = posX;
@@ -43,19 +44,29 @@ public class Hotbar implements InteractableObject {
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-        g2d.setColor(new Color(79,79,79));
-        g2d.fill(backRectangle);
-        backRectangle.setFrame(posX-125,0,35*place.length,35);
-        for (int i = 0; i < place.length ; i++) {
-            place[i] = new Rectangle2D.Double(i*35+posX-125,0,35,35);
-            g2d.setColor(new Color(0,0,0));
-            g2d.draw(rectangle);
-            rectangle.setFrame(i*35+posX-125,0,35,35);
+        if(displayed = true) {
+            g2d.setColor(new Color(79, 79, 79, 100));
+            g2d.fill(backRectangle);
+            backRectangle.setFrame(posX - 125, 0, 35 * place.length, 35);
+            for (int i = 0; i < place.length; i++) {
+                place[i] = new Rectangle2D.Double(i * 35 + posX - 125, 0, 35, 35);
+                g2d.setColor(new Color(0, 0, 0, 100));
+                g2d.draw(rectangle);
+                rectangle.setFrame(i * 35 + posX - 125, 0, 35, 35);
+            }
         }
     }
 
     @Override
     public void update(double dt) {
 
+    }
+
+    public void setDisplayed(boolean displayed) {
+        this.displayed = displayed;
+    }
+
+    public boolean isDisplayed() {
+        return displayed;
     }
 }
