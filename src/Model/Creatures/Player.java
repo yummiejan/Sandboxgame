@@ -41,11 +41,10 @@ public class Player extends Creature implements InteractableObject {
                 posX = posX + 50;
             }
             if (key == KeyEvent.VK_W) {
-                if (!isBlock(2))
-                posY = posY - 60;
-            } else if (key == KeyEvent.VK_S) {
-                if (!isBlock(3))
-                posY = posY + 50;
+                if (!isBlock(2)){
+                    if (isBlock(3))
+                    posY = posY - 60;
+                }
             }
         //System.out.println(isBlock());
     }
