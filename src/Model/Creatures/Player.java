@@ -33,17 +33,20 @@ public class Player extends Creature implements InteractableObject {
 
     @Override
     public void keyReleased(int key) {
-        if(key ==KeyEvent.VK_A){
-            posX = posX - 50;
-        }else if(key ==KeyEvent.VK_D){
-            if (!isBlock())
-            posX = posX + 50;
-        }
-        if(key ==KeyEvent.VK_SPACE){
-            posY = posY - 50;
-        }else if(key ==KeyEvent.VK_SHIFT){
-            posY = posY + 50;
-        }
+            if (key == KeyEvent.VK_A) {
+                if (!isBlock(1))
+                posX = posX - 50;
+            } else if (key == KeyEvent.VK_D) {
+                if (!isBlock(0))
+                posX = posX + 50;
+            }
+            if (key == KeyEvent.VK_W) {
+                if (!isBlock(2))
+                posY = posY - 50;
+            } else if (key == KeyEvent.VK_S) {
+                if (!isBlock(3))
+                posY = posY + 50;
+            }
         //System.out.println(isBlock());
     }
 
@@ -66,9 +69,20 @@ public class Player extends Creature implements InteractableObject {
 
     }
 
-    public boolean isBlock(){
-        Block b = wh.getAllBlocks((posX/50)+1,posY/50+1);
-        System.out.print("Position: "+(posX/50+1)+", "+(posY/50+2)+"; solid block: ");
+    public boolean isBlock(int richtung){
+        Block b;
+        if (richtung==0){
+             b = wh.getAllBlocks((posX/50)+1,posY/50+1);
+        }else if (richtung==1){
+             b = wh.getAllBlocks((posX/50)-1,posY/50+1);
+        }else if (richtung==2){
+             b = wh.getAllBlocks((posX/50),posY/50-1);
+        }else if (richtung==3){
+             b = wh.getAllBlocks((posX/50),posY/50+2);
+        }else {
+            return false;
+        }
+        System.out.println("Position: "+(posX/50+1)+", "+(posY/50+2)+"; solid block: ");
         if(b == null){
             return false;
         }

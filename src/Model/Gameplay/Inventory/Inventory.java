@@ -54,6 +54,7 @@ public class Inventory implements InteractableObject {
         backRectangle.setFrame(posX,posY,35*itemPlace.length+55,35*itemPlace[0].length+1);
         for (int i = 0; i < itemPlace.length; i++) {
             for (int j = 0; j < itemPlace[i].length ; j++) {
+
                 g2d.setColor(new Color(0,0,0));
                 g2d.draw(rectangle);
                 rectangle.setFrame(posX+i*35,posY+j*35,35,35);
