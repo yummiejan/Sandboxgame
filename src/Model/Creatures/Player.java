@@ -46,7 +46,7 @@ public class Player extends Creature implements InteractableObject {
                     posY = posY - 60;
                 }
             }
-
+//s
     }
 
     @Override
