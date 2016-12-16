@@ -2,6 +2,7 @@ package Model.Gameplay.Inventory;
 
 import Control.GameplayHandler.InventoryHandler;
 import Model.InteractableObject;
+import Model.Items.Item;
 import View.DrawingPanel;
 import View.MainFrame;
 
@@ -82,5 +83,23 @@ public class Inventory implements InteractableObject {
 
     public boolean isDisplayed() {
         return displayed;
+    }
+
+
+
+    public Rectangle2D getItemPlace(int a, int b) {
+        return itemPlace[a][b];
+    }
+
+    public void setItemPlace(Rectangle2D item, int a, int b) {
+        itemPlace[a][b] = item;
+    }
+
+    public Rectangle2D getArmorPlace(int a) {
+        return armorPlace[a];
+    }
+
+    public void setArmorPlace(Rectangle2D armor, int a) {
+        armorPlace[a] = armor;
     }
 }

@@ -1,8 +1,12 @@
 package Control.GameplayHandler;
 
+import Model.DataStructures.Stack;
 import Model.Gameplay.Inventory.Hotbar;
 import Model.InteractableObject;
 import Model.Gameplay.Inventory.Inventory;
+import Model.Items.Blocks.Block;
+import Model.Items.Blocks.Dirt;
+import Model.Items.Item;
 import View.DrawingPanel;
 import View.MainFrame;
 
@@ -15,10 +19,10 @@ import java.awt.event.MouseEvent;
  */
 public class InventoryHandler implements InteractableObject{
 
-    private boolean enabled;
     private MainFrame frame;
     private Inventory firstInventory;
     private Hotbar firstHotbar;
+    private Stack<Item> itemStack;
 
     public InventoryHandler(MainFrame frame) {
         this.frame = frame;
@@ -27,6 +31,7 @@ public class InventoryHandler implements InteractableObject{
         firstInventory.setDisplayed(false);
         firstHotbar = new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0);
         frame.getActiveDrawingPanel().addObject(firstHotbar);
+        itemStack = new Stack<Item>();
 
     }
 
@@ -60,5 +65,9 @@ public class InventoryHandler implements InteractableObject{
     @Override
     public void update(double dt) {
 
+    }
+
+    public void addNewItem(Block b, int a, int c){
+        //firstInventory.setItemPlace(b,a,c);
     }
 }
