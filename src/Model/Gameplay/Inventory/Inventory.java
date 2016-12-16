@@ -49,7 +49,7 @@ public class Inventory implements InteractableObject {
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-        g2d.setColor(new Color(79, 79, 79));
+        g2d.setColor(new Color(126, 126, 126));
         g2d.fill(backRectangle);
         backRectangle.setFrame(posX,posY,35*itemPlace.length+55,35*itemPlace[0].length+1);
         for (int i = 0; i < itemPlace.length; i++) {

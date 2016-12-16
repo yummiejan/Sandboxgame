@@ -43,7 +43,7 @@ public class Hotbar implements InteractableObject {
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-        g2d.setColor(new Color(79,79,79));
+        g2d.setColor(new Color(126, 126, 126));
         g2d.fill(backRectangle);
         backRectangle.setFrame(posX-125,0,35*place.length,35);
         for (int i = 0; i < place.length ; i++) {
