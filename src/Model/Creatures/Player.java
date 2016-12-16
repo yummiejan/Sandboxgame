@@ -59,10 +59,10 @@ public class Player extends Creature implements InteractableObject {
     public void draw(DrawingPanel dp, Graphics2D g2d) {
         g2d.setColor(new Color(194, 148, 24));
         g2d.fill(rectangle1);
-        g2d.fill(rectangle2);
+        //g2d.fill(rectangle2);
         g2d.setColor(new Color(0,0,0));
         g2d.draw(rectangle1);
-        g2d.draw(rectangle2);
+        //g2d.draw(rectangle2);
         rectangle1.setFrame(posX+20,posY,10,100);
     }
 
