@@ -33,11 +33,13 @@ public class InventoryHandler implements InteractableObject{
     @Override
     public void keyPressed(int key) {
         if(key == KeyEvent.VK_E && firstHotbar.isDisplayed()){
-            firstInventory.setDisplayed(true);
+            if (!firstInventory.isDisplayed()) {
+                firstInventory.setDisplayed(true);
+            }else{
+                firstInventory.setDisplayed(false);
+            }
         }
-        if(key == KeyEvent.VK_I){
-            firstInventory.setDisplayed(false);
-        }
+
     }
 
     @Override
