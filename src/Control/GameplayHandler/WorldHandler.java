@@ -24,22 +24,23 @@ public class WorldHandler implements InteractableObject{
         allBlocks = new Block[23][13];
         System.out.print("Blocks: ");
         for (int i = 0; i < allBlocks.length; i++) {
-            int counter = (int)(Math.random()*2)+7;
+            int counter = (int) (Math.random() * 2) + 7;
             int console = 0;
             for (int j = 0; j < allBlocks[i].length; j++) {
-                if(j > counter){
-                    allBlocks[i][j] = new Dirt(i*50,j*50);
+                if (j > counter) {
+                    allBlocks[i][j] = new Dirt(i * 50, j * 50);
                     frame.getActiveDrawingPanel().addObject(allBlocks[i][j]);
                     console++;
-                 }
+                }
             }
-            System.out.print(console+" ");
+            System.out.print(console + " ");
         }
+        allBlocks[0][xBlockLevel(0)-1] = new Furnace(0, (xBlockLevel(0)-1)*50);
+        frame.getActiveDrawingPanel().addObject(allBlocks[0][xBlockLevel(0)]);
         System.out.println();
         int x = (int)(Math.random()*19+2);
-        frame.getActiveDrawingPanel().addObject(new Player(x*50,xBlockLevel(x)*50,this));
-        System.out.println("Spawnposition: "+x+", "+xBlockLevel(x));
-        frame.getActiveDrawingPanel().addObject(new Furnace(0,(xBlockLevel(0)+1)*50));
+        frame.getActiveDrawingPanel().addObject(new Player(x*50,(xBlockLevel(x)-2)*50,this));
+        System.out.println("Spawnposition: "+x+", "+(xBlockLevel(x)-2));
     }
 
     public int xBlockLevel(int x){
@@ -49,7 +50,7 @@ public class WorldHandler implements InteractableObject{
                 n++;
             }
         }
-        return n-2;
+        return n;
     }
 
     @Override
