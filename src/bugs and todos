@@ -1,0 +1,25 @@
+Bugs
+- Ofen kann nicht abgebaut werden
+- Blöcke unter einem können nicht abgebaut werden
+- Fehlermeldung, wenn man außerhalb des Randes gehen will
+- Reinsliden in Blöcke
+- Fehlermeldung, wenn man Q drückt, obwohl neben einem kein Block ist
+
+
+Todo's innerhalb des Codes
+- flüssiges Hochspringen
+- flüssiges Bewegen
+- Graphiken für alles
+- funktionsfähiges Inventar
+- funktionsfähiger Ofen
+- weitere funktionsfähige Blöcke und Items
+- Tag-Nacht-System bzw. Hintergru8nd, ggf. Wettersystem
+- funktionsfähige Tiere
+- Items craften
+- Items platzieren
+- mit Items und Creatures interagieren
+- Menü
+- ggf. Pause
+
+
+~Alex

@@ -78,7 +78,6 @@ public class WorldHandler implements InteractableObject{
 
     }
     public Block getAllBlocks(int a, int b) {
-
         return allBlocks[a][b];
     }
 
