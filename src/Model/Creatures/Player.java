@@ -59,7 +59,7 @@ public class Player extends Creature implements InteractableObject {
             destroy();
         }
         if (key==KeyEvent.VK_R){
-            place(new Dirt((posX/50)+1,posY/50+1));
+            place(new Dirt((posX/50)+1,posY/50+1,wh));
         }
         if (key==KeyEvent.VK_SHIFT){
             if (up){
@@ -118,29 +118,42 @@ public class Player extends Creature implements InteractableObject {
     public Block destroy(){
         Block b = null;
         if(direction==0){
-            if (up){
-                b = wh.getAllBlocks((posX/50)+1,posY/50);
-                wh.getAllBlocks((posX/50)+1,posY/50).setDisplayed(false);
-                wh.setAllBlocks((posX/50)+1,posY/50,null);
-            }else{
-                b = wh.getAllBlocks((posX/50)+1,posY/50+1);
-                wh.getAllBlocks((posX/50)+1,posY/50+1).setDisplayed(false);
-                wh.setAllBlocks((posX/50)+1,posY/50+1,null);
+            if (isBlock(0))
+            {
+                if (up)
+                {
+                    b = wh.getAllBlocks((posX / 50) + 1, posY / 50);
+                    wh.getAllBlocks((posX / 50) + 1, posY / 50).setDisplayed(false);
+                    wh.setAllBlocks((posX / 50) + 1, posY / 50, null);
+                } else
+                {
+                    b = wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1);
+                    wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1).setDisplayed(false);
+                    wh.setAllBlocks((posX / 50) + 1, posY / 50 + 1, null);
+                }
             }
         }else if(direction==1){
-            if (up){
-                b = wh.getAllBlocks((posX/50)-1,posY/50);
-                wh.getAllBlocks((posX/50)-1,posY/50).setDisplayed(false);
-                wh.setAllBlocks((posX/50)-1,posY/50,null);
-            }else {
-                b = wh.getAllBlocks((posX/50)-1,posY/50+1);
-                wh.getAllBlocks((posX/50)-1,posY/50+1).setDisplayed(false);
-                wh.setAllBlocks((posX/50)-1,posY/50+1,null);
+            if (isBlock(1))
+            {
+                if (up)
+                {
+                    b = wh.getAllBlocks((posX / 50) - 1, posY / 50);
+                    wh.getAllBlocks((posX / 50) - 1, posY / 50).setDisplayed(false);
+                    wh.setAllBlocks((posX / 50) - 1, posY / 50, null);
+                } else
+                {
+                    b = wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1);
+                    wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1).setDisplayed(false);
+                    wh.setAllBlocks((posX / 50) - 1, posY / 50 + 1, null);
+                }
             }
         }else if(direction==3){
-            b = wh.getAllBlocks((posX/50),posY/50+2);
-            wh.getAllBlocks((posX/50),posY/50+2).setDisplayed(false);
-            wh.setAllBlocks((posX/50),posY/50+2,null);
+            if (isBlock(3))
+            {
+                b = wh.getAllBlocks((posX / 50), posY / 50 + 2);
+                wh.getAllBlocks((posX / 50), posY / 50 + 2).setDisplayed(false);
+                wh.setAllBlocks((posX / 50), posY / 50 + 2, null);
+            }
         }
         return  b;
 

@@ -1,5 +1,6 @@
 package Model.Items.Blocks;
 
+import Control.GameplayHandler.WorldHandler;
 import Model.DrawableObject;
 import Model.Items.Item;
 import View.DrawingPanel;
@@ -18,13 +19,15 @@ public abstract class Block extends Item implements DrawableObject {
     private int[] colours = new int[5];
     private boolean solid;
     private boolean displayed=true;
+    private WorldHandler wh;
 
-    public Block(double posX, double posY, int[] colours,boolean solid) {
+    public Block(double posX, double posY, int[] colours,boolean solid,WorldHandler wh) {
         this.posX = posX;
         this.posY = posY;
         this.colours = colours;
         rectangle = new Rectangle2D.Double(posX, posY, height, width);
         this.solid = solid;
+        this.wh = wh;
     }
 
     @Override
@@ -58,4 +61,27 @@ public abstract class Block extends Item implements DrawableObject {
     public boolean isDisplayed() {
         return displayed;
     }
+
+    public boolean isBlock(int richtung){
+        Block b;
+        if (richtung == 0){
+            b = wh.getAllBlocks((int)posX/50+1,(int) posY/50+1);
+        }else if (richtung == 1){
+            b = wh.getAllBlocks((int)posX/50-1,(int) posY/50+1);
+        }else if (richtung == 2){
+            b = wh.getAllBlocks((int)posX/50,(int) posY/50-1);
+        }else if (richtung == 3){
+            b = wh.getAllBlocks((int)posX/50,(int) posY/50+2);
+        }else {
+            return false;
+        }
+        if(b == null){
+            return false;
+        }
+        if(b.isSolid()){
+            return true;
+        }
+        return false;
+    }
+
 }

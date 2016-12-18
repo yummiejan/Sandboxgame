@@ -1,5 +1,6 @@
 package Model.Items.Blocks;
 
+import Control.GameplayHandler.WorldHandler;
 import View.DrawingPanel;
 
 import java.awt.*;
@@ -18,8 +19,8 @@ public class Furnace extends Block {
     private Rectangle2D.Double rectangle2;
     //private RoundRectangle2D.Double particle;
 
-    public Furnace(double posX, double posY) {
-        super(posX, posY, new int[] {128, 128, 128, 64, 64, 64}, true);
+    public Furnace(double posX, double posY, WorldHandler wh) {
+        super(posX, posY, new int[] {128, 128, 128, 64, 64, 64}, true,wh);
         semicircle = new Arc2D.Double(posX+10, posY+25, 30, 30, 0, 180, Arc2D.PIE);
         rectangle = new Rectangle2D.Double(posX, posY, 50, 50);
         rectangle2 = new Rectangle2D.Double(posX+5, posY+5, 40, 8);
