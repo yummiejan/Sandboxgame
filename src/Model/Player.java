@@ -13,15 +13,15 @@ import java.awt.geom.Rectangle2D;
  */
 public class Player extends Creature implements InteractableObject {
 
-    private WorldHandler wh;
     private Rectangle2D.Double rectangle;
-    private double posX, posY;
+    private int posX, posY;
+    private WorldHandler wh;
 
-    public Player(double posX, double posY, WorldHandler wh) {
+    public Player(int posX, int posY,WorldHandler wh) {
         this.posX = posX;
         this.posY = posY;
-        rectangle = new Rectangle2D.Double(posX,posY,50,100);
         this.wh = wh;
+        rectangle = new Rectangle2D.Double(posX,posY,50,100);
     }
 
     @Override
@@ -31,16 +31,21 @@ public class Player extends Creature implements InteractableObject {
 
     @Override
     public void keyReleased(int key) {
+
         if(key ==KeyEvent.VK_A){
             posX = posX - 50;
         }else if(key ==KeyEvent.VK_D){
-            posX = posX + 50;
+            if(wh.isBlock())
+            {
+                posX = posX + 50;
+            }
         }
         if(key ==KeyEvent.VK_SPACE){
             posY = posY - 50;
         }else if(key ==KeyEvent.VK_S){
             posY = posY + 50;
         }
+
     }
 
     @Override
@@ -62,10 +67,25 @@ public class Player extends Creature implements InteractableObject {
 
     }
 
-    public boolean isBlock(){
-        //if(wh.getAllBlocks()){
 
-        //}
-        return false;
+
+    public int getPosX()
+    {
+        return posX;
+    }
+
+    public void setPosX(int posX)
+    {
+        this.posX = posX;
+    }
+
+    public int getPosY()
+    {
+        return posY;
+    }
+
+    public void setPosY(int posY)
+    {
+        this.posY = posY;
     }
 }

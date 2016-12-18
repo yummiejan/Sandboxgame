@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 public class WorldHandler implements InteractableObject{
 
     private Block allBlocks[][];
+    private Player player = new Player(100,400,this);
 
 
     public WorldHandler(MainFrame frame){
@@ -22,15 +23,29 @@ public class WorldHandler implements InteractableObject{
         for (int i = 0; i < allBlocks.length; i++) {
             for (int j = 0; j < allBlocks[i].length; j++) {
                 if(j > 9){
-                    frame.getActiveDrawingPanel().addObject(new Dirt(i*50,j*50));
+                    frame.getActiveDrawingPanel().addObject(new Dirt(i*50,j*50,true));
                 }
             }
         }
-        frame.getActiveDrawingPanel().addObject(new Player(100,400,this));
+        frame.getActiveDrawingPanel().addObject(player);
+
+
+    }
+
+    public boolean isBlock(){
+
+        if(allBlocks[(player.getPosX()/50)+1][player.getPosY()/50].isSolid()){
+            return false;
+        }
+        return true;
+
+
     }
 
     @Override
     public void keyPressed(int key) {
+
+
 
     }
 
@@ -53,9 +68,9 @@ public class WorldHandler implements InteractableObject{
     public void update(double dt) {
 
     }
-    public Block[][] getAllBlocks(int a, int b) {
+    public Block getAllBlocks(int a, int b) {
 
-        return allBlocks;
+        return allBlocks[a][b];
     }
 
     public void setAllBlocks(Block[][] allBlocks) {
