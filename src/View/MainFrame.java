@@ -33,6 +33,7 @@ public class MainFrame extends JFrame {
         setTitle(name);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        //setResizable(false);
     }
 
     /**

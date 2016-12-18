@@ -1,4 +1,4 @@
-package Model;
+package Model.DataStructures;
 
 /**
  * Created by aos on 07.11.2016.
