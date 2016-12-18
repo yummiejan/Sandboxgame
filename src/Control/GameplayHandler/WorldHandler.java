@@ -17,8 +17,10 @@ import java.awt.event.MouseEvent;
 public class WorldHandler implements InteractableObject{
 
     private Block allBlocks[][];
+    private MainFrame frame;
 
     public WorldHandler(MainFrame frame){
+        this.frame = frame;
         System.out.println("Width: "+frame.getActiveDrawingPanel().getWidth());
         System.out.println("Height: "+frame.getActiveDrawingPanel().getHeight());
         allBlocks = new Block[23][13];
@@ -83,5 +85,10 @@ public class WorldHandler implements InteractableObject{
 
     public void setAllBlocks(int a,int b,Block block) {
         allBlocks[a][b] = block;
+    }
+
+    public MainFrame getFrame()
+    {
+        return frame;
     }
 }

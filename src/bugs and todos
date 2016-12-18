@@ -1,9 +1,9 @@
 Bugs
 - Ofen kann nicht abgebaut werden
-- Blöcke unter einem können nicht abgebaut werden
 - Fehlermeldung, wenn man außerhalb des Randes gehen will
 - Reinsliden in Blöcke
 - Fehlermeldung, wenn man Q drückt, obwohl neben einem kein Block ist
+- wenn man die letzte Blockschicht durchgräbt kann man sich nicht mehr bewegen und es erscheinen nur Fehlermeldungen
 
 
 Todo's innerhalb des Codes
