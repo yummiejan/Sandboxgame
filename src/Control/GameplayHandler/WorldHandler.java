@@ -22,13 +22,9 @@ public class WorldHandler implements InteractableObject{
 
     public WorldHandler(MainFrame frame){
         this.frame = frame;
-        System.out.println("Width: "+frame.getActiveDrawingPanel().getWidth());
-        System.out.println("Height: "+frame.getActiveDrawingPanel().getHeight());
         allBlocks = new Block[23][13];
-        System.out.print("Blocks: ");
         for (int i = 0; i < allBlocks.length; i++) {
-            int counter = (int) (Math.random() * 2) + 7;
-            int console = 0;
+            int counter = (int) (Math.random() * 2) + 6;
             for (int j = 0; j < allBlocks[i].length; j++) {
                 if (j > counter) {
                     int random = (int)(Math.random()*5)+1;
@@ -38,16 +34,13 @@ public class WorldHandler implements InteractableObject{
                         allBlocks[i][j] = new Dirt(i * 50, j * 50,this);
                     }
                     frame.getActiveDrawingPanel().addObject(allBlocks[i][j]);
-                    console++;
                 }
             }
-            System.out.print(console + " ");
         }
         allBlocks[0][xBlockLevel(0)-1] = new Furnace(0, (xBlockLevel(0)-1)*50,this);
         frame.getActiveDrawingPanel().addObject(allBlocks[0][xBlockLevel(0)]);
         int x = (int)(Math.random()*19+2);
         frame.getActiveDrawingPanel().addObject(new Player(x*50,(xBlockLevel(x)-2)*50,this));
-        System.out.println("Spawnposition: "+x+", "+(xBlockLevel(x)-2));
     }
 
     public int xBlockLevel(int x){
