@@ -55,7 +55,7 @@ public class Player extends Creature implements InteractableObject {
                 posY = posY - 80;
         }
         if (key==KeyEvent.VK_Q){
-            abbauen();
+            destroy();
         }
 //sg
     }
@@ -128,7 +128,7 @@ public class Player extends Creature implements InteractableObject {
         return false;
     }
 
-    public Block abbauen(){
+    public Block destroy(){
         Block b = null;
         if(direction){
             b = wh.getAllBlocks((posX/50)+1,posY/50+1);
