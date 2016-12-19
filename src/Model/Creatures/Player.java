@@ -153,12 +153,16 @@ public class Player extends Creature implements InteractableObject {
                     }
                 }
         }else if(direction==3){
-            if (isBlock(3))
+            if (isBlock(3)&&(wh.xBlockLevel(posX/50)<12))
             {
                 b = wh.getAllBlocks((posX / 50), posY / 50 + 2);
                 wh.getAllBlocks((posX / 50), posY / 50 + 2).setDisplayed(false);
                 wh.setAllBlocks((posX / 50), posY / 50 + 2, null);
             }
+        }else if(direction==2){
+                b = wh.getAllBlocks((posX / 50), posY / 50 -1);
+                wh.getAllBlocks((posX / 50), posY / 50 -1).setDisplayed(false);
+                wh.setAllBlocks((posX / 50), posY / 50 -1, null);
         }
         return  b;
 
@@ -167,10 +171,6 @@ public class Player extends Creature implements InteractableObject {
         if(direction==0){
             wh.setAllBlocks((posX/50)+1,posY/50+1,b);
             wh.getFrame().getActiveDrawingPanel().addObject(wh.getAllBlocks((posX/50)+1,posY/50+1));
-
-
         }
-
-
     }
 }
