@@ -6,10 +6,14 @@ import Model.InteractableObject;
 import Model.Items.Blocks.Dirt;
 import View.DrawingPanel;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by 204g04 on 09.12.2016.
@@ -21,12 +25,25 @@ public class Player extends Creature implements InteractableObject {
     private int posX, posY;
     private int direction = 0;
     private boolean up = false;
+    private BufferedImage playerStanding,playerWalking;
 
     public Player(int posX, int posY, WorldHandler wh) {
         this.posX = posX;
         this.posY = posY;
         rectangle1 = new Rectangle2D.Double(posX+20,posY,10,100);
         this.wh = wh;
+
+        playerStanding = null;
+        try {
+            playerStanding = ImageIO.read(new File("images/standing.png"));
+        } catch (IOException e) {
+        }
+
+        playerWalking = null;
+        try {
+            playerWalking = ImageIO.read(new File("images/right.png"));
+        } catch (IOException e) {
+        }
     }
 
     @Override
@@ -68,7 +85,6 @@ public class Player extends Creature implements InteractableObject {
                 up = true;
             }
         }
-//sg
     }
 
     @Override
@@ -78,11 +94,7 @@ public class Player extends Creature implements InteractableObject {
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-        g2d.setColor(new Color(194, 148, 24));
-        g2d.fill(rectangle1);
-        g2d.setColor(new Color(0,0,0));
-        g2d.draw(rectangle1);
-        rectangle1.setFrame(posX+20,posY,10,100);
+        g2d.drawImage(playerStanding,posX,posY,null);
     }
 
     @Override
