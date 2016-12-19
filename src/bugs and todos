@@ -2,7 +2,6 @@ Bugs
 - bild vom ofen wird beim abbauen nicht entfernt
 - Fehlermeldung, wenn man außerhalb des Randes gehen will
 - Reinsliden in Blöcke
-- wenn man die letzte Blockschicht durchgräbt kann man sich nicht mehr bewegen und es erscheinen nur Fehlermeldungen
 - Block wird erstellt jedoch wird er in der oberen Bilschrim ecke antatt an der gewünschten position gemalt
     (der Block existiert aber an der erwünschten Stelle und man kann ihn dort auch abbauen aber halt kein Bild)
 

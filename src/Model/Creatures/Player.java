@@ -53,16 +53,18 @@ public class Player extends Creature implements InteractableObject {
 
     @Override
     public void keyReleased(int key) {
+        /*
+        * Beim Tastendruck w,a,s,d wird überprüft in welche Richtung der Player schaut
+        *
+        */
         if (key == KeyEvent.VK_A) {
             direction = 1;
             if (!isBlock(1)&&!isBlock(5))
             posX = posX - 50;
-            System.out.println("Position: "+posX/50+", "+posY/50+"; Block: "+(isBlock(1)));
         } else if (key == KeyEvent.VK_D) {
             direction = 0;
             if (!isBlock(0)&&!isBlock(4))
             posX = posX + 50;
-            System.out.println("Position: "+posX/50+", "+posY/50+"; Block: "+(isBlock(0)));
         }
         if (key == KeyEvent.VK_W) {
             direction = 2;
@@ -172,9 +174,11 @@ public class Player extends Creature implements InteractableObject {
                 wh.setAllBlocks((posX / 50), posY / 50 + 2, null);
             }
         }else if(direction==2){
-                b = wh.getAllBlocks((posX / 50), posY / 50 -1);
-                wh.getAllBlocks((posX / 50), posY / 50 -1).setDisplayed(false);
-                wh.setAllBlocks((posX / 50), posY / 50 -1, null);
+            if (isBlock(2)&&(wh.xBlockLevel(posX/50)<12)) {
+                b = wh.getAllBlocks((posX / 50), posY / 50 - 1);
+                wh.getAllBlocks((posX / 50), posY / 50 - 1).setDisplayed(false);
+                wh.setAllBlocks((posX / 50), posY / 50 - 1, null);
+            }
         }
         return  b;
 
@@ -182,7 +186,7 @@ public class Player extends Creature implements InteractableObject {
     public void place(Block b){
         if(direction==0){
             wh.setAllBlocks((posX/50)+1,posY/50+1,b);
-            wh.getFrame().getActiveDrawingPanel().addObject(wh.getAllBlocks((posX/50)+1,posY/50+1));
+            wh.getFrame().getActiveDrawingPanel().addObject(wh.getAllBlocks((posX)+1,posY/50+1));
         }
     }
 }
