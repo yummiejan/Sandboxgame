@@ -78,7 +78,7 @@ public class Player extends Creature implements InteractableObject {
             destroy();
         }
         if (key==KeyEvent.VK_R){
-            place(new Dirt((posX/50)+1,posY/50+1,wh));
+            place(new Dirt((posX/50)+1,posY/50+1));//,wh));
         }
         if (key==KeyEvent.VK_SHIFT){
             if (up){

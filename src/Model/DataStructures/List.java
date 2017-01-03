@@ -72,6 +72,9 @@ public class List<ContentType> {
     // aktuelles Element der Liste
     ListNode current;
 
+    //aktuelle Größe der Liste
+    int size;
+
     /**
      * Eine leere Liste wird erzeugt.
      */
@@ -79,6 +82,7 @@ public class List<ContentType> {
         first = null;
         last = null;
         current = null;
+        size = 0;
     }
 
     /**
@@ -193,6 +197,7 @@ public class List<ContentType> {
                 first = newNode;
                 last = newNode;
             }
+            size++;
         }
     }
 
@@ -215,6 +220,7 @@ public class List<ContentType> {
                 first = newNode;
             }
             last = newNode;
+            size++;
         }
     }
 
@@ -236,6 +242,7 @@ public class List<ContentType> {
                 pList.next();
             }
             pList = new List<ContentType>();
+            size = size +pList.getSize();
         }
     }
 
@@ -258,6 +265,7 @@ public class List<ContentType> {
                 last = last.getNextNode();
             }
             current = current.getNextNode();
+            size--;
         }
     }
 
@@ -283,4 +291,11 @@ public class List<ContentType> {
         return null;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public ListNode getCurrent() {
+        return current;
+    }
 }

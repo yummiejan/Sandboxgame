@@ -6,6 +6,7 @@ import Model.InteractableObject;
 import Model.Gameplay.Inventory.Inventory;
 import Model.Items.Blocks.Block;
 import Model.Items.Blocks.Dirt;
+import Model.Items.Blocks.InventoryDirt;
 import Model.Items.Item;
 import View.DrawingPanel;
 import View.MainFrame;
@@ -32,7 +33,9 @@ public class InventoryHandler implements InteractableObject{
         firstHotbar = new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0);
         frame.getActiveDrawingPanel().addObject(firstHotbar);
         itemStack = new Stack<Item>();
-
+        //System.out.println(firstInventory.getItemPlace(0,0));
+        //addNewStack(firstInventory.getItemPlace(0,0),0,0);
+        addNewItem(new InventoryDirt(0,0));
     }
 
     @Override
@@ -67,7 +70,27 @@ public class InventoryHandler implements InteractableObject{
 
     }
 
-    public void addNewItem(Block b, int a, int c){
-        //firstInventory.setItemPlace(b,a,c);
+    public void addNewItem(Item itemName){
+            for (int i = 0; i < firstInventory.getMainList().length; i++) {
+                for (int j = 0; j < firstInventory.getMainList()[i].getSize(); j++) {
+                    if(!firstInventory.getMainList()[i].isEmpty() && !firstInventory.getMainList()[i].getContent().top().equals(itemName)){
+                        firstInventory.getMainList()[i].next();
+                        System.out.print("ada");
+                    }else{
+                        System.out.print("ada");
+                        firstInventory.getMainList()[i].getContent().push(new InventoryDirt(0,0));
+                    }
+                    System.out.print(i);
+                }
+            }
     }
 }
+
+/**for (int j = 0; j < firstInventory.getMainList()[i].getSize(); j++) {
+ if(firstInventory.getMainList()[i].getContent().top().equals("Dirt")){
+ firstInventory.getMainList()[i].getContent().push(1);
+ }else{
+
+ }
+ }
+ }*/

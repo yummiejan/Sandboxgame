@@ -1,13 +1,12 @@
 package Model.Gameplay.Inventory;
 
-import Control.GameplayHandler.InventoryHandler;
+import Model.DataStructures.*;
+import Model.DataStructures.List;
 import Model.InteractableObject;
 import Model.Items.Item;
 import View.DrawingPanel;
-import View.MainFrame;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
@@ -18,9 +17,8 @@ public class Inventory implements InteractableObject {
 
     private Rectangle2D.Double backRectangle;
     private Rectangle2D.Double rectangle;
-    private Rectangle2D.Double rectangle2;
-    private Rectangle2D itemPlace[][];
-    private Rectangle2D armorPlace[];
+    private List<Stack>[] mainList;
+    private List<Stack> itemList;
     private double posX, posY;
     private boolean displayed;
 
@@ -29,9 +27,9 @@ public class Inventory implements InteractableObject {
         this.posY = posY;
         backRectangle = new Rectangle2D.Double(posX, posY, 10, 10);
         rectangle = new Rectangle2D.Double(posX, posY, 10, 10);
-        rectangle2 = new Rectangle2D.Double(posX, posY, 10, 10);
-        itemPlace = new Rectangle2D[10][4];
-        armorPlace = new Rectangle2D[4];
+        mainList = new List[10];
+        itemList = new List<Stack>();
+        createList();
     }
 
     @Override
@@ -51,30 +49,36 @@ public class Inventory implements InteractableObject {
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-        if(displayed == true) {
+        if (displayed == true) {
             g2d.setColor(new Color(79, 79, 79, 100));
             g2d.fill(backRectangle);
-            backRectangle.setFrame(posX, posY, 35 * itemPlace.length + 55, 35 * itemPlace[0].length + 1);
-            for (int i = 0; i < itemPlace.length; i++) {
-                for (int j = 0; j < itemPlace[i].length; j++) {
-                    itemPlace[i][j] = new Rectangle2D.Double(posX + i * 35, posY + j * 35, 35, 35);
+            backRectangle.setFrame(posX, posY, 35 * mainList.length , 35 * 4);
+            for (int i = 0; i < mainList.length; i++) {
+                for (int j = 0; j < mainList[0].getSize(); j++) {
+
                     g2d.setColor(new Color(0, 0, 0, 100));
                     g2d.draw(rectangle);
                     rectangle.setFrame(posX + i * 35, posY + j * 35, 35, 35);
                 }
             }
-            for (int i = 0; i < armorPlace.length; i++) {
-                armorPlace[i] = new Rectangle2D.Double(posX + 35 * itemPlace.length + 20, posY + i * 35, 35, 35);
-                g2d.setColor(new Color(0, 0, 0, 100));
-                g2d.draw(rectangle2);
-                rectangle2.setFrame(posX + 35 * itemPlace.length + 20, posY + i * 35, 35, 35);
-            }
+
         }
     }
 
     @Override
     public void update(double dt) {
 
+    }
+
+    public void createList() {
+        for (int i = 0; i < mainList.length; i++) {
+            mainList[i] = itemList;
+            while(mainList[i].getSize() < 4){
+                mainList[i].append(new Stack<Item>());
+            }
+        }
+        //mainList[0].getContent().push(new Dirt(0,0));
+        //System.out.print(mainList[0].getContent().top());
     }
 
     public void setDisplayed(boolean displayed) {
@@ -86,20 +90,11 @@ public class Inventory implements InteractableObject {
     }
 
 
-
-    public Rectangle2D getItemPlace(int a, int b) {
-        return itemPlace[a][b];
+    public List<Stack> getItemList() {
+        return itemList;
     }
 
-    public void setItemPlace(Rectangle2D item, int a, int b) {
-        itemPlace[a][b] = item;
-    }
-
-    public Rectangle2D getArmorPlace(int a) {
-        return armorPlace[a];
-    }
-
-    public void setArmorPlace(Rectangle2D armor, int a) {
-        armorPlace[a] = armor;
+    public List<Stack>[] getMainList() {
+        return mainList;
     }
 }
