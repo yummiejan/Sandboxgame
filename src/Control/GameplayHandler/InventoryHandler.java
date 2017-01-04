@@ -6,7 +6,6 @@ import Model.InteractableObject;
 import Model.Gameplay.Inventory.Inventory;
 import Model.Items.Blocks.Block;
 import Model.Items.Blocks.Dirt;
-import Model.Items.Blocks.InventoryDirt;
 import Model.Items.Item;
 import View.DrawingPanel;
 import View.MainFrame;
@@ -71,21 +70,28 @@ public class InventoryHandler implements InteractableObject{
     }
 
     public void addNewItem(Item itemName){
-            for (int i = 0; i < firstInventory.getMainList().getSize(); i++) {
-                for (int j = 0; j < firstInventory.getItemList().getSize(); j++) {
-                    if (!firstInventory.getItemList().isEmpty()){ //&& !firstInventory.getItemList().getContent().top().equals(itemName)) {
-                        firstInventory.getItemList().next();
-                        //System.out.print("ada");
-                    } else {
-                        System.out.print("awdada");
-                        firstInventory.getItemList().getContent().push(itemName);
-                    }
-                    System.out.print(i);
-                    System.out.print(j);
+        for (int i = 0; i < firstInventory.getItemPlace().length; i++) {
+            for (int j = 0; j < firstInventory.getItemPlaceLength(i); j++) {
+                if(firstInventory.getItemPlacePlace(i,j).top() == itemName){
+                    firstInventory.getItemPlacePlace(i,j).push(itemName);
+                }else if(firstInventory.getItemPlacePlace(i,j).isEmpty()){
+                    firstInventory.getItemPlacePlace(i,j).push(itemName);
                 }
+                System.out.print(i);
+                System.out.print(i);
+                break;
             }
+            break;
+
+        }
+
+        System.out.println(firstInventory.getItemPlacePlace(0,0).top());
+        System.out.println(firstInventory.getItemPlacePlace(1,0).top());
+        System.out.println(firstInventory.getItemPlacePlace(0,0).getSize());
+
     }
 }
+
 
 /**for (int j = 0; j < firstInventory.getMainList()[i].getSize(); j++) {
  if(firstInventory.getMainList()[i].getContent().top().equals("Dirt")){

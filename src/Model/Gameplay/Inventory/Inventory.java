@@ -1,14 +1,13 @@
 package Model.Gameplay.Inventory;
 
-import Model.DataStructures.*;
-import Model.DataStructures.List;
+import Model.DataStructures.Stack;
 import Model.InteractableObject;
 import Model.Items.Blocks.Dirt;
-import Model.Items.Blocks.InventoryDirt;
 import Model.Items.Item;
 import View.DrawingPanel;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
@@ -19,8 +18,9 @@ public class Inventory implements InteractableObject {
 
     private Rectangle2D.Double backRectangle;
     private Rectangle2D.Double rectangle;
-    private List<List> mainList;
-    private List<Stack> itemList;
+    private Rectangle2D.Double rectangle2;
+    private Stack itemPlace[][];
+    private Stack armorPlace[];
     private double posX, posY;
     private boolean displayed;
 
@@ -29,9 +29,10 @@ public class Inventory implements InteractableObject {
         this.posY = posY;
         backRectangle = new Rectangle2D.Double(posX, posY, 10, 10);
         rectangle = new Rectangle2D.Double(posX, posY, 10, 10);
-        mainList = new List<List>();
-        itemList = new List<Stack>();
-        createList();
+        rectangle2 = new Rectangle2D.Double(posX, posY, 10, 10);
+        itemPlace = new Stack[10][4];
+        armorPlace = new Stack[4];
+        addNewStack();
     }
 
     @Override
@@ -51,35 +52,38 @@ public class Inventory implements InteractableObject {
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-        if (displayed == true) {
+        if(displayed == true) {
             g2d.setColor(new Color(79, 79, 79, 100));
             g2d.fill(backRectangle);
-            backRectangle.setFrame(posX, posY, 35 * mainList.getSize() , 35 * 4);
-            for (int i = 0; i < mainList.getSize(); i++) {
-                for (int j = 0; j < itemList.getSize(); j++) {
-
+            backRectangle.setFrame(posX, posY, 35 * itemPlace.length + 55, 35 * itemPlace[0].length + 1);
+            for (int i = 0; i < itemPlace.length; i++) {
+                for (int j = 0; j < itemPlace[i].length; j++) {
                     g2d.setColor(new Color(0, 0, 0, 100));
                     g2d.draw(rectangle);
                     rectangle.setFrame(posX + i * 35, posY + j * 35, 35, 35);
                 }
             }
+            for (int i = 0; i < armorPlace.length; i++) {
+                g2d.setColor(new Color(0, 0, 0, 100));
+                g2d.draw(rectangle2);
+                rectangle2.setFrame(posX + 35 * itemPlace.length + 20, posY + i * 35, 35, 35);
+
+            }
 
         }
     }
+    public void addNewStack(){
+        for (int i = 0; i < itemPlace.length ; i++) {
+            for (int j = 0; j < itemPlace[i].length; j++) {
+                itemPlace[i][j] = new Stack<Item>();
+            }
+        }
+    }
+
 
     @Override
     public void update(double dt) {
 
-    }
-
-    public void createList() {
-        while(mainList.getSize() < 10){
-            mainList.append(itemList);
-            while(itemList.getSize() < 4){
-                itemList.append(new Stack<InventoryDirt>());
-            }
-        }
-        //System.out.print(itemList.getContent().top());
     }
 
     public void setDisplayed(boolean displayed) {
@@ -91,11 +95,28 @@ public class Inventory implements InteractableObject {
     }
 
 
-    public List<Stack> getItemList() {
-        return itemList;
+
+    public Stack getItemPlacePlace(int a, int b) {
+        return itemPlace[a][b];
     }
 
-    public List<List> getMainList() {
-        return mainList;
+    public int getItemPlaceLength(int a) {
+        return itemPlace[a].length;
+    }
+
+    public Stack[][] getItemPlace() {
+        return itemPlace;
+    }
+
+    public void setItemPlace(Stack item, int a, int b) {
+        itemPlace[a][b] = item;
+    }
+
+    public Stack getArmorPlace(int a) {
+        return armorPlace[a];
+    }
+
+    public void setArmorPlace(Stack armor, int a) {
+        armorPlace[a] = armor;
     }
 }

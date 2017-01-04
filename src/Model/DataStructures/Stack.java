@@ -29,9 +29,11 @@ public class Stack<ContentType> {
     /* ----------- Ende der inneren Klasse ----------- */
 
     private StackNode head;
+    private int size;
 
     public Stack(){
         head = null;
+        size = 0;
     }
 
     public boolean isEmpty(){
@@ -44,12 +46,14 @@ public class Stack<ContentType> {
             newNode.setNext(head);
         }
         head = newNode;
+        size++;
     }
 
     public void pop(){
         if(!isEmpty()) {
             head = head.getNext();
         }
+        size--;
     }
 
     public ContentType top(){
@@ -57,5 +61,9 @@ public class Stack<ContentType> {
             return head.getContent();
         }
         return null;
+    }
+
+    public int getSize() {
+        return size;
     }
 }
