@@ -35,7 +35,7 @@ public class InventoryHandler implements InteractableObject{
         itemStack = new Stack<Item>();
         //System.out.println(firstInventory.getItemPlace(0,0));
         //addNewStack(firstInventory.getItemPlace(0,0),0,0);
-        addNewItem(new InventoryDirt(0,0));
+        addNewItem(new Dirt(0,0));
     }
 
     @Override
@@ -71,16 +71,17 @@ public class InventoryHandler implements InteractableObject{
     }
 
     public void addNewItem(Item itemName){
-            for (int i = 0; i < firstInventory.getMainList().length; i++) {
-                for (int j = 0; j < firstInventory.getMainList()[i].getSize(); j++) {
-                    if(!firstInventory.getMainList()[i].isEmpty() && !firstInventory.getMainList()[i].getContent().top().equals(itemName)){
-                        firstInventory.getMainList()[i].next();
-                        System.out.print("ada");
-                    }else{
-                        System.out.print("ada");
-                        firstInventory.getMainList()[i].getContent().push(new InventoryDirt(0,0));
+            for (int i = 0; i < firstInventory.getMainList().getSize(); i++) {
+                for (int j = 0; j < firstInventory.getItemList().getSize(); j++) {
+                    if (!firstInventory.getItemList().isEmpty()){ //&& !firstInventory.getItemList().getContent().top().equals(itemName)) {
+                        firstInventory.getItemList().next();
+                        //System.out.print("ada");
+                    } else {
+                        System.out.print("awdada");
+                        firstInventory.getItemList().getContent().push(itemName);
                     }
                     System.out.print(i);
+                    System.out.print(j);
                 }
             }
     }

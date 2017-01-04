@@ -3,6 +3,8 @@ package Model.Gameplay.Inventory;
 import Model.DataStructures.*;
 import Model.DataStructures.List;
 import Model.InteractableObject;
+import Model.Items.Blocks.Dirt;
+import Model.Items.Blocks.InventoryDirt;
 import Model.Items.Item;
 import View.DrawingPanel;
 
@@ -17,7 +19,7 @@ public class Inventory implements InteractableObject {
 
     private Rectangle2D.Double backRectangle;
     private Rectangle2D.Double rectangle;
-    private List<Stack>[] mainList;
+    private List<List> mainList;
     private List<Stack> itemList;
     private double posX, posY;
     private boolean displayed;
@@ -27,7 +29,7 @@ public class Inventory implements InteractableObject {
         this.posY = posY;
         backRectangle = new Rectangle2D.Double(posX, posY, 10, 10);
         rectangle = new Rectangle2D.Double(posX, posY, 10, 10);
-        mainList = new List[10];
+        mainList = new List<List>();
         itemList = new List<Stack>();
         createList();
     }
@@ -52,9 +54,9 @@ public class Inventory implements InteractableObject {
         if (displayed == true) {
             g2d.setColor(new Color(79, 79, 79, 100));
             g2d.fill(backRectangle);
-            backRectangle.setFrame(posX, posY, 35 * mainList.length , 35 * 4);
-            for (int i = 0; i < mainList.length; i++) {
-                for (int j = 0; j < mainList[0].getSize(); j++) {
+            backRectangle.setFrame(posX, posY, 35 * mainList.getSize() , 35 * 4);
+            for (int i = 0; i < mainList.getSize(); i++) {
+                for (int j = 0; j < itemList.getSize(); j++) {
 
                     g2d.setColor(new Color(0, 0, 0, 100));
                     g2d.draw(rectangle);
@@ -71,14 +73,13 @@ public class Inventory implements InteractableObject {
     }
 
     public void createList() {
-        for (int i = 0; i < mainList.length; i++) {
-            mainList[i] = itemList;
-            while(mainList[i].getSize() < 4){
-                mainList[i].append(new Stack<Item>());
+        while(mainList.getSize() < 10){
+            mainList.append(itemList);
+            while(itemList.getSize() < 4){
+                itemList.append(new Stack<InventoryDirt>());
             }
         }
-        //mainList[0].getContent().push(new Dirt(0,0));
-        //System.out.print(mainList[0].getContent().top());
+        //System.out.print(itemList.getContent().top());
     }
 
     public void setDisplayed(boolean displayed) {
@@ -94,7 +95,7 @@ public class Inventory implements InteractableObject {
         return itemList;
     }
 
-    public List<Stack>[] getMainList() {
+    public List<List> getMainList() {
         return mainList;
     }
 }
