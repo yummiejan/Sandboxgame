@@ -17,7 +17,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
 /**
- * Created by 204g04 on 12.12.2016.
+ * Created by Felix on 12.12.2016.
  */
 public class InventoryHandler implements InteractableObject{
 
@@ -32,9 +32,13 @@ public class InventoryHandler implements InteractableObject{
         firstInventory.setDisplayed(false);
         firstHotbar = new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0);
         frame.getActiveDrawingPanel().addObject(firstHotbar);
+        for (int i = 0; i < 65; i++) {
+            addNewItem("Dirt");
+        }
+
+        addNewItem("Dirt");
         addNewItem("Coal");
-        addNewItem("Dirt");
-        addNewItem("Dirt");
+        //addNewItem("Furnace");
     }
 
     @Override
@@ -70,26 +74,47 @@ public class InventoryHandler implements InteractableObject{
     }
 
     public void addNewItem(String itemName){
+        boolean added = false;
         for (int i = 0; i < firstInventory.getItemPlace().length; i++) {
             for (int j = 0; j < firstInventory.getItemPlaceLength(i); j++) {
-                if (firstInventory.getItemPlacePlace(i, j).top() == itemName) {
+                if (firstInventory.getItemPlacePlace(i, j).top() == itemName && firstInventory.getItemPlacePlace(i, j).getSize() < 64) {
                     firstInventory.getItemPlacePlace(i, j).push(itemName);
+                    added = true;
                     break;
                 } else if (firstInventory.getItemPlacePlace(i, j).isEmpty()) {
                     firstInventory.getItemPlacePlace(i, j).push(itemName);
+                    added = true;
                     break;
                 }
                 System.out.print(i);
                 System.out.println(j);
             }
+            if(added){
+                break;
+            }
         }
-        frame.repaint();
         System.out.println(firstInventory.getItemPlacePlace(0,0).top());
         System.out.println(firstInventory.getItemPlacePlace(0,1).top());
-        System.out.println(firstInventory.getItemPlacePlace(2,1).top());
+        System.out.println(firstInventory.getItemPlacePlace(0,2).top());
         System.out.println(firstInventory.getItemPlacePlace(0,0).getSize());
         System.out.println(firstInventory.getItemPlacePlace(0,1).getSize());
 
+    }
+
+    public void removeItem(String itemName){
+        boolean removed = false;
+        for (int i = 0; i < firstInventory.getItemPlace().length; i++) {
+            for (int j = 0; j < firstInventory.getItemPlaceLength(i); j++) {
+                if (firstInventory.getItemPlacePlace(i, j).top() == itemName) {
+                    firstInventory.getItemPlacePlace(i, j).pop();
+                    removed = true;
+                    break;
+                }
+            }
+            if(removed){
+                break;
+            }
+        }
     }
 }
 

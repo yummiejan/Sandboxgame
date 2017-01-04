@@ -1,6 +1,8 @@
 package Model.Creatures;
 
+import Control.GameplayHandler.InventoryHandler;
 import Control.GameplayHandler.WorldHandler;
+import Model.Gameplay.Inventory.Inventory;
 import Model.Items.Blocks.Block;
 import Model.InteractableObject;
 import Model.Items.Blocks.Dirt;
@@ -21,6 +23,8 @@ import java.io.IOException;
 public class Player extends Creature implements InteractableObject {
 
     private WorldHandler wh;
+    private InventoryHandler ih;
+    private Inventory firstInventory;
     private Rectangle2D.Double rectangle1;
     private int posX, posY;
     private int direction = 0;
@@ -143,6 +147,7 @@ public class Player extends Creature implements InteractableObject {
                         wh.getAllBlocks((posX / 50) + 1, posY / 50).setDisplayed(false);
                         wh.setAllBlocks((posX / 50) + 1, posY / 50, null);
                     }
+
                 } else
                 {
                     if (isBlock(0)) {
@@ -150,6 +155,8 @@ public class Player extends Creature implements InteractableObject {
                         wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1).setDisplayed(false);
                         wh.setAllBlocks((posX / 50) + 1, posY / 50 + 1, null);
                     }
+
+
                 }
         }else if(direction==1){
                 if (up)
@@ -180,6 +187,9 @@ public class Player extends Creature implements InteractableObject {
                 wh.setAllBlocks((posX / 50), posY / 50 - 1, null);
             }
         }
+            System.out.println(b.getContent());
+            //ih.addNewItem(b.getContent());
+
         return  b;
 
     }

@@ -31,7 +31,7 @@ public class WorldHandler implements InteractableObject{
                     if (random==1){
                         allBlocks[i][j] = new Coal(i * 50, j * 50);
                     }else{
-                        allBlocks[i][j] = new Dirt(i * 50, j * 50);//,this);
+                        allBlocks[i][j] = new Dirt(i * 50, j * 50);
                     }
                     frame.getActiveDrawingPanel().addObject(allBlocks[i][j]);
                 }

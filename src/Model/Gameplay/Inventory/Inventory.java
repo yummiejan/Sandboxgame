@@ -9,10 +9,11 @@ import View.DrawingPanel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Arc2D;
 import java.awt.geom.Rectangle2D;
 
 /**
- * Created by 204g04 on 12.12.2016.
+ * Created by Felix on 12.12.2016.
  */
 public class Inventory implements InteractableObject {
 
@@ -20,6 +21,9 @@ public class Inventory implements InteractableObject {
     private Rectangle2D.Double rectangle;
     private Rectangle2D.Double rectangle2;
     private Rectangle2D.Double itemRectangle;
+    private Rectangle2D.Double frectangle;
+    private Arc2D.Double fsemicircle;
+    private Rectangle2D.Double frectangle2;
     private Stack itemPlace[][];
     private Stack armorPlace[];
     private Stack<String> itemStack;
@@ -33,6 +37,7 @@ public class Inventory implements InteractableObject {
         rectangle = new Rectangle2D.Double(posX, posY, 10, 10);
         rectangle2 = new Rectangle2D.Double(posX, posY, 10, 10);
         itemRectangle = new Rectangle2D.Double(posX+2.5, posY+2.5, 5, 5);
+
         itemPlace = new Stack[10][4];
         armorPlace = new Stack[4];
         itemStack = new Stack<String>();
@@ -84,6 +89,9 @@ public class Inventory implements InteractableObject {
                         g2d.setColor(new Color(75, 25, 0));
                         g2d.fill(itemRectangle);
                         itemRectangle.setFrame(posX + i * 35 + 8.75, posY + j * 35 + 8.75, 17.5, 17.5);
+                    }
+                    if (itemPlace[i][j].top() == "Furnace") {
+
                     }
 
                 }

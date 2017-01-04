@@ -58,4 +58,12 @@ public abstract class Block extends Item implements DrawableObject {
     public boolean isDisplayed() {
         return displayed;
     }
+
+    public String getContent() {
+        if(colours[0] > 51) {
+            return "Dirt";
+        }else{
+            return "Coal";
+        }
+    }
 }
