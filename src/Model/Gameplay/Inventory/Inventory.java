@@ -19,8 +19,10 @@ public class Inventory implements InteractableObject {
     private Rectangle2D.Double backRectangle;
     private Rectangle2D.Double rectangle;
     private Rectangle2D.Double rectangle2;
+    private Rectangle2D.Double itemRectangle;
     private Stack itemPlace[][];
     private Stack armorPlace[];
+    private Stack<String> itemStack;
     private double posX, posY;
     private boolean displayed;
 
@@ -30,8 +32,10 @@ public class Inventory implements InteractableObject {
         backRectangle = new Rectangle2D.Double(posX, posY, 10, 10);
         rectangle = new Rectangle2D.Double(posX, posY, 10, 10);
         rectangle2 = new Rectangle2D.Double(posX, posY, 10, 10);
+        itemRectangle = new Rectangle2D.Double(posX+2.5, posY+2.5, 5, 5);
         itemPlace = new Stack[10][4];
         armorPlace = new Stack[4];
+        itemStack = new Stack<String>();
         addNewStack();
     }
 
@@ -69,13 +73,28 @@ public class Inventory implements InteractableObject {
                 rectangle2.setFrame(posX + 35 * itemPlace.length + 20, posY + i * 35, 35, 35);
 
             }
+            for (int i = 0; i < itemPlace.length; i++) {
+                for (int j = 0; j < itemPlace[i].length; j++) {
+                    if (itemPlace[i][j].top() == "Coal") {
+                        g2d.setColor(new Color(51, 51, 51));
+                        g2d.fill(itemRectangle);
+                        itemRectangle.setFrame(posX + i * 35 + 8.75, posY + j * 35 + 8.75, 17.5, 17.5);
+                    }
+                    if (itemPlace[i][j].top() == "Dirt") {
+                        g2d.setColor(new Color(75, 25, 0));
+                        g2d.fill(itemRectangle);
+                        itemRectangle.setFrame(posX + i * 35 + 8.75, posY + j * 35 + 8.75, 17.5, 17.5);
+                    }
+
+                }
+            }
 
         }
     }
     public void addNewStack(){
         for (int i = 0; i < itemPlace.length ; i++) {
             for (int j = 0; j < itemPlace[i].length; j++) {
-                itemPlace[i][j] = new Stack<Item>();
+                itemPlace[i][j] = new Stack<String>();
             }
         }
     }
@@ -118,5 +137,13 @@ public class Inventory implements InteractableObject {
 
     public void setArmorPlace(Stack armor, int a) {
         armorPlace[a] = armor;
+    }
+
+    public double getPosX() {
+        return posX;
+    }
+
+    public double getPosY() {
+        return posY;
     }
 }

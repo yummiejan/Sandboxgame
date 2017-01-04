@@ -10,7 +10,7 @@ public class Coal extends Block
 
     private boolean used = false;
 
-    public Coal(double posX, double posY,WorldHandler wh)
+    public Coal(double posX, double posY)
     {
         super(posX, posY, new int[] {51,51,51,0,0,0}, true);//, wh);
     }

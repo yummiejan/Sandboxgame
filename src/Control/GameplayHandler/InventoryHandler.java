@@ -5,6 +5,7 @@ import Model.Gameplay.Inventory.Hotbar;
 import Model.InteractableObject;
 import Model.Gameplay.Inventory.Inventory;
 import Model.Items.Blocks.Block;
+import Model.Items.Blocks.Coal;
 import Model.Items.Blocks.Dirt;
 import Model.Items.Item;
 import View.DrawingPanel;
@@ -13,6 +14,7 @@ import View.MainFrame;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Rectangle2D;
 
 /**
  * Created by 204g04 on 12.12.2016.
@@ -22,7 +24,6 @@ public class InventoryHandler implements InteractableObject{
     private MainFrame frame;
     private Inventory firstInventory;
     private Hotbar firstHotbar;
-    private Stack<Item> itemStack;
 
     public InventoryHandler(MainFrame frame) {
         this.frame = frame;
@@ -31,10 +32,9 @@ public class InventoryHandler implements InteractableObject{
         firstInventory.setDisplayed(false);
         firstHotbar = new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0);
         frame.getActiveDrawingPanel().addObject(firstHotbar);
-        itemStack = new Stack<Item>();
-        //System.out.println(firstInventory.getItemPlace(0,0));
-        //addNewStack(firstInventory.getItemPlace(0,0),0,0);
-        addNewItem(new Dirt(0,0));
+        addNewItem("Coal");
+        addNewItem("Dirt");
+        addNewItem("Dirt");
     }
 
     @Override
@@ -69,35 +69,30 @@ public class InventoryHandler implements InteractableObject{
 
     }
 
-    public void addNewItem(Item itemName){
+    public void addNewItem(String itemName){
         for (int i = 0; i < firstInventory.getItemPlace().length; i++) {
             for (int j = 0; j < firstInventory.getItemPlaceLength(i); j++) {
-                if(firstInventory.getItemPlacePlace(i,j).top() == itemName){
-                    firstInventory.getItemPlacePlace(i,j).push(itemName);
-                }else if(firstInventory.getItemPlacePlace(i,j).isEmpty()){
-                    firstInventory.getItemPlacePlace(i,j).push(itemName);
+                if (firstInventory.getItemPlacePlace(i, j).top() == itemName) {
+                    firstInventory.getItemPlacePlace(i, j).push(itemName);
+                    break;
+                } else if (firstInventory.getItemPlacePlace(i, j).isEmpty()) {
+                    firstInventory.getItemPlacePlace(i, j).push(itemName);
+                    break;
                 }
                 System.out.print(i);
-                System.out.print(i);
-                break;
+                System.out.println(j);
             }
-            break;
-
         }
-
+        frame.repaint();
         System.out.println(firstInventory.getItemPlacePlace(0,0).top());
-        System.out.println(firstInventory.getItemPlacePlace(1,0).top());
+        System.out.println(firstInventory.getItemPlacePlace(0,1).top());
+        System.out.println(firstInventory.getItemPlacePlace(2,1).top());
         System.out.println(firstInventory.getItemPlacePlace(0,0).getSize());
+        System.out.println(firstInventory.getItemPlacePlace(0,1).getSize());
 
     }
 }
 
 
-/**for (int j = 0; j < firstInventory.getMainList()[i].getSize(); j++) {
- if(firstInventory.getMainList()[i].getContent().top().equals("Dirt")){
- firstInventory.getMainList()[i].getContent().push(1);
- }else{
-
- }
- }
- }*/
+/**
+ */

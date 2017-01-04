@@ -29,7 +29,7 @@ public class WorldHandler implements InteractableObject{
                 if (j > counter) {
                     int random = (int)(Math.random()*5)+1;
                     if (random==1){
-                        allBlocks[i][j] = new Coal(i * 50, j * 50,this);
+                        allBlocks[i][j] = new Coal(i * 50, j * 50);
                     }else{
                         allBlocks[i][j] = new Dirt(i * 50, j * 50);//,this);
                     }
