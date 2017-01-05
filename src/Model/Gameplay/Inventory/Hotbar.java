@@ -18,6 +18,7 @@ public class Hotbar implements InteractableObject {
     private Rectangle2D.Double rectangle;
     private Rectangle2D.Double itemRectangle;
     private Rectangle2D.Double chooseRectangle;
+    private Inventory firstInventory;
     private int posX, posY, chosenX;
     private Stack place[];
     private boolean displayed;
@@ -37,10 +38,16 @@ public class Hotbar implements InteractableObject {
     @Override
     public void keyPressed(int key) {
         if(displayed == true){
-            if (key == KeyEvent.VK_RIGHT && chosenX < ((place.length-1) * 35 + posX-125 )) {
-                chosenX = chosenX + 35;
-            }else if (key == KeyEvent.VK_LEFT && chosenX > 450) {
-                chosenX = chosenX - 35;
+            if (key == KeyEvent.VK_1) {
+                chosenX = 450;
+            }else if (key == KeyEvent.VK_2) {
+                chosenX = 485;
+            }else if (key == KeyEvent.VK_3) {
+                chosenX = 520;
+            }else if (key == KeyEvent.VK_4) {
+                chosenX = 555;
+            }else if (key == KeyEvent.VK_5) {
+                chosenX = 590;
             }
         }
     }
@@ -60,14 +67,24 @@ public class Hotbar implements InteractableObject {
         if(displayed = true) {
             for (int i = 0; i < place.length; i++) {
                 if (place[i].top() == "Coal") {
-                    g2d.setColor(new Color(75, 25, 0));
-                    g2d.fill(itemRectangle);
-                    itemRectangle.setFrame(posX -125 + i * 35 + 8.75, posY + 8.75, 17.5, 17.5);
-                }
-                if (place[i].top() == "Dirt") {
                     g2d.setColor(new Color(51, 51, 51));
                     g2d.fill(itemRectangle);
                     itemRectangle.setFrame(posX -125 + i * 35 + 8.75, posY + 8.75, 17.5, 17.5);
+                    if(place[i].getSize() < 9) {
+                        g2d.drawString("" + place[i].getSize(), (int) (posX - 125) + i * 35 + 28, (int) posY + 32);
+                    }else{
+                        g2d.drawString("" + place[i].getSize(), (int) (posX - 125) + i * 35 + 23, (int) posY + 32);
+                    }
+                }
+                if (place[i].top() == "Dirt") {
+                    g2d.setColor(new Color(75, 25, 0));
+                    g2d.fill(itemRectangle);
+                    itemRectangle.setFrame(posX -125 + i * 35 + 8.75, posY + 8.75, 17.5, 17.5);
+                    if(place[i].getSize() < 9) {
+                        g2d.drawString("" + place[i].getSize(), (int) (posX -125) + i * 35 + 28, (int) posY + 32);
+                    }else{
+                        g2d.drawString("" + place[i].getSize(), (int) (posX -125) + i * 35 + 23, (int) posY + 32);
+                    }
                 }
                 if (place[i].top() == "Furnace") {
 

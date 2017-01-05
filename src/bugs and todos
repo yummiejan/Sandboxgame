@@ -5,7 +5,6 @@ Bugs
     (der Block existiert aber an der erwünschten Stelle und man kann ihn dort auch abbauen aber halt kein Bild)
     -> Fehlermeldung, wenn man den Block bauen will, ob an der gewünschten poisition schon ein Block steht oder nicht
 - Wenn zwei Blöcke über einem ein Block ist und man springt, rutscht der Kopf in den Block rein
-- Wenn man den untersten Block abbaut, kommen durchgehend Fehlermeldungen und man kann nichts machen
 
 
 Todo's innerhalb des Codes

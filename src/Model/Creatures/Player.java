@@ -80,8 +80,6 @@ public class Player extends Creature implements InteractableObject {
         }
         if (key==KeyEvent.VK_Q){
             destroy();
-            //System.out.println(destroy().getContent());
-            //ih.addNewItem(destroy().getContent());
         }
         if (key==KeyEvent.VK_R){
             place(new Dirt((posX/50)+1,posY/50+1));//,wh));
@@ -148,7 +146,6 @@ public class Player extends Creature implements InteractableObject {
                         b = wh.getAllBlocks((posX / 50) + 1, posY / 50);
                         wh.getAllBlocks((posX / 50) + 1, posY / 50).setDisplayed(false);
                         wh.setAllBlocks((posX / 50) + 1, posY / 50, null);
-                        //ih.addNewItem("Dirt");
                     }
 
                 } else
