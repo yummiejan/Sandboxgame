@@ -36,6 +36,9 @@ public class InventoryHandler implements InteractableObject{
 
     @Override
     public void keyPressed(int key) {
+        /**
+         * Aufrufen des Inventars im Spiel
+         */
         if(key == KeyEvent.VK_E && firstHotbar.isDisplayed()){
             if (!firstInventory.isDisplayed()) {
                 firstInventory.setDisplayed(true);
@@ -43,17 +46,23 @@ public class InventoryHandler implements InteractableObject{
                 firstInventory.setDisplayed(false);
             }
         }
+        /**
+         * Items werden mit den Num-Tasten in die Hotbar gezogen
+         */
         if(key == KeyEvent.VK_NUMPAD1){
+            //Zwei Hilfstacks werden erzeugt, damit dort die Stacks zum Tauschen kurz gespeichert werden können
             Stack help = new Stack<String>();
             Stack help2 = new Stack<String>();
             System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX()/35,firstInventory.getChosenY()/35));
             System.out.println(firstHotbar.getPlace(0));
             if(firstHotbar.getPlace(0).isEmpty()) {
+                //wenn der Platz in der Hotbar leer ist, werden einfach alle Items in dem Stack des Platzes hinzugefügt
                 while (!firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).isEmpty()) {
                     firstHotbar.getPlace(0).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                     firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                 }
             }else{
+                //ansonsten soll getauscht werden (funktioniert noch nicht)
                 while (!firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).isEmpty()){
                     help.push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                     firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
@@ -120,6 +129,7 @@ public class InventoryHandler implements InteractableObject{
             System.out.println(firstHotbar.getPlace(4).top());
         }
         if(key == KeyEvent.VK_C){
+            //mit der Taste C kann überprüft werden was in den Stacks der ganzen Hotbar ist und in dem Stack des Ausgewählten Platzesim Inventar
             System.out.println("Inventar:"+firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
             System.out.println("Hotbar:"+firstHotbar.getPlace(0).top());
             System.out.println("Hotbar:"+firstHotbar.getPlace(1).top());

@@ -37,6 +37,9 @@ public class Hotbar implements InteractableObject {
 
     @Override
     public void keyPressed(int key) {
+        /**
+         * Steuerung des roten Rechtecks mit Tasten
+         */
         if(displayed == true){
             if (key == KeyEvent.VK_1) {
                 chosenX = 450;
@@ -65,6 +68,9 @@ public class Hotbar implements InteractableObject {
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
         if(displayed = true) {
+            /**
+             * Items werden im Inventar gezeichnet und ein Stack auf eine Größe von 64 Items beschränkt
+             */
             for (int i = 0; i < place.length; i++) {
                 if (place[i].top() == "Coal") {
                     g2d.setColor(new Color(51, 51, 51));
@@ -90,6 +96,9 @@ public class Hotbar implements InteractableObject {
 
                 }
             }
+            /**
+             * Zeichnen der Hotbar selber
+             */
             g2d.setColor(new Color(79, 79, 79, 100));
             g2d.fill(backRectangle);
             backRectangle.setFrame(posX - 125, 0, 35 * place.length, 35);
@@ -109,6 +118,9 @@ public class Hotbar implements InteractableObject {
 
     }
 
+    /**
+     * den Plätzen werden String-Stacks hinzugefügt
+     */
     public void addNewStack(){
         for (int i = 0; i < place.length; i++) {
             place[i] = new Stack<String>();
@@ -123,6 +135,10 @@ public class Hotbar implements InteractableObject {
         return displayed;
     }
 
+    /**
+     * @param a
+     * @return den Stack an der Stelle a
+     */
     public Stack getPlace(double a) {
         return place[(int)a];
     }

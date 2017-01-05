@@ -51,7 +51,7 @@ public class Inventory implements InteractableObject {
     @Override
     public void keyPressed(int key) {
         /**
-         * Steuerung des roten Rechtecks innerhalb des Inventars
+         * Steuerung des roten Rechtecks innerhalb des Inventars mit den Pfeiltasten
          */
         if(displayed == true){
             if (key == KeyEvent.VK_RIGHT && chosenX < (itemPlace.length-1) * 35) {
@@ -79,6 +79,9 @@ public class Inventory implements InteractableObject {
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
         if(displayed == true) {
+            /**
+             * Zeichnen des Inventars selber
+             */
             g2d.setColor(new Color(79, 79, 79, 100));
             g2d.fill(backRectangle);
             backRectangle.setFrame(posX, posY, 35 * itemPlace.length + 55, 35 * itemPlace[0].length + 1);
@@ -95,10 +98,16 @@ public class Inventory implements InteractableObject {
                 rectangle2.setFrame(posX + 35 * itemPlace.length + 20, posY + i * 35, 35, 35);
 
             }
+            /**
+             * Rotes Rechteck zum Auswählen der Items
+             */
             g2d.setColor(new Color(250, 0, 0));
             g2d.draw(chooseRectangle);
             chooseRectangle.setFrame(chosenX, chosenY, 35, 35);
 
+            /**
+             * Items werden im Inventar gezeichnet und ein Stack auf eine Größe von 64 Items beschränkt
+             */
             for (int i = 0; i < itemPlace.length; i++) {
                 for (int j = 0; j < itemPlace[i].length; j++) {
                     if (itemPlace[i][j].top() == "Coal") {
@@ -138,7 +147,9 @@ public class Inventory implements InteractableObject {
 
     }
 
-
+    /**
+     * Den Plätzen des Inventars werden jeweils ein String-Stack zugewiesen
+     */
     public void addNewStack(){
         for (int i = 0; i < itemPlace.length ; i++) {
             for (int j = 0; j < itemPlace[i].length; j++) {
@@ -156,11 +167,19 @@ public class Inventory implements InteractableObject {
     }
 
 
-
+    /**
+     * @param a
+     * @param b
+     * @return den Stack an der gewünschten Stelle a und b
+     */
     public Stack getItemPlacePlace(double a, double b) {
         return itemPlace[(int)a][(int)b];
     }
 
+    /**
+     * @param a
+     * @return die y-Länge in Array-länge
+     */
     public int getItemPlaceLength(int a) {
         return itemPlace[a].length;
     }
