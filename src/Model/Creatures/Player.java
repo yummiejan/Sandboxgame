@@ -27,7 +27,8 @@ public class Player extends Creature implements InteractableObject {
     private int posX, posY;
     private int direction = 0;
     private boolean up = false;
-    private BufferedImage playerStanding,playerWalking;
+    private BufferedImage playerStanding,playerRight,playerLeft;
+    private Image currentImage;
 
     public Player(int posX, int posY, WorldHandler wh, InventoryHandler ih) {
         this.posX = posX;
@@ -37,21 +38,25 @@ public class Player extends Creature implements InteractableObject {
         this.ih = ih;
 
         playerStanding = null;
+        playerRight = null;
+        playerLeft = null;
         try {
-            playerStanding = ImageIO.read(new File("images/standing.png"));
+            playerStanding = ImageIO.read(new File("images/character_front.png"));
+            playerRight = ImageIO.read(new File("images/character_right.png"));
+            playerLeft = ImageIO.read(new File("images/character_left.png"));
         } catch (IOException e) {
         }
-
-        playerWalking = null;
-        try {
-            playerWalking = ImageIO.read(new File("images/right.png"));
-        } catch (IOException e) {
-        }
+        currentImage = playerStanding;
     }
 
     @Override
     public void keyPressed(int key) {
-
+        if(key == KeyEvent.VK_A){
+            currentImage = playerLeft;
+        }
+        else if(key == KeyEvent.VK_D){
+            currentImage = playerRight;
+        }
     }
 
     @Override
@@ -61,10 +66,12 @@ public class Player extends Creature implements InteractableObject {
         *
         */
         if (key == KeyEvent.VK_A) {
+            //currentImage = playerStanding;
             direction = 1;
             if (!isBlock(1)&&!isBlock(5))
             posX = posX - 50;
         } else if (key == KeyEvent.VK_D) {
+            //currentImage = playerStanding;
             direction = 0;
             if (!isBlock(0)&&!isBlock(4))
             posX = posX + 50;
@@ -101,13 +108,13 @@ public class Player extends Creature implements InteractableObject {
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-        g2d.drawImage(playerStanding,posX,posY,null);
+        g2d.drawImage(currentImage,posX,posY,null);
     }
 
     @Override
     public void update(double dt) {
         if (!isBlock(3)){
-            posY = posY + 5;
+            posY = posY + 4;
 
         }
     }
