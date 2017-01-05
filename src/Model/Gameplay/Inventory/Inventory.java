@@ -50,6 +50,9 @@ public class Inventory implements InteractableObject {
 
     @Override
     public void keyPressed(int key) {
+        /**
+         * Steuerung des roten Rechtecks innerhalb des Inventars
+         */
         if(displayed == true){
             if (key == KeyEvent.VK_RIGHT && chosenX < (itemPlace.length-1) * 35) {
                 chosenX = chosenX + 35;
