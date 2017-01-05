@@ -76,8 +76,8 @@ public abstract class Block extends Item implements DrawableObject {
     }
 
     /**
-     *
-     * @return
+     * Ist wichtig um den abgebbauten Block zum Inventar hinzuzufügen
+     * @return den Content eines Blockes
      */
     public String getContent() {
         if(colours[0] > 51) {

@@ -194,6 +194,10 @@ public class Player extends Creature implements InteractableObject {
                 wh.setAllBlocks((posX / 50), posY / 50 - 1, null);
             }
         }
+        /**
+         * der abgebaute Block-Content wird dem Inventar hinzugefügt (fonktioniert noch nicht, weil ich null zuruck bekomme, aber auch wenn ich nur "Dirt" eingebe)
+         */
+        ih.addNewItem(b.getContent());
         return  b;
 
     }
