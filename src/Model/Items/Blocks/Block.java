@@ -43,22 +43,42 @@ public abstract class Block extends Item implements DrawableObject {
 
     }
 
+    /**
+     * Checks if the current block is solid or not.
+     * @return state of the block
+     */
     public boolean isSolid() {
         return solid;
     }
 
+    /**
+     * Sets the block state to solid.
+     * @param solid
+     */
     public void setSolid(boolean solid) {
         this.solid = solid;
     }
 
+    /**
+     * Sets the block to be shown on the interface.
+     * @param displayed
+     */
     public void setDisplayed(boolean displayed) {
         this.displayed = displayed;
     }
 
+    /**
+     * Checks if the current block is displayed.
+     * @return
+     */
     public boolean isDisplayed() {
         return displayed;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getContent() {
         if(colours[0] > 51) {
             return "Dirt";

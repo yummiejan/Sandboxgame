@@ -113,6 +113,11 @@ public class Player extends Creature implements InteractableObject {
         }
     }
 
+    /**
+     * Checks if there is a block next to the player.
+     * @param richtung direction the player is facing
+     * @return
+     */
     public boolean isBlock(int richtung){
         Block b;
         if (richtung == 0){
@@ -139,6 +144,10 @@ public class Player extends Creature implements InteractableObject {
         return false;
     }
 
+    /**
+     * Destroys the block in the direction you're facing.
+     * @return the block to be destroyed
+     */
     public Block destroy(){
         Block b = null;
         if(direction==0){
@@ -193,6 +202,11 @@ public class Player extends Creature implements InteractableObject {
         return  b;
 
     }
+
+    /**
+     * Places a block in the direction you're facing
+     * @param b block to be placed
+     */
     public void place(Block b){
         if(direction==0){
             wh.setAllBlocks((posX/50)+1,posY/50+1,b);

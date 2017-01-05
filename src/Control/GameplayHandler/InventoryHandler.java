@@ -150,6 +150,10 @@ public class InventoryHandler implements InteractableObject{
 
     }
 
+    /**
+     * Adds new Item to the Inventory.
+     * @param itemName Name of the item to be added to the inventory.
+     */
     public void addNewItem(String itemName){
         boolean added = false;
         for (int i = 0; i < firstInventory.getItemPlace().length; i++) {
@@ -177,6 +181,12 @@ public class InventoryHandler implements InteractableObject{
         System.out.println(firstInventory.getItemPlacePlace(0,1).getSize());
 
     }
+
+    /**
+     * Removes given Item from the inventory.
+     *
+     * @param itemName Item to be removed from the Inventory.
+     */
 
     public void removeItem(String itemName){
         boolean removed = false;

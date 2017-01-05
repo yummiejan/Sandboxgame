@@ -10,9 +10,6 @@ import java.awt.event.MouseEvent;
  */
 public class Dirt extends Block {
 
-    /*private int randomR = (int)(Math.random() * 40) + 160;
-    private int randomG = (int)(Math.random() * 50) + 80;
-    private int randomB = (int)(Math.random() * 10) + 20;*/
     private String content;
 
     public Dirt(double posX, double posY) {
@@ -20,6 +17,10 @@ public class Dirt extends Block {
         content = "Dirt";
     }
 
+    /**
+     * Returns content
+     * @return content
+     */
     public String getContent() {
         return content;
     }

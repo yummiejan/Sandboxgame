@@ -78,10 +78,23 @@ public class WorldHandler implements InteractableObject{
     public void update(double dt) {
 
     }
+
+    /**
+     *
+     * @param a
+     * @param b
+     * @return
+     */
     public Block getAllBlocks(int a, int b) {
         return allBlocks[a][b];
     }
 
+    /**
+     *
+     * @param a
+     * @param b
+     * @param block
+     */
     public void setAllBlocks(int a,int b,Block block) {
         allBlocks[a][b] = block;
     }
