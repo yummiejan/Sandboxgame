@@ -5,6 +5,7 @@ import Model.InteractableObject;
 import Model.Items.Blocks.Dirt;
 import Model.Items.Item;
 import View.DrawingPanel;
+import View.MainFrame;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -107,11 +108,11 @@ public class Inventory implements InteractableObject {
 
             /**
              * Items werden im Inventar gezeichnet und ein Stack auf eine Größe von 64 Items beschränkt
-             */
+            */
             for (int i = 0; i < itemPlace.length; i++) {
                 for (int j = 0; j < itemPlace[i].length; j++) {
                     if (itemPlace[i][j].top() == "Coal") {
-                        g2d.setColor(new Color(75, 25, 0));
+                        g2d.setColor(new Color(51, 51, 51));
                         g2d.fill(itemRectangle);
                         itemRectangle.setFrame(posX + i * 35 + 8.75, posY + j * 35 + 8.75, 17.5, 17.5);
                         g2d.setColor(new Color(0, 0, 0));
@@ -120,9 +121,8 @@ public class Inventory implements InteractableObject {
                         }else{
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
                         }
-                    }
-                    if (itemPlace[i][j].top() == "Dirt") {
-                        g2d.setColor(new Color(51, 51, 51));
+                    }else if (itemPlace[i][j].top() == "Dirt") {
+                        g2d.setColor(new Color(75, 25, 0));
                         g2d.fill(itemRectangle);
                         itemRectangle.setFrame(posX + i * 35 + 8.75, posY + j * 35 + 8.75, 17.5, 17.5);
                         g2d.setColor(new Color(0, 0, 0));
