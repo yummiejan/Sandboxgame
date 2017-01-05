@@ -126,7 +126,6 @@ public class Inventory implements InteractableObject {
 
                 }
             }
-            g2d.setColor(new Color(250, 250, 250));
 
         }
     }
