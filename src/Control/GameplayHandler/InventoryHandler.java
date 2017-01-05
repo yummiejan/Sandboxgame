@@ -27,14 +27,11 @@ public class InventoryHandler implements InteractableObject{
         firstInventory.setDisplayed(false);
         firstHotbar = new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0);
         frame.getActiveDrawingPanel().addObject(firstHotbar);
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 65; i++) {
             addNewItem("Dirt");
         }
-
         addNewItem("Dirt");
         addNewItem("Coal");
-        //addNewItem("Furnace");
-        System.out.println(firstInventory.getItemPlacePlace(0,0).top()+ "adawdaw");
     }
 
     @Override
@@ -46,7 +43,7 @@ public class InventoryHandler implements InteractableObject{
                 firstInventory.setDisplayed(false);
             }
         }
-        if(key == KeyEvent.VK_1){
+        if(key == KeyEvent.VK_NUMPAD1){
             Stack help = new Stack<String>();
             Stack help2 = new Stack<String>();
             System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX()/35,firstInventory.getChosenY()/35));
@@ -70,7 +67,7 @@ public class InventoryHandler implements InteractableObject{
             }
             System.out.println(firstHotbar.getPlace(0).top());
         }
-        if(key == KeyEvent.VK_2) {
+        if(key == KeyEvent.VK_NUMPAD2) {
             Stack help = new Stack<String>();
             Stack help2 = new Stack<String>();
             System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35));
@@ -83,7 +80,7 @@ public class InventoryHandler implements InteractableObject{
             }
             System.out.println(firstHotbar.getPlace(1).top());
         }
-        if(key == KeyEvent.VK_3) {
+        if(key == KeyEvent.VK_NUMPAD3) {
             Stack help = new Stack<String>();
             Stack help2 = new Stack<String>();
             System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35));
@@ -96,7 +93,7 @@ public class InventoryHandler implements InteractableObject{
             }
             System.out.println(firstHotbar.getPlace(2).top());
         }
-        if(key == KeyEvent.VK_4) {
+        if(key == KeyEvent.VK_NUMPAD4) {
             Stack help = new Stack<String>();
             Stack help2 = new Stack<String>();
             System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35));
@@ -109,7 +106,7 @@ public class InventoryHandler implements InteractableObject{
             }
             System.out.println(firstHotbar.getPlace(3).top());
         }
-        if(key == KeyEvent.VK_5) {
+        if(key == KeyEvent.VK_NUMPAD5) {
             Stack help = new Stack<String>();
             Stack help2 = new Stack<String>();
             System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35));
@@ -121,6 +118,9 @@ public class InventoryHandler implements InteractableObject{
                 }
             }
             System.out.println(firstHotbar.getPlace(4).top());
+        }
+        if(key == KeyEvent.VK_C){
+            System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
         }
 
     }
@@ -162,18 +162,16 @@ public class InventoryHandler implements InteractableObject{
                     added = true;
                     break;
                 }
-                System.out.print(i);
-                System.out.println(j);
             }
             if(added){
                 break;
             }
         }
-        System.out.println(firstInventory.getItemPlacePlace(0,0).top());
+        /**System.out.println(firstInventory.getItemPlacePlace(0,0).top());
         System.out.println(firstInventory.getItemPlacePlace(0,1).top());
         System.out.println(firstInventory.getItemPlacePlace(0,2).top());
         System.out.println(firstInventory.getItemPlacePlace(0,0).getSize());
-        System.out.println(firstInventory.getItemPlacePlace(0,1).getSize());
+        System.out.println(firstInventory.getItemPlacePlace(0,1).getSize());*/
 
     }
 
@@ -199,7 +197,3 @@ public class InventoryHandler implements InteractableObject{
         }
     }
 }
-
-
-/**
- */
