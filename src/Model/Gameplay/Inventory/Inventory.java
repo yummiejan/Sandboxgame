@@ -102,11 +102,23 @@ public class Inventory implements InteractableObject {
                         g2d.setColor(new Color(75, 25, 0));
                         g2d.fill(itemRectangle);
                         itemRectangle.setFrame(posX + i * 35 + 8.75, posY + j * 35 + 8.75, 17.5, 17.5);
+                        g2d.setColor(new Color(0, 0, 0));
+                        if(itemPlace[i][j].getSize() < 9) {
+                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
+                        }else{
+                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
+                        }
                     }
                     if (itemPlace[i][j].top() == "Dirt") {
                         g2d.setColor(new Color(51, 51, 51));
                         g2d.fill(itemRectangle);
                         itemRectangle.setFrame(posX + i * 35 + 8.75, posY + j * 35 + 8.75, 17.5, 17.5);
+                        g2d.setColor(new Color(0, 0, 0));
+                        if(itemPlace[i][j].getSize() < 9) {
+                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
+                        }else{
+                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
+                        }
                     }
                     if (itemPlace[i][j].top() == "Furnace") {
 

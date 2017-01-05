@@ -17,23 +17,32 @@ public class Hotbar implements InteractableObject {
     private Rectangle2D.Double backRectangle;
     private Rectangle2D.Double rectangle;
     private Rectangle2D.Double itemRectangle;
-    private int posX, posY;
+    private Rectangle2D.Double chooseRectangle;
+    private int posX, posY, chosenX;
     private Stack place[];
     private boolean displayed;
 
     public Hotbar(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
+        chosenX = 450;
         place = new Stack[5];
         rectangle = new Rectangle2D.Double(posX,posY,250,50);
         backRectangle = new Rectangle2D.Double(posX,posY,250,50);
         itemRectangle = new Rectangle2D.Double(posX+2.5, posY+2.5, 5, 5);
+        chooseRectangle = new Rectangle2D.Double(chosenX, posY, 10, 10);
         addNewStack();
     }
 
     @Override
     public void keyPressed(int key) {
-
+        if(displayed == true){
+            if (key == KeyEvent.VK_RIGHT && chosenX < ((place.length-1) * 35 + posX-125 )) {
+                chosenX = chosenX + 35;
+            }else if (key == KeyEvent.VK_LEFT && chosenX > 450) {
+                chosenX = chosenX - 35;
+            }
+        }
     }
 
     @Override
@@ -49,6 +58,21 @@ public class Hotbar implements InteractableObject {
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
         if(displayed = true) {
+            for (int i = 0; i < place.length; i++) {
+                if (place[i].top() == "Coal") {
+                    g2d.setColor(new Color(75, 25, 0));
+                    g2d.fill(itemRectangle);
+                    itemRectangle.setFrame(posX -125 + i * 35 + 8.75, posY + 8.75, 17.5, 17.5);
+                }
+                if (place[i].top() == "Dirt") {
+                    g2d.setColor(new Color(51, 51, 51));
+                    g2d.fill(itemRectangle);
+                    itemRectangle.setFrame(posX -125 + i * 35 + 8.75, posY + 8.75, 17.5, 17.5);
+                }
+                if (place[i].top() == "Furnace") {
+
+                }
+            }
             g2d.setColor(new Color(79, 79, 79, 100));
             g2d.fill(backRectangle);
             backRectangle.setFrame(posX - 125, 0, 35 * place.length, 35);
@@ -57,23 +81,10 @@ public class Hotbar implements InteractableObject {
                 g2d.draw(rectangle);
                 rectangle.setFrame(i * 35 + posX - 125, 0, 35, 35);
             }
-            for (int i = 0; i < place.length; i++) {
-                if (place[i].top() == "Coal") {
-                    g2d.setColor(new Color(51, 51, 51));
-                    g2d.fill(itemRectangle);
-                    itemRectangle.setFrame(posX -125 + i * 35 + 8.75, posY + 8.75, 17.5, 17.5);
-                }
-                if (place[i].top() == "Dirt") {
-                    g2d.setColor(new Color(75, 25, 0));
-                    g2d.fill(itemRectangle);
-                    itemRectangle.setFrame(posX -125 + i * 35 + 8.75, posY + 8.75, 17.5, 17.5);
-                }
-                if (place[i].top() == "Furnace") {
-
-                }
-            }
-            g2d.setColor(new Color(250, 250, 250));
         }
+        g2d.setColor(new Color(250, 0, 0));
+        g2d.draw(chooseRectangle);
+        chooseRectangle.setFrame(chosenX, posY, 35, 35);
     }
 
     @Override
@@ -97,5 +108,9 @@ public class Hotbar implements InteractableObject {
 
     public Stack getPlace(double a) {
         return place[(int)a];
+    }
+
+    public int getChosenX() {
+        return chosenX;
     }
 }

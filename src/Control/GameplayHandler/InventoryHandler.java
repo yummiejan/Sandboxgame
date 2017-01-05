@@ -31,8 +31,9 @@ public class InventoryHandler implements InteractableObject{
         frame.getActiveDrawingPanel().addObject(firstInventory);
         firstInventory.setDisplayed(false);
         firstHotbar = new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0);
+        System.out.println(frame.getActiveDrawingPanel().getWidth()/2);
         frame.getActiveDrawingPanel().addObject(firstHotbar);
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 65; i++) {
             addNewItem("Dirt");
         }
 
@@ -126,6 +127,9 @@ public class InventoryHandler implements InteractableObject{
                 }
             }
             System.out.println(firstHotbar.getPlace(4).top());
+        }
+        if(key == KeyEvent.VK_C){
+            System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
         }
 
     }
