@@ -3,6 +3,9 @@ Bugs
 - Reinsliden in Blöcke
 - Block wird erstellt jedoch wird er in der oberen Bilschrim ecke antatt an der gewünschten position gemalt
     (der Block existiert aber an der erwünschten Stelle und man kann ihn dort auch abbauen aber halt kein Bild)
+    -> Fehlermeldung, wenn man den Block bauen will, ob an der gewünschten poisition schon ein Block steht oder nicht
+- Wenn zwei Blöcke über einem ein Block ist und man springt, rutscht der Kopf in den Block rein
+- Wenn man den untersten Block abbaut, kommen durchgehend Fehlermeldungen und man kann nichts machen
 
 
 Todo's innerhalb des Codes
@@ -19,6 +22,3 @@ Todo's innerhalb des Codes
 - mit Items und Creatures interagieren
 - Menü
 - ggf. Pause
-
-
-~Alex

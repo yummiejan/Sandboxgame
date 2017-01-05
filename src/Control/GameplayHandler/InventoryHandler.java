@@ -4,17 +4,12 @@ import Model.DataStructures.Stack;
 import Model.Gameplay.Inventory.Hotbar;
 import Model.InteractableObject;
 import Model.Gameplay.Inventory.Inventory;
-import Model.Items.Blocks.Block;
-import Model.Items.Blocks.Coal;
-import Model.Items.Blocks.Dirt;
-import Model.Items.Item;
 import View.DrawingPanel;
 import View.MainFrame;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Rectangle2D;
 
 /**
  * Created by Felix on 12.12.2016.
