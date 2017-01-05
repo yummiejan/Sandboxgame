@@ -70,14 +70,62 @@ public class InventoryHandler implements InteractableObject{
                     help2.push(firstHotbar.getPlace(1).top());
                     firstHotbar.getPlace(0).pop();
                 }
-                while(!help2.isEmpty()) {
-                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).push(help2.top());
-                }
-                while (!help.isEmpty()) {
-                    firstHotbar.getPlace(0).push(help.top());
-                }
+                firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).push(help2.top());
+                firstHotbar.getPlace(0).push(help.top());
             }
             System.out.println(firstHotbar.getPlace(0).top());
+        }
+        if(key == KeyEvent.VK_2) {
+            Stack help = new Stack<String>();
+            Stack help2 = new Stack<String>();
+            System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35));
+
+            if (firstHotbar.getPlace(1).isEmpty()) {
+                while (!firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).isEmpty()) {
+                    firstHotbar.getPlace(1).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
+                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
+                }
+            }
+            System.out.println(firstHotbar.getPlace(1).top());
+        }
+        if(key == KeyEvent.VK_3) {
+            Stack help = new Stack<String>();
+            Stack help2 = new Stack<String>();
+            System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35));
+
+            if (firstHotbar.getPlace(2).isEmpty()) {
+                while (!firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).isEmpty()) {
+                    firstHotbar.getPlace(2).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
+                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
+                }
+            }
+            System.out.println(firstHotbar.getPlace(2).top());
+        }
+        if(key == KeyEvent.VK_4) {
+            Stack help = new Stack<String>();
+            Stack help2 = new Stack<String>();
+            System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35));
+
+            if (firstHotbar.getPlace(3).isEmpty()) {
+                while (!firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).isEmpty()) {
+                    firstHotbar.getPlace(3).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
+                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
+                }
+            }
+            System.out.println(firstHotbar.getPlace(3).top());
+        }
+        if(key == KeyEvent.VK_5) {
+            Stack help = new Stack<String>();
+            Stack help2 = new Stack<String>();
+            System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35));
+            System.out.println(firstHotbar.getPlace(4).top());
+            if (firstHotbar.getPlace(4).isEmpty()) {
+                while (!firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).isEmpty()) {
+                    firstHotbar.getPlace(4).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
+                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
+                }
+            }
+            System.out.println(firstHotbar.getPlace(4).top());
         }
 
     }
