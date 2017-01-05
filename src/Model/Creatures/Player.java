@@ -2,7 +2,6 @@ package Model.Creatures;
 
 import Control.GameplayHandler.InventoryHandler;
 import Control.GameplayHandler.WorldHandler;
-import Model.Gameplay.Inventory.Inventory;
 import Model.Items.Blocks.Block;
 import Model.InteractableObject;
 import Model.Items.Blocks.Dirt;
