@@ -120,7 +120,12 @@ public class InventoryHandler implements InteractableObject{
             System.out.println(firstHotbar.getPlace(4).top());
         }
         if(key == KeyEvent.VK_C){
-            System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
+            System.out.println("Inventar:"+firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
+            System.out.println("Hotbar:"+firstHotbar.getPlace(0).top());
+            System.out.println("Hotbar:"+firstHotbar.getPlace(1).top());
+            System.out.println("Hotbar:"+firstHotbar.getPlace(2).top());
+            System.out.println("Hotbar:"+firstHotbar.getPlace(3).top());
+            System.out.println("Hotbar:"+firstHotbar.getPlace(4).top());
         }
 
     }
