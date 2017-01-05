@@ -24,18 +24,18 @@ public class Player extends Creature implements InteractableObject {
 
     private WorldHandler wh;
     private InventoryHandler ih;
-    private Inventory firstInventory;
     private Rectangle2D.Double rectangle1;
     private int posX, posY;
     private int direction = 0;
     private boolean up = false;
     private BufferedImage playerStanding,playerWalking;
 
-    public Player(int posX, int posY, WorldHandler wh) {
+    public Player(int posX, int posY, WorldHandler wh, InventoryHandler ih) {
         this.posX = posX;
         this.posY = posY;
         rectangle1 = new Rectangle2D.Double(posX+20,posY,10,100);
         this.wh = wh;
+        this.ih = ih;
 
         playerStanding = null;
         try {
@@ -80,6 +80,8 @@ public class Player extends Creature implements InteractableObject {
         }
         if (key==KeyEvent.VK_Q){
             destroy();
+            //System.out.println(destroy().getContent());
+            //ih.addNewItem(destroy().getContent());
         }
         if (key==KeyEvent.VK_R){
             place(new Dirt((posX/50)+1,posY/50+1));//,wh));
@@ -146,6 +148,7 @@ public class Player extends Creature implements InteractableObject {
                         b = wh.getAllBlocks((posX / 50) + 1, posY / 50);
                         wh.getAllBlocks((posX / 50) + 1, posY / 50).setDisplayed(false);
                         wh.setAllBlocks((posX / 50) + 1, posY / 50, null);
+                        //ih.addNewItem("Dirt");
                     }
 
                 } else
@@ -187,9 +190,6 @@ public class Player extends Creature implements InteractableObject {
                 wh.setAllBlocks((posX / 50), posY / 50 - 1, null);
             }
         }
-            System.out.println(b.getContent());
-            //ih.addNewItem(b.getContent());
-
         return  b;
 
     }

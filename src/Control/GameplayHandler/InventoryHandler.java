@@ -32,13 +32,14 @@ public class InventoryHandler implements InteractableObject{
         firstInventory.setDisplayed(false);
         firstHotbar = new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0);
         frame.getActiveDrawingPanel().addObject(firstHotbar);
-        for (int i = 0; i < 65; i++) {
+        for (int i = 0; i < 2; i++) {
             addNewItem("Dirt");
         }
 
         addNewItem("Dirt");
         addNewItem("Coal");
         //addNewItem("Furnace");
+        System.out.println(firstInventory.getItemPlacePlace(0,0).top()+ "adawdaw");
     }
 
     @Override
@@ -49,6 +50,34 @@ public class InventoryHandler implements InteractableObject{
             }else{
                 firstInventory.setDisplayed(false);
             }
+        }
+        if(key == KeyEvent.VK_1){
+            Stack help = new Stack<String>();
+            Stack help2 = new Stack<String>();
+            System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX()/35,firstInventory.getChosenY()/35));
+            System.out.println(firstHotbar.getPlace(0));
+            if(firstHotbar.getPlace(0).isEmpty()) {
+                while (!firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).isEmpty()) {
+                    firstHotbar.getPlace(0).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
+                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
+                }
+            }else{
+                while (!firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).isEmpty()){
+                    help.push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
+                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
+                }
+                while (!firstHotbar.getPlace(0).isEmpty()){
+                    help2.push(firstHotbar.getPlace(1).top());
+                    firstHotbar.getPlace(0).pop();
+                }
+                while(!help2.isEmpty()) {
+                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).push(help2.top());
+                }
+                while (!help.isEmpty()) {
+                    firstHotbar.getPlace(0).push(help.top());
+                }
+            }
+            System.out.println(firstHotbar.getPlace(0).top());
         }
 
     }

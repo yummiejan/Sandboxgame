@@ -19,6 +19,7 @@ public class WorldHandler implements InteractableObject{
 
     private Block allBlocks[][];
     private MainFrame frame;
+    private InventoryHandler ih;
 
     public WorldHandler(MainFrame frame){
         this.frame = frame;
@@ -40,7 +41,7 @@ public class WorldHandler implements InteractableObject{
         allBlocks[0][xBlockLevel(0)-1] = new Furnace(0, (xBlockLevel(0)-1)*50,this);
         frame.getActiveDrawingPanel().addObject(allBlocks[0][xBlockLevel(0)]);
         int x = (int)(Math.random()*19+2);
-        frame.getActiveDrawingPanel().addObject(new Player(x*50,(xBlockLevel(x)-2)*50,this));
+        frame.getActiveDrawingPanel().addObject(new Player(x*50,(xBlockLevel(x)-2)*50,this,ih));
     }
 
     public int xBlockLevel(int x){
