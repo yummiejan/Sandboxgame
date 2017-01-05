@@ -2,11 +2,9 @@ package Model.Creatures;
 
 import Control.GameplayHandler.InventoryHandler;
 import Control.GameplayHandler.WorldHandler;
-import Model.Gameplay.Inventory.Hotbar;
 import Model.Gameplay.Inventory.Inventory;
 import Model.Items.Blocks.Block;
 import Model.InteractableObject;
-import Model.Items.Blocks.Coal;
 import Model.Items.Blocks.Dirt;
 import View.DrawingPanel;
 
@@ -27,8 +25,6 @@ public class Player extends Creature implements InteractableObject {
     private WorldHandler wh;
     private InventoryHandler ih;
     private Rectangle2D.Double rectangle1;
-    private Inventory firstInventory;
-    private Hotbar firstHotbar;
     private int posX, posY;
     private int direction = 0;
     private boolean up = false;
@@ -84,15 +80,11 @@ public class Player extends Creature implements InteractableObject {
         }
         if (key==KeyEvent.VK_Q){
             destroy();
+            //System.out.println(destroy().getContent());
             //ih.addNewItem(destroy().getContent());
         }
         if (key==KeyEvent.VK_R){
-            if(/**firstHotbar.getPlace(firstHotbar.getChosenX()/35).top() == "Dirt" &&*/ !firstHotbar.getPlace(firstHotbar.getChosenX()/35).isEmpty() && firstHotbar.getPlace(firstHotbar.getChosenX()/35) != null) {
-                //place(new Dirt((posX / 50) + 1, posY / 50 + 1));//,wh));
-                System.out.println("adawdawdawdadawdawdawdasdawdasdaw");
-            }else if(firstHotbar.getPlace(firstHotbar.getChosenX()/35).top() == "Coal"){
-                place(new Coal((posX / 50) + 1, posY / 50 + 1));
-            }
+            place(new Dirt((posX/50)+1,posY/50+1));//,wh));
         }
         if (key==KeyEvent.VK_SHIFT){
             if (up){
@@ -198,7 +190,6 @@ public class Player extends Creature implements InteractableObject {
                 wh.setAllBlocks((posX / 50), posY / 50 - 1, null);
             }
         }
-        System.out.println(b.getContent());
         return  b;
 
     }

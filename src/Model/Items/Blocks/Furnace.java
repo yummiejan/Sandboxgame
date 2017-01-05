@@ -58,10 +58,18 @@ public class Furnace extends Block {
         }*/
     }
 
+    /**
+     * Checks if the furnace is activated.
+     * @return
+     */
     public boolean isActivated() {
         return activated;
     }
 
+    /**
+     *
+     * @param activated
+     */
     public void setActivated(boolean activated) {
         this.activated = activated;
     }
