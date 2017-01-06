@@ -136,8 +136,6 @@ public class Player extends Creature implements InteractableObject {
         }
     }
 
-
-
     public boolean isBlock(int richtung){
         Block b;
         if (richtung == 0){
@@ -163,6 +161,8 @@ public class Player extends Creature implements InteractableObject {
         }
         return false;
     }
+
+
 
     public Block destroy(){
         Block b = null;
@@ -217,7 +217,7 @@ public class Player extends Creature implements InteractableObject {
         /**
          * der abgebaute Block-Content wird dem Inventar hinzugefügt (fonktioniert noch nicht, weil ich null zuruck bekomme, aber auch wenn ich nur "Dirt" eingebe)
          */
-        ih.addNewItem(b.getContent());
+        ih.addNewItem(b.getName());
         return  b;
 
     }
@@ -226,8 +226,8 @@ public class Player extends Creature implements InteractableObject {
             wh.setAllBlocks((posX/50)+1,posY/50+1,b);
             wh.getFrame().getActiveDrawingPanel().addObject(wh.getAllBlocks((posX)+1,posY/50+1));
         }
-        ih.removeItem(b.getContent());
-        System.out.println(b.getContent());
+        ih.removeItem(b.getName());
+        System.out.println(b.getName());
     }
 
     public void startJump(){

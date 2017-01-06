@@ -10,21 +10,23 @@ import java.awt.geom.Rectangle2D;
 /**
  * Created by 204g04 on 12.12.2016.
  */
-public abstract class Block extends Item implements DrawableObject {
+public abstract class Block extends Item /*implements DrawableObject*/ {
 
     private Rectangle2D.Double rectangle;
     private double posX, posY;
     private double height = 50, width = 50;
     private int[] colours = new int[5];
     private boolean solid;
-    private boolean displayed=true;
+    private String name;
+    private boolean displayed = true;
 
-    public Block(double posX, double posY, int[] colours,boolean solid) {
+    public Block(double posX, double posY, int[] colours,boolean solid, String name) {
         this.posX = posX;
         this.posY = posY;
         this.colours = colours;
         rectangle = new Rectangle2D.Double(posX, posY, height, width);
         this.solid = solid;
+        this.name = name;
     }
 
     @Override
@@ -76,14 +78,10 @@ public abstract class Block extends Item implements DrawableObject {
     }
 
     /**
-     * Ist wichtig um den abgebbauten Block zum Inventar hinzuzufügen
-     * @return den Content eines Blockes
+     * Ist wichtig, um den abgebbauten Block zum Inventar hinzuzufügen
+     * @return den Namen eines Blockes
      */
-    public String getContent() {
-        if(colours[0] > 51) {
-            return "Dirt";
-        }else{
-            return "Coal";
-        }
+    public String getName() {
+        return name;
     }
 }

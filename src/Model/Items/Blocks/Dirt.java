@@ -13,7 +13,7 @@ public class Dirt extends Block {
     private String content;
 
     public Dirt(double posX, double posY) {
-        super(posX, posY, new int[] {(int)(Math.random() * 15) + 100, (int)(Math.random() * 15) + 40, (int)(Math.random() * 15) + 0,0,0,0},true);
+        super(posX, posY, new int[] {(int)(Math.random() * 15) + 100, (int)(Math.random() * 15) + 40, (int)(Math.random() * 15) + 0,0,0,0},true,"Dirt");
         content = "Dirt";
     }
 
@@ -23,5 +23,15 @@ public class Dirt extends Block {
      */
     public String getContent() {
         return content;
+    }
+
+    @Override
+    public void keyReleased(int key) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
     }
 }
