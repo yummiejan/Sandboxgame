@@ -8,9 +8,12 @@ import Model.Items.Blocks.Dirt;
 import Model.Items.Blocks.Furnace;
 import View.DrawingPanel;
 import View.MainFrame;
+import javafx.scene.shape.Circle;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Arc2D;
+import java.awt.geom.Ellipse2D;
 
 /**
  * Created by 204g07 on 09.12.2016.
@@ -20,6 +23,7 @@ public class WorldHandler implements InteractableObject{
     private Block allBlocks[][];
     private MainFrame frame;
     private InventoryHandler ih;
+    private Ellipse2D.Double sonne;
 
     public WorldHandler(MainFrame frame){
         this.frame = frame;
@@ -42,6 +46,8 @@ public class WorldHandler implements InteractableObject{
         frame.getActiveDrawingPanel().addObject(allBlocks[0][xBlockLevel(0)]);
         int x = (int)(Math.random()*19+2);
         frame.getActiveDrawingPanel().addObject(new Player(x*50,(xBlockLevel(x)-2)*50,this,ih));
+
+        sonne = new Ellipse2D.Double(500,500,100,100);
     }
 
     public int xBlockLevel(int x){
@@ -71,7 +77,9 @@ public class WorldHandler implements InteractableObject{
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-
+        g2d.setColor(new Color(255, 212,0));
+        g2d.fill(sonne);
+        g2d.draw(sonne);
     }
 
     @Override

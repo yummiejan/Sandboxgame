@@ -16,6 +16,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Timer;
 
 /**
  * Created by 204g04 on 09.12.2016.
@@ -24,12 +25,21 @@ public class Player extends Creature implements InteractableObject {
 
     private WorldHandler wh;
     private InventoryHandler ih;
+
     private Rectangle2D.Double rectangle1;
+
     private int posX, posY;
+    private double velX,velY;
+    private double gravity;
+    private boolean onGround;
+
     private int direction = 0;
     private boolean up = false;
+
     private BufferedImage playerStanding,playerRight,playerLeft;
     private Image currentImage;
+
+    private Timer timer;
 
     public Player(int posX, int posY, WorldHandler wh, InventoryHandler ih) {
         this.posX = posX;
@@ -41,6 +51,9 @@ public class Player extends Creature implements InteractableObject {
         playerStanding = null;
         playerRight = null;
         playerLeft = null;
+
+        gravity = 200;
+
         try {
             playerStanding = ImageIO.read(new File("images/character_front.png"));
             playerRight = ImageIO.read(new File("images/character_right.png"));
@@ -54,9 +67,10 @@ public class Player extends Creature implements InteractableObject {
     public void keyPressed(int key) {
         if(key == KeyEvent.VK_A){
             currentImage = playerLeft;
-        }
-        else if(key == KeyEvent.VK_D){
+        }else if(key == KeyEvent.VK_D){
             currentImage = playerRight;
+        }else if(key == KeyEvent.VK_W){
+            startJump();
         }
     }
 
@@ -67,21 +81,19 @@ public class Player extends Creature implements InteractableObject {
         *
         */
         if (key == KeyEvent.VK_A) {
-            //currentImage = playerStanding;
+            currentImage = playerStanding;
             direction = 1;
             if (!isBlock(1)&&!isBlock(5))
             posX = posX - 50;
         } else if (key == KeyEvent.VK_D) {
-            //currentImage = playerStanding;
+            currentImage = playerStanding;
             direction = 0;
             if (!isBlock(0)&&!isBlock(4))
             posX = posX + 50;
         }
         if (key == KeyEvent.VK_W) {
+            endJump();
             direction = 2;
-            if (!isBlock(2))
-                if (isBlock(3))
-                posY = posY - 80;
         }else if(key == KeyEvent.VK_S){
             direction = 3;
         }
@@ -107,16 +119,24 @@ public class Player extends Creature implements InteractableObject {
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-        g2d.drawImage(currentImage,posX,posY,null);
+        g2d.drawImage(currentImage,(int)posX,(int)posY,null);
     }
 
     @Override
     public void update(double dt) {
-        if (!isBlock(3)){
-            posY = posY + 4;
 
+        posY += velY * dt;
+        velY += gravity * dt;
+        //System.out.println(posY);
+        //System.out.println(onGround);
+
+        if(isBlock(3)){
+            velY = 0.0;
+            onGround = true;
         }
     }
+
+
 
     public boolean isBlock(int richtung){
         Block b;
@@ -206,5 +226,17 @@ public class Player extends Creature implements InteractableObject {
             wh.setAllBlocks((posX/50)+1,posY/50+1,b);
             wh.getFrame().getActiveDrawingPanel().addObject(wh.getAllBlocks((posX)+1,posY/50+1));
         }
+    }
+
+    public void startJump(){
+        if(onGround){
+            velY=-200.0;
+            onGround = false;
+        }
+    }
+
+    public void endJump(){
+        if(velY < -100.0)
+            velY = -100.0;
     }
 }
