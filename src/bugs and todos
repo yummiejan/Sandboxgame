@@ -3,15 +3,16 @@ Bugs
 - Reinsliden in Blöcke
 - Block wird erstellt jedoch wird er in der oberen Bilschrim ecke antatt an der gewünschten position gemalt
     (der Block existiert aber an der erwünschten Stelle und man kann ihn dort auch abbauen aber halt kein Bild)
-    -> Fehlermeldung, wenn man den Block bauen will, ob an der gewünschten poisition schon ein Block steht oder nicht
+    -> Fehlermeldung, wenn man den Block bauen will, ob an der gewünschten poisition schon ein Block steht oder nicht (ArryOutOfBounds)
 - Wenn zwei Blöcke über einem ein Block ist und man springt, rutscht der Kopf in den Block rein
+- Beim Hinzufügen der Blöcke im Player uns Inventar kommt ein NullPointer
 
 
 Todo's innerhalb des Codes
 - flüssiges Hochspringen
 - flüssiges Bewegen
 - Graphiken für alles
-- funktionsfähiges Inventar
+- funktionsfähiges Inventar -> 90% fertig
 - funktionsfähiger Ofen
 - weitere funktionsfähige Blöcke und Items
 - Tag-Nacht-System bzw. Hintergru8nd, ggf. Wettersystem

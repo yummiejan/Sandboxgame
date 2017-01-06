@@ -226,6 +226,8 @@ public class Player extends Creature implements InteractableObject {
             wh.setAllBlocks((posX/50)+1,posY/50+1,b);
             wh.getFrame().getActiveDrawingPanel().addObject(wh.getAllBlocks((posX)+1,posY/50+1));
         }
+        ih.removeItem(b.getContent());
+        System.out.println(b.getContent());
     }
 
     public void startJump(){
