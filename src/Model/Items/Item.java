@@ -1,5 +1,6 @@
 package Model.Items;
 
+import Model.DrawableObject;
 import Model.InteractableObject;
 import View.DrawingPanel;
 

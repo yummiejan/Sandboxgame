@@ -19,7 +19,7 @@ public class Furnace extends Block {
     private Rectangle2D.Double rectangle2;
 
     public Furnace(double posX, double posY, WorldHandler wh) {
-        super(posX, posY, new int[] {128, 128, 128, 64, 64, 64}, true,"Furnace");//,wh);
+        super(posX, posY, true,"Furnace");
         semicircle = new Arc2D.Double(posX+10, posY+25, 30, 30, 0, 180, Arc2D.PIE);
         rectangle = new Rectangle2D.Double(posX, posY, 50, 50);
         rectangle2 = new Rectangle2D.Double(posX+5, posY+5, 40, 8);

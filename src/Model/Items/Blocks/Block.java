@@ -19,15 +19,13 @@ public abstract class Block extends Item /*implements DrawableObject*/ {
     private Image image;
     private double posX, posY;
     private double height = 50, width = 50;
-    private int[] colours = new int[5];
     private boolean solid;
     private String name;
     private boolean displayed = true;
 
-    public Block(double posX, double posY, int[] colours,boolean solid, String name) {
+    public Block(double posX, double posY,boolean solid, String name) {
         this.posX = posX;
         this.posY = posY;
-        this.colours = colours;
         rectangle = new Rectangle2D.Double(posX, posY, height, width);
         this.solid = solid;
         this.name = name;
@@ -47,13 +45,6 @@ public abstract class Block extends Item /*implements DrawableObject*/ {
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-        /**if (isDisplayed()) {
-            g2d.setColor(new Color(colours[0], colours[1], colours[2]));
-            g2d.fill(rectangle);
-            g2d.setColor(new Color(colours[3], colours[4], colours[5]));
-            g2d.draw(rectangle);
-            rectangle.setFrame(posX, posY, width, height);
-        }*/
         if (isDisplayed()){
             g2d.drawImage(image,(int)posX,(int)posY,null);
         }

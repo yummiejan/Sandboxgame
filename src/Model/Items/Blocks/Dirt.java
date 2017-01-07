@@ -13,7 +13,7 @@ public class Dirt extends Block {
     private String content;
 
     public Dirt(double posX, double posY) {
-        super(posX, posY, new int[] {(int)(Math.random() * 15) + 100, (int)(Math.random() * 15) + 40, (int)(Math.random() * 15) + 0,0,0,0},true,"Dirt");
+        super(posX, posY,true,"Dirt");
         content = "Dirt";
     }
 

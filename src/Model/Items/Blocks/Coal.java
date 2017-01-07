@@ -15,7 +15,7 @@ public class Coal extends Block
 
     public Coal(double posX, double posY)
     {
-        super(posX, posY, new int[] {51,51,51,0,0,0}, true,"Coal");//, wh);
+        super(posX, posY, true,"Coal");
     }
 
     /**
