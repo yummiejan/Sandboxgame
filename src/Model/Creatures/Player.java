@@ -74,6 +74,7 @@ public class Player extends Creature implements InteractableObject {
         }else if(key == KeyEvent.VK_D){
             currentImage = playerRight;
         }else if(key == KeyEvent.VK_W){
+            if (!isBlock(2))
             startJump();
         }
     }
