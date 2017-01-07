@@ -1,5 +1,4 @@
 Bugs
-- Fehlermeldung, wenn man außerhalb des Randes gehen will
 - Reinsliden in Blöcke
 - Block wird erstellt jedoch wird er in der oberen Bilschrim ecke antatt an der gewünschten position gemalt
     (der Block existiert aber an der erwünschten Stelle und man kann ihn dort auch abbauen aber halt kein Bild)
@@ -9,16 +8,14 @@ Bugs
 
 
 Todo's innerhalb des Codes
-- flüssiges Hochspringen
-- flüssiges Bewegen
-- Graphiken für alles
-- funktionsfähiges Inventar -> 90% fertig
+(- flüssiges Hochspringen)
+(- flüssiges Bewegen)
 - funktionsfähiger Ofen
-- weitere funktionsfähige Blöcke und Items
+(- weitere funktionsfähige Blöcke und Items)
 - Tag-Nacht-System bzw. Hintergru8nd, ggf. Wettersystem
-- funktionsfähige Tiere
+(- funktionsfähige Tiere)
 - Items craften
-- Items platzieren
+- Items platzieren -> NullPointer, warum auch immer
 - mit Items und Creatures interagieren
 - Menü
 - ggf. Pause
