@@ -91,7 +91,7 @@ public class WorldHandler implements InteractableObject{
 
     @Override
     public void update(double dt) {
-        //currentBackground = background;
+        System.out.println(currentBackground.getSource());
     }
 
     /**

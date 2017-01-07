@@ -29,7 +29,7 @@ public class Player extends Creature implements InteractableObject {
     private Rectangle2D.Double rectangle1;
 
     private int posX, posY;
-    private double velX,velY;
+    private double velY;
     private double gravity;
     private boolean onGround;
     private boolean destroyed;
