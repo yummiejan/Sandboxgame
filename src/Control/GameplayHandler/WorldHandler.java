@@ -41,10 +41,10 @@ public class WorldHandler implements InteractableObject{
             int counter = (int) (Math.random() * 2) + 6;
             for (int j = 0; j < allBlocks[i].length; j++) {
                 if (j > counter) {
-                    int random = (int)(Math.random()*5)+1;
-                    if (random==1){
+                    int random = (int) (Math.random() * 5) + 1;
+                    if (random == 1 && j > counter+1) {
                         allBlocks[i][j] = new Coal(i * 50, j * 50);
-                    }else{
+                    } else {
                         allBlocks[i][j] = new Dirt(i * 50, j * 50);
                     }
                     frame.getActiveDrawingPanel().addObject(allBlocks[i][j]);

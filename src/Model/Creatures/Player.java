@@ -2,6 +2,7 @@ package Model.Creatures;
 
 import Control.GameplayHandler.InventoryHandler;
 import Control.GameplayHandler.WorldHandler;
+import Model.Gameplay.Inventory.Hotbar;
 import Model.Gameplay.Inventory.Inventory;
 import Model.Items.Blocks.Block;
 import Model.InteractableObject;
@@ -25,6 +26,7 @@ public class Player extends Creature implements InteractableObject {
 
     private WorldHandler wh;
     private InventoryHandler ih;
+    private Hotbar hb;
 
     private Rectangle2D.Double rectangle1;
 
@@ -229,9 +231,9 @@ public class Player extends Creature implements InteractableObject {
         if(direction==0){
             wh.setAllBlocks((posX/50)+1,posY/50+1,b);
             wh.getFrame().getActiveDrawingPanel().addObject(wh.getAllBlocks((posX)+1,posY/50+1));
+            hb.getPlace(hb.getChosenX()/50).pop();
         }
-        ih.removeItem(b.getName());
-        System.out.println(b.getName());
+
     }
 
     public void startJump(){
