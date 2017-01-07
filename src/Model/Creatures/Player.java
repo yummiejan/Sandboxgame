@@ -50,9 +50,9 @@ public class Player extends Creature implements InteractableObject {
         this.ih = ih;
 
         destroyed = false;
-        playerStanding = null;
-        playerRight = null;
-        playerLeft = null;
+        //playerStanding = null;
+        //playerRight = null;
+        //playerLeft = null;
 
         gravity = 200;
 
@@ -60,8 +60,8 @@ public class Player extends Creature implements InteractableObject {
             playerStanding = ImageIO.read(new File("images/character_front.png"));
             playerRight = ImageIO.read(new File("images/character_right.png"));
             playerLeft = ImageIO.read(new File("images/character_left.png"));
-        } catch (IOException e) {
-        }
+        } catch (IOException e) {}
+
         currentImage = playerStanding;
     }
 

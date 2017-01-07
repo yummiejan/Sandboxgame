@@ -10,10 +10,13 @@ import View.DrawingPanel;
 import View.MainFrame;
 import javafx.scene.shape.Circle;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by 204g07 on 09.12.2016.
@@ -23,6 +26,7 @@ public class WorldHandler implements InteractableObject{
     private Block allBlocks[][];
     private MainFrame frame;
     private InventoryHandler ih;
+    private Image currentBackground,background,invBackground;
 
     public WorldHandler(MainFrame frame){
         this.frame = frame;
@@ -45,6 +49,14 @@ public class WorldHandler implements InteractableObject{
         frame.getActiveDrawingPanel().addObject(allBlocks[0][xBlockLevel(0)]);
         int x = (int)(Math.random()*19+2);
         frame.getActiveDrawingPanel().addObject(new Player(x*50,(xBlockLevel(x)-2)*50,this,ih));
+
+
+        try {
+            background = ImageIO.read(new File("images/background.png"));
+            invBackground = ImageIO.read(new File("images/background.png"));
+        } catch (IOException e) {}
+
+        currentBackground = background;
     }
 
     public int xBlockLevel(int x){
@@ -74,12 +86,12 @@ public class WorldHandler implements InteractableObject{
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-
+        g2d.drawImage(currentBackground,0,0,null);
     }
 
     @Override
     public void update(double dt) {
-
+        //currentBackground = background;
     }
 
     /**
