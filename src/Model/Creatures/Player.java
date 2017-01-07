@@ -32,6 +32,7 @@ public class Player extends Creature implements InteractableObject {
     private double velX,velY;
     private double gravity;
     private boolean onGround;
+    private boolean destroyed;
 
     private int direction = 0;
     private boolean up = false;
@@ -48,6 +49,7 @@ public class Player extends Creature implements InteractableObject {
         this.wh = wh;
         this.ih = ih;
 
+        destroyed = false;
         playerStanding = null;
         playerRight = null;
         playerLeft = null;
@@ -98,6 +100,7 @@ public class Player extends Creature implements InteractableObject {
             direction = 3;
         }
         if (key==KeyEvent.VK_Q){
+            destroyed = true;
             destroy();
         }
         if (key==KeyEvent.VK_R){
@@ -217,6 +220,7 @@ public class Player extends Creature implements InteractableObject {
         /**
          * der abgebaute Block-Content wird dem Inventar hinzugefügt (fonktioniert noch nicht, weil ich null zuruck bekomme, aber auch wenn ich nur "Dirt" eingebe)
          */
+        System.out.println(b.getName());
         ih.addNewItem(b.getName());
         return  b;
 
@@ -240,5 +244,9 @@ public class Player extends Creature implements InteractableObject {
     public void endJump(){
         if(velY < -100.0)
             velY = -100.0;
+    }
+
+    public boolean isDestroyed() {
+        return destroyed;
     }
 }

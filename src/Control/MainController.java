@@ -2,6 +2,7 @@ package Control;
 
 import Control.GameplayHandler.InventoryHandler;
 import Control.GameplayHandler.WorldHandler;
+import Model.Creatures.Player;
 import Model.InteractableObject;
 import View.*;
 
@@ -16,7 +17,7 @@ public class MainController {
     private MainFrame frame;
     private WorldHandler handler;
     private InventoryHandler handler2;
-    private boolean paused = false;
+    private Player player;
 
     public MainController(MainFrame frame){
             handler = new WorldHandler(frame);

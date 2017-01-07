@@ -1,9 +1,11 @@
 package Control.GameplayHandler;
 
+import Model.Creatures.Player;
 import Model.DataStructures.Stack;
 import Model.Gameplay.Inventory.Hotbar;
 import Model.InteractableObject;
 import Model.Gameplay.Inventory.Inventory;
+import Model.Items.Blocks.Block;
 import View.DrawingPanel;
 import View.MainFrame;
 
@@ -19,20 +21,21 @@ public class InventoryHandler implements InteractableObject{
     private MainFrame frame;
     private Inventory firstInventory;
     private Hotbar firstHotbar;
+    private Player player;
 
     public InventoryHandler(MainFrame frame) {
         this.frame = frame;
-        firstInventory = new Inventory(0,0);
+        firstInventory = new Inventory(0, 0);
         frame.getActiveDrawingPanel().addObject(firstInventory);
         firstInventory.setDisplayed(false);
-        firstHotbar = new Hotbar(frame.getActiveDrawingPanel().getWidth()/2,0);
+        firstHotbar = new Hotbar(frame.getActiveDrawingPanel().getWidth() / 2, 0);
         frame.getActiveDrawingPanel().addObject(firstHotbar);
         for (int i = 0; i < 256; i++) {
             addNewItem("Dirt");
         }
         //addNewItem("Coal");
         //removeItem("Dirt");
-        for (int i = 0; i < 256 ; i++) {
+        for (int i = 0; i < 256; i++) {
             addNewItem("Coal");
         }
 
