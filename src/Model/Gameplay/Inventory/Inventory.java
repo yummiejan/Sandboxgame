@@ -7,11 +7,14 @@ import Model.Items.Item;
 import View.DrawingPanel;
 import View.MainFrame;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Rectangle2D;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Felix on 12.12.2016.
@@ -23,12 +26,9 @@ public class Inventory implements InteractableObject {
     private Rectangle2D.Double rectangle2;
     private Rectangle2D.Double itemRectangle;
     private Rectangle2D.Double chooseRectangle;
-    private Rectangle2D.Double frectangle;
-    private Arc2D.Double fsemicircle;
-    private Rectangle2D.Double frectangle2;
+    private Image image;
     private Stack itemPlace[][];
     private Stack armorPlace[];
-    private Stack<String> itemStack;
     private double posX, posY, chosenX, chosenY;
     private boolean displayed;
 
@@ -45,7 +45,7 @@ public class Inventory implements InteractableObject {
 
         itemPlace = new Stack[10][4];
         armorPlace = new Stack[4];
-        itemStack = new Stack<String>();
+
         addNewStack();
     }
 
@@ -112,9 +112,11 @@ public class Inventory implements InteractableObject {
             for (int i = 0; i < itemPlace.length; i++) {
                 for (int j = 0; j < itemPlace[i].length; j++) {
                     if (itemPlace[i][j].top() == "Coal") {
-                        g2d.setColor(new Color(51, 51, 51));
-                        g2d.fill(itemRectangle);
-                        itemRectangle.setFrame(posX + i * 35 + 8.75, posY + j * 35 + 8.75, 17, 17);
+                        try {
+                            image = ImageIO.read(new File("images/coal_inv.png"));
+                        } catch (IOException e) {
+                        }
+                        g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
                         g2d.setColor(new Color(0, 0, 0));
                         if(itemPlace[i][j].getSize() < 9) {
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
@@ -122,9 +124,11 @@ public class Inventory implements InteractableObject {
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
                         }
                     }else if (itemPlace[i][j].top() == "Dirt") {
-                        g2d.setColor(new Color(75, 25, 0));
-                        g2d.fill(itemRectangle);
-                        itemRectangle.setFrame(posX + i * 35 + 8.75, posY + j * 35 + 8.75, 17, 17);
+                        try {
+                            image = ImageIO.read(new File("images/dirt_inv.png"));
+                        } catch (IOException e) {
+                        }
+                        g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
                         g2d.setColor(new Color(0, 0, 0));
                         if(itemPlace[i][j].getSize() < 9) {
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);

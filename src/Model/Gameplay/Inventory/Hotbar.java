@@ -4,10 +4,13 @@ import Model.DataStructures.Stack;
 import Model.InteractableObject;
 import View.DrawingPanel;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Felix on 12.12.2016.
@@ -18,7 +21,7 @@ public class Hotbar implements InteractableObject {
     private Rectangle2D.Double rectangle;
     private Rectangle2D.Double itemRectangle;
     private Rectangle2D.Double chooseRectangle;
-    private Inventory firstInventory;
+    private Image image;
     private int posX, posY, chosenX;
     private Stack place[];
     private boolean displayed;
@@ -73,9 +76,11 @@ public class Hotbar implements InteractableObject {
              */
             for (int i = 0; i < place.length; i++) {
                 if (place[i].top() == "Coal") {
-                    g2d.setColor(new Color(51, 51, 51));
-                    g2d.fill(itemRectangle);
-                    itemRectangle.setFrame(posX -125 + i * 35 + 8.75, posY + 8.75, 17.5, 17.5);
+                    try {
+                        image = ImageIO.read(new File("images/coal_inv.png"));
+                    } catch (IOException e) {
+                    }
+                    g2d.drawImage(image,(int)(posX -125 + i * 35 + 8.75),(int)(posY +8.75) ,null);
                     if(place[i].getSize() < 9) {
                         g2d.drawString("" + place[i].getSize(), (int) (posX - 125) + i * 35 + 28, (int) posY + 32);
                     }else{
@@ -83,9 +88,11 @@ public class Hotbar implements InteractableObject {
                     }
                 }
                 if (place[i].top() == "Dirt") {
-                    g2d.setColor(new Color(75, 25, 0));
-                    g2d.fill(itemRectangle);
-                    itemRectangle.setFrame(posX -125 + i * 35 + 8.75, posY + 8.75, 17.5, 17.5);
+                    try {
+                        image = ImageIO.read(new File("images/dirt_inv.png"));
+                    } catch (IOException e) {
+                    }
+                    g2d.drawImage(image,(int)(posX -125 + i * 35 + 8.75), (int)(posY +8.75) ,null);
                     if(place[i].getSize() < 9) {
                         g2d.drawString("" + place[i].getSize(), (int) (posX -125) + i * 35 + 28, (int) posY + 32);
                     }else{

@@ -20,8 +20,9 @@ public class MainController {
     private Player player;
 
     public MainController(MainFrame frame){
-            handler = new WorldHandler(frame);
-            handler2 = new InventoryHandler(frame);
-            frame.getActiveDrawingPanel().addObject(handler2);
+        handler = new WorldHandler(frame);
+        handler2 = new InventoryHandler(frame);
+        frame.getActiveDrawingPanel().addObject(handler2);
+        frame.getActiveDrawingPanel().addObject(handler);
     }
 }
