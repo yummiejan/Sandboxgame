@@ -82,12 +82,12 @@ public class Player extends Creature implements InteractableObject {
         * Beim Tastendruck w,a,s,d wird überprüft in welche Richtung der Player schaut
         *
         */
-        if (key == KeyEvent.VK_A) {
+        if (key == KeyEvent.VK_A && posX > 0) {
             currentImage = playerStanding;
             direction = 1;
             if (!isBlock(1)&&!isBlock(5))
             posX = posX - 50;
-        } else if (key == KeyEvent.VK_D) {
+        } else if (key == KeyEvent.VK_D && posX < wh.getAllBlocks(22,12).getPosX()) {
             currentImage = playerStanding;
             direction = 0;
             if (!isBlock(0)&&!isBlock(4))

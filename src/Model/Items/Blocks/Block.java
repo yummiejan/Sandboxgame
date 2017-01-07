@@ -104,4 +104,8 @@ public abstract class Block extends Item /*implements DrawableObject*/ {
     public String getName() {
         return name;
     }
+
+    public double getPosX() {
+        return posX;
+    }
 }

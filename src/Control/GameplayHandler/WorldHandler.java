@@ -30,6 +30,12 @@ public class WorldHandler implements InteractableObject{
 
     public WorldHandler(MainFrame frame){
         this.frame = frame;
+        try {
+            //background = ImageIO.read(new File("images/background.png"));
+            invBackground = ImageIO.read(new File("images/background.png"));
+        } catch (IOException e) {}
+
+        currentBackground = background;
         allBlocks = new Block[23][13];
         for (int i = 0; i < allBlocks.length; i++) {
             int counter = (int) (Math.random() * 2) + 6;
@@ -49,14 +55,6 @@ public class WorldHandler implements InteractableObject{
         frame.getActiveDrawingPanel().addObject(allBlocks[0][xBlockLevel(0)]);
         int x = (int)(Math.random()*19+2);
         frame.getActiveDrawingPanel().addObject(new Player(x*50,(xBlockLevel(x)-2)*50,this,ih));
-
-
-        try {
-            background = ImageIO.read(new File("images/background.png"));
-            invBackground = ImageIO.read(new File("images/background.png"));
-        } catch (IOException e) {}
-
-        currentBackground = background;
     }
 
     public int xBlockLevel(int x){
@@ -91,7 +89,7 @@ public class WorldHandler implements InteractableObject{
 
     @Override
     public void update(double dt) {
-        System.out.println(currentBackground.getSource());
+        //System.out.println(currentBackground.getSource());
     }
 
     /**
