@@ -2,10 +2,7 @@ package Control.GameplayHandler;
 
 import Model.*;
 import Model.Creatures.Player;
-import Model.Items.Blocks.Block;
-import Model.Items.Blocks.Coal;
-import Model.Items.Blocks.Dirt;
-import Model.Items.Blocks.Furnace;
+import Model.Items.Blocks.*;
 import View.DrawingPanel;
 import View.MainFrame;
 import javafx.scene.shape.Circle;
@@ -53,6 +50,8 @@ public class WorldHandler implements InteractableObject{
         }
         allBlocks[0][xBlockLevel(0)-1] = new Furnace(0, (xBlockLevel(0)-1)*50,this);
         frame.getActiveDrawingPanel().addObject(allBlocks[0][xBlockLevel(0)]);
+        allBlocks[22][xBlockLevel(0)-1] = new CraftingTable(50, 50,this);
+        //frame.getActiveDrawingPanel().addObject(allBlocks[22][6]);
         int x = (int)(Math.random()*19+2);
         frame.getActiveDrawingPanel().addObject(new Player(x*50,(xBlockLevel(x)-2)*50,this,ih));
     }

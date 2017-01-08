@@ -4,7 +4,9 @@ import Model.DrawableObject;
 import Model.InteractableObject;
 import View.DrawingPanel;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Line2D;
 
 
 /**
@@ -12,7 +14,10 @@ import java.awt.event.KeyEvent;
  */
 public abstract class Item implements InteractableObject {
 
-    public Item() {
+    private String name;
+
+    public Item(String name) {
+        this.name = name;
 
     }
 
@@ -21,5 +26,14 @@ public abstract class Item implements InteractableObject {
         if(key == KeyEvent.VK_SPACE) {
 
         }
+    }
+
+    @Override
+    public void draw(DrawingPanel dp, Graphics2D g2d) {
+
+    }
+
+    public String getName() {
+        return name;
     }
 }

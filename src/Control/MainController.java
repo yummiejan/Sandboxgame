@@ -3,6 +3,7 @@ package Control;
 import Control.GameplayHandler.InventoryHandler;
 import Control.GameplayHandler.WorldHandler;
 import Model.Creatures.Player;
+import Model.Gameplay.Inventory.CraftingTableInventory;
 import Model.InteractableObject;
 import View.*;
 
@@ -17,11 +18,11 @@ public class MainController {
     private MainFrame frame;
     private WorldHandler handler;
     private InventoryHandler handler2;
-    private Player player;
 
     public MainController(MainFrame frame){
         handler = new WorldHandler(frame);
         handler2 = new InventoryHandler(frame);
+
         frame.getActiveDrawingPanel().addObject(handler);
         frame.getActiveDrawingPanel().addObject(handler2);
     }

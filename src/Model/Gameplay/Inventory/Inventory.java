@@ -2,16 +2,13 @@ package Model.Gameplay.Inventory;
 
 import Model.DataStructures.Stack;
 import Model.InteractableObject;
-import Model.Items.Blocks.Dirt;
-import Model.Items.Item;
 import View.DrawingPanel;
-import View.MainFrame;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Arc2D;
+import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
@@ -24,8 +21,9 @@ public class Inventory implements InteractableObject {
     private Rectangle2D.Double backRectangle;
     private Rectangle2D.Double rectangle;
     private Rectangle2D.Double rectangle2;
-    private Rectangle2D.Double itemRectangle;
     private Rectangle2D.Double chooseRectangle;
+    private Rectangle2D.Double woodRectangle;
+    private Line2D.Double stickLine;
     private Image image;
     private Stack itemPlace[][];
     private Stack armorPlace[];
@@ -40,8 +38,9 @@ public class Inventory implements InteractableObject {
         backRectangle = new Rectangle2D.Double(posX, posY, 10, 10);
         rectangle = new Rectangle2D.Double(posX, posY, 10, 10);
         rectangle2 = new Rectangle2D.Double(posX, posY, 10, 10);
-        itemRectangle = new Rectangle2D.Double(posX+2.5, posY+2.5, 5, 5);
         chooseRectangle = new Rectangle2D.Double(chosenX, chosenY, 10, 10);
+        stickLine = new Line2D.Double(posX,posY,posX,posY);
+        woodRectangle = new Rectangle2D.Double(posX,posY,10,10);
 
         itemPlace = new Stack[10][4];
         armorPlace = new Stack[4];
@@ -135,9 +134,44 @@ public class Inventory implements InteractableObject {
                         }else{
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
                         }
-                    }
-                    if (itemPlace[i][j].top() == "Furnace") {
+                    }else if (itemPlace[i][j].top() == "Furnace") {
 
+                    }else if(itemPlace[i][j].top() == "Stick"){
+                        g2d.setColor(new Color(92, 36, 2));
+                        g2d.draw(stickLine);
+                        stickLine.setLine(posX + i * 35 + 17.5, posY + j * 35 + 8.75, posX + i * 35 + 17.5, posY + j * 35 + 25);
+                        g2d.setColor(new Color(0, 0, 0));
+                        if(itemPlace[i][j].getSize() < 9) {
+                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
+                        }else{
+                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
+                        }
+                    }else if(itemPlace[i][j].top() == "Pickaxe"){
+                        //Bild für Pickaxe
+                        g2d.setColor(new Color(0, 0, 0));
+                        if(itemPlace[i][j].getSize() < 9) {
+                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
+                        }else{
+                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
+                        }
+                    }else if(itemPlace[i][j].top() == "Wood") {
+                        g2d.setColor(new Color(45, 19, 2));
+                        g2d.fill(woodRectangle);
+                        woodRectangle.setFrame(posX + i *35 + 8.75,posY + j *35 + 8.75, 18, 18);
+                        if (itemPlace[i][j].getSize() < 9) {
+                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
+                        } else {
+                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
+                        }
+                    } else if(itemPlace[i][j].top() == "Stone") {
+                        g2d.setColor(new Color(52, 51, 51));
+                        g2d.fill(woodRectangle);
+                        woodRectangle.setFrame(posX + i *35 + 8.75,posY + j *35 + 8.75, 18, 18);
+                        if (itemPlace[i][j].getSize() < 9) {
+                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
+                        } else {
+                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
+                        }
                     }
 
                 }

@@ -24,6 +24,7 @@ public abstract class Block extends Item /*implements DrawableObject*/ {
     private boolean displayed = true;
 
     public Block(double posX, double posY,boolean solid, String name) {
+        super(name);
         this.posX = posX;
         this.posY = posY;
         rectangle = new Rectangle2D.Double(posX, posY, height, width);
