@@ -112,6 +112,10 @@ public class Player extends Creature implements InteractableObject {
                 up = true;
             }
         }
+        if(key == KeyEvent.VK_F && getBlock() != null) {
+            //System.out.println(getBlock().getName());
+            getBlock().interact(getBlock());
+        }
     }
 
     @Override
@@ -140,6 +144,12 @@ public class Player extends Creature implements InteractableObject {
         }
     }
 
+    /**
+     * Prüft, ob der Block in Blickrichtung solide ist.
+     * @param richtung Die Richtung, in der geprüft werden soll.
+     * @return Solidarität des Blockes.
+     */
+
     public boolean isBlock(int richtung){
         Block b;
         if (richtung == 0){
@@ -164,9 +174,34 @@ public class Player extends Creature implements InteractableObject {
             return true;
         }
         return false;
+        /*if(getBlock() != null) {
+            if (getBlock().isSolid()) return true;
+        }
+        return false;*/
     }
 
+    /**
+     * Liefert den sich in Abhängigkeit der Blickrichtung befindenden Block zurück.
+     * @return Den oben genannten Block.
+     */
 
+    public Block getBlock(){
+        Block b;
+        if (direction == 0 && !up){
+            b = wh.getAllBlocks(posX/50+1, posY/50+1);
+        }else if (direction == 1 && !up){
+            b = wh.getAllBlocks(posX/50-1, posY/50+1);
+        }else if (direction == 2){
+            b = wh.getAllBlocks(posX/50, posY/50-1);
+        }else if (direction == 3){
+            b = wh.getAllBlocks(posX/50, posY/50+2);
+        }else if (direction == 0){
+            b = wh.getAllBlocks(posX/50+1, posY/50);
+        }else if (direction == 1){
+            b = wh.getAllBlocks(posX/50-1, posY/50);
+        }else b = null;
+        return b;
+    }
 
     public Block destroy(){
         Block b = null;

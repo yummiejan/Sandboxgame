@@ -18,7 +18,7 @@ public class Furnace extends Block {
     private Arc2D.Double semicircle;
     private Rectangle2D.Double rectangle2;
 
-    public Furnace(double posX, double posY, WorldHandler wh) {
+    public Furnace(double posX, double posY) {
         super(posX, posY, true,"Furnace");
         semicircle = new Arc2D.Double(posX+10, posY+25, 30, 30, 0, 180, Arc2D.PIE);
         rectangle = new Rectangle2D.Double(posX, posY, 50, 50);

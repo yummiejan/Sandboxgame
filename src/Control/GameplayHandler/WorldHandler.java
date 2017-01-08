@@ -1,18 +1,15 @@
 package Control.GameplayHandler;
 
+import Control.Itemhandler.FurnaceHandler;
 import Model.*;
 import Model.Creatures.Player;
 import Model.Items.Blocks.*;
 import View.DrawingPanel;
 import View.MainFrame;
-import javafx.scene.shape.Circle;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Arc2D;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
 
@@ -27,6 +24,9 @@ public class WorldHandler implements InteractableObject{
     private MainFrame frame;
     private InventoryHandler ih;
     private Image currentBackground,background,invBackground;
+    private Player player;
+    private Furnace furnace;
+    private FurnaceHandler furnaceHandler;
 
     public WorldHandler(MainFrame frame){
         this.frame = frame;
@@ -59,15 +59,23 @@ public class WorldHandler implements InteractableObject{
                 }
             }
         }
-        allBlocks[0][xBlockLevel(0)-1] = new Furnace(0, (xBlockLevel(0)-1)*50,this);
+        furnace = new Furnace(0, (xBlockLevel(0)-1)*50);
+        allBlocks[0][xBlockLevel(0)-1] = furnace;
         frame.getActiveDrawingPanel().addObject(allBlocks[0][xBlockLevel(0)]);
+        furnaceHandler = new FurnaceHandler(frame, furnace);
+        frame.getActiveDrawingPanel().addObject(furnaceHandler);
         allBlocks[22][xBlockLevel(0)-1] = new CraftingTable(frame.getWidth()-65, (xBlockLevel(22)-1)*50,this);
         frame.getActiveDrawingPanel().addObject(allBlocks[22][xBlockLevel(0)-1]);
         int x = (int)(Math.random()*19+2);
-        frame.getActiveDrawingPanel().addObject(new Player(x*50,(xBlockLevel(x)-2)*50,this,ih));
-
-
+        player = new Player(x*50,(xBlockLevel(x)-2)*50,this,ih);
+        frame.getActiveDrawingPanel().addObject(player);
     }
+
+    /**
+     * Methode für die Höhe der Blöcke.
+     * @param x Die zu analysierende Stelle.
+     * @return Anzahl der sich auf einer x-Koordinate befindende Blöcke.
+     */
 
     public int xBlockLevel(int x){
         int n = 0;
