@@ -86,7 +86,8 @@ public class Player extends Creature implements InteractableObject {
                     currentImage = playerStanding;
                     direction = 1;
                     if (!isBlock(1) && !isBlock(5)) {
-                        posX -= 50;
+                        //posX -= 50;
+                        wantedX -= 50;
                     }
                 }
                 break;
@@ -98,7 +99,8 @@ public class Player extends Creature implements InteractableObject {
                     currentImage = playerStanding;
                     direction = 0;
                     if (!isBlock(0) && !isBlock(4)) {
-                        posX += 50;
+                        //posX += 50;
+                        wantedX += 50;
                     }
                 }
                 break;
@@ -139,28 +141,36 @@ public class Player extends Creature implements InteractableObject {
             velY = 0.0;
             onGround = true;
         }
+
+        if(wantedX < posX){
+            posX -= 5;
+        }else if(wantedX > posX){
+            posX += 5;
+        }else{
+            posX = wantedX;
+        }
     }
 
     public boolean isBlock(int richtung){
         Block b = null;
         switch(richtung) {
             case 0:
-                b = wh.getAllBlocks(posX / 50 + 1, posY / 50 + 1);
+                b = wh.getAllBlocks(wantedX / 50 + 1, posY / 50 + 1);
                 break;
             case 1:
-                b = wh.getAllBlocks(posX / 50 - 1, posY / 50 + 1);
+                b = wh.getAllBlocks(wantedX / 50 - 1, posY / 50 + 1);
                 break;
             case 2:
-                b = wh.getAllBlocks(posX / 50, posY / 50 - 1);
+                b = wh.getAllBlocks(wantedX / 50, posY / 50 - 1);
                 break;
             case 3:
-                b = wh.getAllBlocks(posX / 50, posY / 50 + 2);
+                b = wh.getAllBlocks(wantedX / 50, posY / 50 + 2);
                 break;
             case 4:
-                b = wh.getAllBlocks(posX / 50 + 1, posY / 50);
+                b = wh.getAllBlocks(wantedX / 50 + 1, posY / 50);
                 break;
             case 5:
-                b = wh.getAllBlocks(posX / 50 - 1, posY / 50);
+                b = wh.getAllBlocks(wantedX / 50 - 1, posY / 50);
                 break;
         }
         if(b == null){
