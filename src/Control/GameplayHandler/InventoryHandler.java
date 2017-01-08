@@ -38,24 +38,9 @@ public class InventoryHandler implements InteractableObject{
         for (int i = 0; i < 256; i++) {
             addNewItem("Dirt");
         }
-        //addNewItem("Coal");
-        //removeItem("Dirt");
         for (int i = 0; i < 256; i++) {
             addNewItem("Coal");
         }
-        for (int i = 0; i < 256; i++) {
-            addNewItem("Stick");
-        }
-        for (int i = 0; i < 256 ; i++) {
-            addNewItem("Pickaxe");
-        }
-        for (int i = 0; i < 256 ; i++) {
-            addNewItem("Stone");
-        }
-        for (int i = 0; i < 256 ; i++) {
-            addNewItem("Wood");
-        }
-        //addNewItem(firstCTI.crafted());
 
 
 
@@ -64,25 +49,41 @@ public class InventoryHandler implements InteractableObject{
     @Override
     public void keyPressed(int key) {
         if (key == KeyEvent.VK_N) {
-            addNewItem("Dirt");
+            addNewItem("Wood");
+            addNewItem("Stone");
         }
+
+        /**
+         * Das gecraftete Item wird dem Inventar hinzugefügt
+         */
         if( key == KeyEvent.VK_ENTER){
             if(firstCTI.crafted() == "Stick"){
                 for (int i = 0; i < 4; i++) {
                     addNewItem(firstCTI.crafted());
                 }
-            }else{
+            }else if(firstCTI.crafted() != "Nichts"){
                 addNewItem(firstCTI.crafted());
             }
-            firstCTI.getCraftingPlace(0,0).pop();
-            firstCTI.getCraftingPlace(0,1).pop();
-            firstCTI.getCraftingPlace(0,2).pop();
-            firstCTI.getCraftingPlace(1,0).pop();
-            firstCTI.getCraftingPlace(1,1).pop();
-            firstCTI.getCraftingPlace(1,2).pop();
-            firstCTI.getCraftingPlace(2,0).pop();
-            firstCTI.getCraftingPlace(2,1).pop();
-            firstCTI.getCraftingPlace(2,2).pop();
+            if(firstCTI.crafted() != "Nichts") {
+                firstCTI.getCraftingPlace(0, 0).pop();
+                firstCTI.getCraftingPlace(0, 1).pop();
+                firstCTI.getCraftingPlace(0, 2).pop();
+                firstCTI.getCraftingPlace(1, 0).pop();
+                firstCTI.getCraftingPlace(1, 1).pop();
+                firstCTI.getCraftingPlace(1, 2).pop();
+                firstCTI.getCraftingPlace(2, 0).pop();
+                firstCTI.getCraftingPlace(2, 1).pop();
+                firstCTI.getCraftingPlace(2, 2).pop();
+            }else{
+                for (int i = 0; i < firstCTI.getCraftingPlaceLength() ; i++) {
+                    for (int j = 0; j < firstCTI.aGetCraftingPlaceLength(i); j++) {
+                        if(!firstCTI.getCraftingPlace(i,j).isEmpty()){
+                            addNewItem(firstCTI.getCraftingPlace(i,j).top().toString());
+                            firstCTI.getCraftingPlace(i,j).pop();
+                        }
+                    }
+                }
+            }
         }
         /**
          * Aufrufen des Inventars im Spiel
@@ -262,36 +263,46 @@ public class InventoryHandler implements InteractableObject{
              * Bedinung des Craftingfeldes
              */
             if(key == KeyEvent.VK_NUMPAD1 ){
+                //Wenn der Platz leer ist, wird ganz normal das oberste Item des ausgewählten Stacks im Inventar hinzugefügt
              if(firstCTI.getCraftingPlace(0,2).isEmpty()) {
                  firstCTI.getCraftingPlace(0, 2).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                  firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
              }else{
-                 firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).push(firstCTI.getCraftingPlace(0, 2).top());
+                 //Wenn doch etwas in dem Feld ist, wird dieses item dem Inventar wieder hinzugefügt (addNewItem) und der obrige Prozess wiederholt sich
+                 addNewItem(firstCTI.getCraftingPlace(0, 2).top().toString());
                  firstCTI.getCraftingPlace(0, 2).pop();
+                 firstCTI.getCraftingPlace(0, 2).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
+                 firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
              }
             }else if(key == KeyEvent.VK_NUMPAD2 ) {
                 if (firstCTI.getCraftingPlace(1, 2).isEmpty()) {
                     firstCTI.getCraftingPlace(1, 2).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                     firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                 } else {
-                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).push(firstCTI.getCraftingPlace(1, 2).top());
+                    addNewItem(firstCTI.getCraftingPlace(1, 2).top().toString());
                     firstCTI.getCraftingPlace(1, 2).pop();
+                    firstCTI.getCraftingPlace(1, 2).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
+                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                 }
             }else if(key == KeyEvent.VK_NUMPAD3 ) {
                 if (firstCTI.getCraftingPlace(2, 2).isEmpty()) {
                     firstCTI.getCraftingPlace(2, 2).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                     firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                 } else {
-                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).push(firstCTI.getCraftingPlace(2, 2).top());
+                    addNewItem(firstCTI.getCraftingPlace(2, 2).top().toString());
                     firstCTI.getCraftingPlace(2, 2).pop();
+                    firstCTI.getCraftingPlace(2, 2).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
+                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                 }
             }else if(key == KeyEvent.VK_NUMPAD4 ) {
                 if (firstCTI.getCraftingPlace(0, 1).isEmpty()) {
                     firstCTI.getCraftingPlace(0, 1).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                     firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                 } else {
-                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).push(firstCTI.getCraftingPlace(0, 1).top());
+                    addNewItem(firstCTI.getCraftingPlace(0, 1).top().toString());
                     firstCTI.getCraftingPlace(0, 1).pop();
+                    firstCTI.getCraftingPlace(0, 1).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
+                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                 }
             }else if(key == KeyEvent.VK_NUMPAD5 ) {
                 if (firstCTI.getCraftingPlace(1, 1).isEmpty()) {
@@ -306,37 +317,45 @@ public class InventoryHandler implements InteractableObject{
                     firstCTI.getCraftingPlace(2, 1).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                     firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                 } else {
-                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).push(firstCTI.getCraftingPlace(2, 1).top());
+                    addNewItem(firstCTI.getCraftingPlace(2, 1).top().toString());
                     firstCTI.getCraftingPlace(2, 1).pop();
+                    firstCTI.getCraftingPlace(2, 1).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
+                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                 }
             }else if(key == KeyEvent.VK_NUMPAD7 ) {
                 if (firstCTI.getCraftingPlace(0, 0).isEmpty()) {
                     firstCTI.getCraftingPlace(0, 0).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                     firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                 } else {
-                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).push(firstCTI.getCraftingPlace(0, 0).top());
+                    addNewItem(firstCTI.getCraftingPlace(0, 0).top().toString());
                     firstCTI.getCraftingPlace(0, 0).pop();
+                    firstCTI.getCraftingPlace(0, 0).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
+                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                 }
             }else if(key == KeyEvent.VK_NUMPAD8 ) {
                 if (firstCTI.getCraftingPlace(1, 0).isEmpty()) {
                     firstCTI.getCraftingPlace(1, 0).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                     firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                 } else {
-                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).push(firstCTI.getCraftingPlace(1, 0).top());
+                    addNewItem(firstCTI.getCraftingPlace(1, 0).top().toString());
                     firstCTI.getCraftingPlace(1, 0).pop();
+                    firstCTI.getCraftingPlace(1, 0).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
+                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                 }
             }else if(key == KeyEvent.VK_NUMPAD9 ) {
                 if (firstCTI.getCraftingPlace(2, 0).isEmpty()) {
                     firstCTI.getCraftingPlace(2, 0).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                     firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                 } else {
-                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).push(firstCTI.getCraftingPlace(2, 0).top());
+                    addNewItem(firstCTI.getCraftingPlace(2, 0).top().toString());
                     firstCTI.getCraftingPlace(2, 0).pop();
+                    firstCTI.getCraftingPlace(2, 0).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
+                    firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                 }
             }
         }
+        //mit der Taste C kann überprüft werden was in den Stacks der ganzen Hotbar ist und in dem Stack des Ausgewählten Platzesim Inventar
         if (key == KeyEvent.VK_C) {
-            //mit der Taste C kann überprüft werden was in den Stacks der ganzen Hotbar ist und in dem Stack des Ausgewählten Platzesim Inventar
             System.out.println("Inventar:" + firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
             System.out.println("Hotbar:" + firstHotbar.getPlace(0).top());
             System.out.println("Hotbar:" + firstHotbar.getPlace(1).top());

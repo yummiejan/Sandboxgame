@@ -20,10 +20,9 @@ public class MainController {
     private InventoryHandler handler2;
 
     public MainController(MainFrame frame){
-        handler = new WorldHandler(frame);
         handler2 = new InventoryHandler(frame);
-
-        frame.getActiveDrawingPanel().addObject(handler);
         frame.getActiveDrawingPanel().addObject(handler2);
+        handler = new WorldHandler(frame);
+        frame.getActiveDrawingPanel().addObject(handler);
     }
 }
