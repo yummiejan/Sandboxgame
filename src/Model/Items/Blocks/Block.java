@@ -111,4 +111,8 @@ public abstract class Block extends Item /*implements DrawableObject*/ {
     public double getPosX() {
         return posX;
     }
+
+    public double getPosY(){
+        return posY;
+    }
 }

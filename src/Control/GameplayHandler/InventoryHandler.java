@@ -403,7 +403,7 @@ public class InventoryHandler implements InteractableObject{
         boolean added = false;
         for (int i = 0; i < firstInventory.getItemPlace().length; i++) {
             for (int j = 0; j < firstInventory.getItemPlaceLength(i); j++) {
-                if (firstInventory.getItemPlacePlace(i, j).top() == itemName && firstInventory.getItemPlacePlace(i, j).getSize() < 64 || firstInventory.getItemPlacePlace(i, j).isEmpty()) {
+                if (firstInventory.getItemPlacePlace(i, j).top() == itemName && firstInventory.getItemPlacePlace(i, j).getSize() < 64 ) {
                     firstInventory.getItemPlacePlace(i, j).push(itemName);
                     added = true;
                     break;
@@ -411,6 +411,21 @@ public class InventoryHandler implements InteractableObject{
             }
             if(added){
                 break;
+            }
+
+        }
+        if(added == false) {
+            for (int i = 0; i < firstInventory.getItemPlace().length; i++) {
+                for (int j = 0; j < firstInventory.getItemPlaceLength(i); j++) {
+                    if(firstInventory.getItemPlacePlace(i,j).isEmpty()){
+                        firstInventory.getItemPlacePlace(i, j).push(itemName);
+                        added = true;
+                        break;
+                    }
+                }
+                if(added){
+                    break;
+                }
             }
         }
     }

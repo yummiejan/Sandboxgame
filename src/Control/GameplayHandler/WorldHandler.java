@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
 
@@ -37,6 +38,7 @@ public class WorldHandler implements InteractableObject{
 
         currentBackground = background;
 
+
         allBlocks = new Block[23][13];
         for (int i = 0; i < allBlocks.length; i++) {
             int counter = (int) (Math.random() * 2) + 4;
@@ -51,12 +53,9 @@ public class WorldHandler implements InteractableObject{
                     } else {
                         allBlocks[i][j] = new Dirt(i * 50, j * 50);
                     }
-                    if(counter2 == 5){
-                        //allBlocks[i][xBlockLevel(0)-2] = new Wood(i * 50, (xBlockLevel(0)-1)*50);
-                    }
                     //allBlocks[i][xBlockLevel(i)-1] = new Grass(i * 50, (xBlockLevel(i)-1)*50);
                     frame.getActiveDrawingPanel().addObject(allBlocks[i][j]);
-                    System.out.println(counter2);
+
                 }
             }
         }
@@ -97,7 +96,7 @@ public class WorldHandler implements InteractableObject{
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-        g2d.drawImage(currentBackground,0,0,null);
+        //g2d.drawImage(currentBackground,0,0,null);
     }
 
     @Override
