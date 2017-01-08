@@ -15,6 +15,8 @@ import java.awt.geom.Ellipse2D;
 import java.io.File;
 import java.io.IOException;
 
+import static sun.audio.AudioPlayer.player;
+
 /**
  * Created by 204g07 on 09.12.2016.
  */
@@ -50,10 +52,12 @@ public class WorldHandler implements InteractableObject{
         }
         allBlocks[0][xBlockLevel(0)-1] = new Furnace(0, (xBlockLevel(0)-1)*50,this);
         frame.getActiveDrawingPanel().addObject(allBlocks[0][xBlockLevel(0)]);
-        allBlocks[22][xBlockLevel(0)-1] = new CraftingTable(50, 50,this);
-        //frame.getActiveDrawingPanel().addObject(allBlocks[22][6]);
+        allBlocks[22][xBlockLevel(0)-1] = new CraftingTable(frame.getWidth()-65, (xBlockLevel(22)-1)*50,this);
+        frame.getActiveDrawingPanel().addObject(allBlocks[22][xBlockLevel(0)-1]);
         int x = (int)(Math.random()*19+2);
         frame.getActiveDrawingPanel().addObject(new Player(x*50,(xBlockLevel(x)-2)*50,this,ih));
+
+
     }
 
     public int xBlockLevel(int x){

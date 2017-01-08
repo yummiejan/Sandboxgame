@@ -129,7 +129,7 @@ public class CraftingTableInventory implements InteractableObject{
 
     @Override
     public void update(double dt) {
-        System.out.println(crafted());
+        //System.out.println(crafted());
     }
 
     public void createList(){
@@ -174,9 +174,6 @@ public class CraftingTableInventory implements InteractableObject{
         return craftingPlace[a][b];
     }
 
-    public List getCraftList() {
-        return craftList;
-    }
 
     public String crafted(){
         if(isDisplayed()) {

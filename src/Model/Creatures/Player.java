@@ -34,13 +34,13 @@ public class Player extends Creature implements InteractableObject {
     private double velY;
     private double gravity;
     private boolean onGround;
-    private boolean destroyed;
 
     private int direction = 0;
     private boolean up = false;
 
     private BufferedImage playerStanding,playerRight,playerLeft;
     private Image currentImage;
+    private Inventory firstInventory;
 
     private Timer timer;
 
@@ -51,7 +51,6 @@ public class Player extends Creature implements InteractableObject {
         this.wh = wh;
         this.ih = ih;
 
-        destroyed = false;
         //playerStanding = null;
         //playerRight = null;
         //playerLeft = null;
@@ -103,11 +102,12 @@ public class Player extends Creature implements InteractableObject {
             direction = 3;
         }
         if (key==KeyEvent.VK_Q){
-            destroyed = true;
             destroy();
         }
         if (key==KeyEvent.VK_R){
-            place(new Dirt((posX/50)+1,posY/50+1));//,wh));
+            System.out.println(hb.getPlace(hb.getChosenX()).top() == "Dirt");
+            place(new Dirt((posX / 50) + 1, posY / 50 + 1));//,wh));
+
         }
         if (key==KeyEvent.VK_SHIFT){
             if (up){
@@ -224,7 +224,7 @@ public class Player extends Creature implements InteractableObject {
          * der abgebaute Block-Content wird dem Inventar hinzugefügt (fonktioniert noch nicht, weil ich null zuruck bekomme, aber auch wenn ich nur "Dirt" eingebe)
          */
         System.out.println(b.getName());
-        ih.addNewItem(b.getName());
+        //ih.addNewItem(b.getName());
         return  b;
 
     }
@@ -249,7 +249,4 @@ public class Player extends Creature implements InteractableObject {
             velY = -100.0;
     }
 
-    public boolean isDestroyed() {
-        return destroyed;
-    }
 }

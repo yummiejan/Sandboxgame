@@ -18,6 +18,7 @@ public class CraftingTable extends Block implements DrawableObject{
     private InventoryHandler ih;
 
     private Rectangle2D.Double rectangle;
+    private Rectangle2D.Double rectangle2;
     private Rectangle2D.Double craftField;
     private Line2D.Double line;
     private Line2D.Double line2;
@@ -33,6 +34,7 @@ public class CraftingTable extends Block implements DrawableObject{
     public CraftingTable(double posX, double posY, WorldHandler wh) {
         super(posX,posY,true,"Craftingtable");
         rectangle = new Rectangle2D.Double(posX, posY, 50, 50);
+        rectangle2 = new Rectangle2D.Double(posX, posY, 50, 50);
         craftField = new Rectangle2D.Double(posX, posY, 50, 8);
         line = new Line2D.Double(posX+10,posY,posX+10,posY+50);
         line2 = new Line2D.Double(posX+20,posY,posX+20,posY+50);
@@ -51,6 +53,7 @@ public class CraftingTable extends Block implements DrawableObject{
             g2d.setColor(new Color(131, 66, 23));
             g2d.fill(rectangle);
             g2d.setColor(new Color(0,0,0));
+            g2d.draw(rectangle);
             g2d.draw(line);
             g2d.draw(line2);
             g2d.draw(line3);
