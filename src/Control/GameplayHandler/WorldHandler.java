@@ -40,20 +40,23 @@ public class WorldHandler implements InteractableObject{
         allBlocks = new Block[23][13];
         for (int i = 0; i < allBlocks.length; i++) {
             int counter = (int) (Math.random() * 2) + 4;
+            int counter2 = 5;//(int) (Math.random() * 200) + 4;
             for (int j = 0; j < allBlocks[i].length; j++) {
                 if (j > counter) {
-                    int random = (int) (Math.random() * 2) + 1;
-                    if (random == 1 && j > counter + 1) {
+                    int random = (int) (Math.random() * 3) + 1;
+                    if (random == 1 && j > counter + 3 ) {
                         allBlocks[i][j] = new Coal(i * 50, j * 50);
-                    } else if (random == 2 && j > counter + 3) {
+                    } else if (random == 2 || random == 3 && j > counter + 3) {
                         allBlocks[i][j] = new Stone(i * 50, j * 50);
                     } else {
                         allBlocks[i][j] = new Dirt(i * 50, j * 50);
                     }
-                    allBlocks[i][xBlockLevel(0)-1] = new Grass(i * 50, (xBlockLevel(0)-1)*50);
+                    if(counter2 == 5){
+                        //allBlocks[i][xBlockLevel(0)-2] = new Wood(i * 50, (xBlockLevel(0)-1)*50);
+                    }
+                    //allBlocks[i][xBlockLevel(i)-1] = new Grass(i * 50, (xBlockLevel(i)-1)*50);
                     frame.getActiveDrawingPanel().addObject(allBlocks[i][j]);
-                    //frame.getActiveDrawingPanel().addObject(new Grass(50,50 ));
-                    //frame.getActiveDrawingPanel().addObject(allBlocks[0][xBlockLevel(0)]);
+                    System.out.println(counter2);
                 }
             }
         }
