@@ -176,58 +176,56 @@ public class Player extends Creature implements InteractableObject {
 
     public Block destroy(){
         Block b = null;
-        if(direction==0){
-            if (up)
-            {
-                if(isBlock(4)) {
-                    b = wh.getAllBlocks((posX / 50) + 1, posY / 50);
-                    wh.getAllBlocks((posX / 50) + 1, posY / 50).setDisplayed(false);
-                    wh.setAllBlocks((posX / 50) + 1, posY / 50, null);
+        switch (direction){
+            case 0:
+                if (up){
+                    if(isBlock(4)){
+                        b = wh.getAllBlocks((posX / 50) + 1, posY / 50);
+                        wh.getAllBlocks((posX / 50) + 1, posY / 50).setDisplayed(false);
+                        wh.setAllBlocks((posX / 50) + 1, posY / 50, null);
+                    }
+                }else{
+                    if (isBlock(0)){
+                        b = wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1);
+                        wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1).setDisplayed(false);
+                        wh.setAllBlocks((posX / 50) + 1, posY / 50 + 1, null);
+                    }
                 }
-
-            } else
-            {
-                if (isBlock(0)) {
-                    b = wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1);
-                    wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1).setDisplayed(false);
-                    wh.setAllBlocks((posX / 50) + 1, posY / 50 + 1, null);
+                break;
+            case 1:
+                if(up){
+                    if(isBlock(5)){
+                        b = wh.getAllBlocks((posX / 50) - 1, posY / 50);
+                        wh.getAllBlocks((posX / 50) - 1, posY / 50).setDisplayed(false);
+                        wh.setAllBlocks((posX / 50) - 1, posY / 50, null);
+                    }
+                }else{
+                    if(isBlock(1)) {
+                        b = wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1);
+                        wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1).setDisplayed(false);
+                        wh.setAllBlocks((posX / 50) - 1, posY / 50 + 1, null);
+                    }
                 }
-
-
-            }
-        }else if(direction==1){
-            if (up)
-            {
-                if (isBlock(5)) {
-                    b = wh.getAllBlocks((posX / 50) - 1, posY / 50);
-                    wh.getAllBlocks((posX / 50) - 1, posY / 50).setDisplayed(false);
-                    wh.setAllBlocks((posX / 50) - 1, posY / 50, null);
+                break;
+            case 2:
+                if(isBlock(2)&&(wh.xBlockLevel(posX/50)<12)){
+                    b = wh.getAllBlocks((posX / 50), posY / 50 - 1);
+                    wh.getAllBlocks((posX / 50), posY / 50 - 1).setDisplayed(false);
+                    wh.setAllBlocks((posX / 50), posY / 50 - 1, null);
                 }
-            }else{
-                if (isBlock(1)) {
-                    b = wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1);
-                    wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1).setDisplayed(false);
-                    wh.setAllBlocks((posX / 50) - 1, posY / 50 + 1, null);
+                break;
+            case 3:
+                if(isBlock(3)&&(wh.xBlockLevel(posX/50)<12)){
+                    b = wh.getAllBlocks((posX / 50), posY / 50 + 2);
+                    wh.getAllBlocks((posX / 50), posY / 50 + 2).setDisplayed(false);
+                    wh.setAllBlocks((posX / 50), posY / 50 + 2, null);
                 }
-            }
-        }else if(direction==3){
-            if (isBlock(3)&&(wh.xBlockLevel(posX/50)<12))
-            {
-                b = wh.getAllBlocks((posX / 50), posY / 50 + 2);
-                wh.getAllBlocks((posX / 50), posY / 50 + 2).setDisplayed(false);
-                wh.setAllBlocks((posX / 50), posY / 50 + 2, null);
-            }
-        }else if(direction==2){
-            if (isBlock(2)&&(wh.xBlockLevel(posX/50)<12)) {
-                b = wh.getAllBlocks((posX / 50), posY / 50 - 1);
-                wh.getAllBlocks((posX / 50), posY / 50 - 1).setDisplayed(false);
-                wh.setAllBlocks((posX / 50), posY / 50 - 1, null);
-            }
+                break;
         }
         /**
          * der abgebaute Block-Content wird dem Inventar hinzugefügt (fonktioniert noch nicht, weil ich null zuruck bekomme, aber auch wenn ich nur "Dirt" eingebe)
          */
-        System.out.println(b.getName());
+        //System.out.println(b.getName());
         //ih.addNewItem(b.getName());
         return  b;
 
