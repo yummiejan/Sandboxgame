@@ -3,7 +3,6 @@ package Model.Creatures;
 import Control.GameplayHandler.InventoryHandler;
 import Control.GameplayHandler.WorldHandler;
 import Model.Gameplay.Inventory.Hotbar;
-import Model.Gameplay.Inventory.Inventory;
 import Model.Items.Blocks.Block;
 import Model.InteractableObject;
 import Model.Items.Blocks.Dirt;
@@ -12,8 +11,7 @@ import View.DrawingPanel;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.geom.Rectangle2D;
+import java.awt.event.MouseEvent;;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -28,11 +26,8 @@ public class Player extends Creature implements InteractableObject {
     private InventoryHandler ih;
     private Hotbar hb;
 
-    private Rectangle2D.Double rectangle1;
-
-    private int posX, posY;
-    private double velY;
-    private double gravity;
+    private int posX, posY, wantedX;
+    private double velY,gravity;
     private boolean onGround;
 
     private int direction = 0;
@@ -40,77 +35,90 @@ public class Player extends Creature implements InteractableObject {
 
     private BufferedImage playerStanding,playerRight,playerLeft;
     private Image currentImage;
-    private Inventory firstInventory;
-
-    private Timer timer;
 
     public Player(int posX, int posY, WorldHandler wh, InventoryHandler ih) {
         this.posX = posX;
         this.posY = posY;
-        rectangle1 = new Rectangle2D.Double(posX+20,posY,10,100);
         this.wh = wh;
         this.ih = ih;
 
         gravity = 200;
+        wantedX = posX;
 
         try {
             playerStanding = ImageIO.read(new File("images/character_front.png"));
             playerRight = ImageIO.read(new File("images/character_right.png"));
             playerLeft = ImageIO.read(new File("images/character_left.png"));
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
 
         currentImage = playerStanding;
     }
 
     @Override
     public void keyPressed(int key) {
-        if(key == KeyEvent.VK_A){
-            currentImage = playerLeft;
-        }else if(key == KeyEvent.VK_D){
-            currentImage = playerRight;
-        }else if(key == KeyEvent.VK_W){
-            if (!isBlock(2))
-            startJump();
+        switch (key) {
+            case KeyEvent.VK_W:
+                if (!isBlock(2)) {
+                    startJump();
+                }
+                break;
+            case KeyEvent.VK_A:
+                currentImage = playerLeft;
+                //posX = posX - 50;
+                break;
+            case KeyEvent.VK_D:
+                currentImage = playerRight;
+                //posX = posX + 50;
+                break;
         }
     }
 
     @Override
     public void keyReleased(int key) {
-        /*
-        * Beim Tastendruck w,a,s,d wird überprüft in welche Richtung der Player schaut
-        *
-        */
-        if (key == KeyEvent.VK_A && posX > 0) {
-            currentImage = playerStanding;
-            direction = 1;
-            if (!isBlock(1)&&!isBlock(5))
-            posX = posX - 50;
-        } else if (key == KeyEvent.VK_D && posX < wh.getAllBlocks(22,12).getPosX()) {
-            currentImage = playerStanding;
-            direction = 0;
-            if (!isBlock(0)&&!isBlock(4))
-            posX = posX + 50;
-        }
-        if (key == KeyEvent.VK_W) {
-            endJump();
-            direction = 2;
-        }else if(key == KeyEvent.VK_S){
-            direction = 3;
-        }
-        if (key==KeyEvent.VK_Q){
-            destroy();
-        }
-        if (key==KeyEvent.VK_R){
-            System.out.println(hb.getPlace(hb.getChosenX()).top());
-            place(new Dirt((posX / 50) + 1, posY / 50 + 1));//,wh));
+        switch (key) {
+            case KeyEvent.VK_W:
+                endJump();
+                direction = 2;
+                break;
+            case KeyEvent.VK_A:
+                if (posX > 0) {
+                    currentImage = playerStanding;
+                    direction = 1;
+                    if (!isBlock(1) && !isBlock(5)) {
+                        //posX -= 50;
+                        wantedX -= 50;
+                    }
+                }
+                break;
+            case KeyEvent.VK_S:
+                direction = 3;
+                break;
+            case KeyEvent.VK_D:
+                if (posX < wh.getAllBlocks(22, 12).getPosX()) {
+                    currentImage = playerStanding;
+                    direction = 0;
+                    if (!isBlock(0) && !isBlock(4)) {
+                        //posX += 50;
+                        wantedX += 50;
+                    }
+                }
+                break;
 
-        }
-        if (key==KeyEvent.VK_SHIFT){
-            if (up){
-                up = false;
-            }else{
-                up = true;
-            }
+            case KeyEvent.VK_Q:
+                destroy();
+                break;
+            case KeyEvent.VK_R:
+                System.out.println(hb.getPlace(hb.getChosenX()).top());
+                place(new Dirt((posX / 50) + 1, posY / 50 + 1));//,wh));
+                break;
+            case KeyEvent.VK_SHIFT:
+                if (up) {
+                    up = false;
+                } else {
+                    up = true;
+                }
+                break;
         }
         if(key == KeyEvent.VK_F && getBlock() != null) {
             //System.out.println(getBlock().getName());
@@ -131,16 +139,19 @@ public class Player extends Creature implements InteractableObject {
 
     @Override
     public void update(double dt) {
-        //if(posY > 1) {
-            posY += velY * dt;
-            velY += gravity * dt;
-        //}else if(posY <= 1){
-            //posY = 2;
-        //}
-
+        posY += velY * dt;
+        velY += gravity * dt;
         if(isBlock(3)){
             velY = 0.0;
             onGround = true;
+        }
+
+        if(wantedX < posX){
+            posX -= 5;
+        }else if(wantedX > posX){
+            posX += 5;
+        }else{
+            posX = wantedX;
         }
     }
 
@@ -151,21 +162,26 @@ public class Player extends Creature implements InteractableObject {
      */
 
     public boolean isBlock(int richtung){
-        Block b;
-        if (richtung == 0){
-             b = wh.getAllBlocks(posX/50+1, posY/50+1);
-        }else if (richtung == 1){
-             b = wh.getAllBlocks(posX/50-1, posY/50+1);
-        }else if (richtung == 2){
-             b = wh.getAllBlocks(posX/50, posY/50-1);
-        }else if (richtung == 3){
-             b = wh.getAllBlocks(posX/50, posY/50+2);
-        }else if (richtung == 4){
-            b = wh.getAllBlocks(posX/50+1, posY/50);
-        }else if (richtung == 5){
-            b = wh.getAllBlocks(posX/50-1, posY/50);
-        }else {
-            return false;
+        Block b = null;
+        switch(richtung) {
+            case 0:
+                b = wh.getAllBlocks(wantedX / 50 + 1, posY / 50 + 1);
+                break;
+            case 1:
+                b = wh.getAllBlocks(wantedX / 50 - 1, posY / 50 + 1);
+                break;
+            case 2:
+                b = wh.getAllBlocks(wantedX / 50, posY / 50 - 1);
+                break;
+            case 3:
+                b = wh.getAllBlocks(wantedX / 50, posY / 50 + 2);
+                break;
+            case 4:
+                b = wh.getAllBlocks(wantedX / 50 + 1, posY / 50);
+                break;
+            case 5:
+                b = wh.getAllBlocks(wantedX / 50 - 1, posY / 50);
+                break;
         }
         if(b == null){
             return false;
@@ -205,58 +221,56 @@ public class Player extends Creature implements InteractableObject {
 
     public Block destroy(){
         Block b = null;
-        if(direction==0){
-            if (up)
-            {
-                if(isBlock(4)) {
-                    b = wh.getAllBlocks((posX / 50) + 1, posY / 50);
-                    wh.getAllBlocks((posX / 50) + 1, posY / 50).setDisplayed(false);
-                    wh.setAllBlocks((posX / 50) + 1, posY / 50, null);
+        switch (direction){
+            case 0:
+                if (up){
+                    if(isBlock(4)){
+                        b = wh.getAllBlocks((posX / 50) + 1, posY / 50);
+                        wh.getAllBlocks((posX / 50) + 1, posY / 50).setDisplayed(false);
+                        wh.setAllBlocks((posX / 50) + 1, posY / 50, null);
+                    }
+                }else{
+                    if (isBlock(0)){
+                        b = wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1);
+                        wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1).setDisplayed(false);
+                        wh.setAllBlocks((posX / 50) + 1, posY / 50 + 1, null);
+                    }
                 }
-
-            } else
-            {
-                if (isBlock(0)) {
-                    b = wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1);
-                    wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1).setDisplayed(false);
-                    wh.setAllBlocks((posX / 50) + 1, posY / 50 + 1, null);
+                break;
+            case 1:
+                if(up){
+                    if(isBlock(5)){
+                        b = wh.getAllBlocks((posX / 50) - 1, posY / 50);
+                        wh.getAllBlocks((posX / 50) - 1, posY / 50).setDisplayed(false);
+                        wh.setAllBlocks((posX / 50) - 1, posY / 50, null);
+                    }
+                }else{
+                    if(isBlock(1)) {
+                        b = wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1);
+                        wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1).setDisplayed(false);
+                        wh.setAllBlocks((posX / 50) - 1, posY / 50 + 1, null);
+                    }
                 }
-
-
-            }
-        }else if(direction==1){
-            if (up)
-            {
-                if (isBlock(5)) {
-                    b = wh.getAllBlocks((posX / 50) - 1, posY / 50);
-                    wh.getAllBlocks((posX / 50) - 1, posY / 50).setDisplayed(false);
-                    wh.setAllBlocks((posX / 50) - 1, posY / 50, null);
+                break;
+            case 2:
+                if(isBlock(2)&&(wh.xBlockLevel(posX/50)<12)){
+                    b = wh.getAllBlocks((posX / 50), posY / 50 - 1);
+                    wh.getAllBlocks((posX / 50), posY / 50 - 1).setDisplayed(false);
+                    wh.setAllBlocks((posX / 50), posY / 50 - 1, null);
                 }
-            }else{
-                if (isBlock(1)) {
-                    b = wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1);
-                    wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1).setDisplayed(false);
-                    wh.setAllBlocks((posX / 50) - 1, posY / 50 + 1, null);
+                break;
+            case 3:
+                if(isBlock(3)&&(wh.xBlockLevel(posX/50)<12)){
+                    b = wh.getAllBlocks((posX / 50), posY / 50 + 2);
+                    wh.getAllBlocks((posX / 50), posY / 50 + 2).setDisplayed(false);
+                    wh.setAllBlocks((posX / 50), posY / 50 + 2, null);
                 }
-            }
-        }else if(direction==3){
-            if (isBlock(3)&&(wh.xBlockLevel(posX/50)<12))
-            {
-                b = wh.getAllBlocks((posX / 50), posY / 50 + 2);
-                wh.getAllBlocks((posX / 50), posY / 50 + 2).setDisplayed(false);
-                wh.setAllBlocks((posX / 50), posY / 50 + 2, null);
-            }
-        }else if(direction==2){
-            if (isBlock(2)&&(wh.xBlockLevel(posX/50)<12)) {
-                b = wh.getAllBlocks((posX / 50), posY / 50 - 1);
-                wh.getAllBlocks((posX / 50), posY / 50 - 1).setDisplayed(false);
-                wh.setAllBlocks((posX / 50), posY / 50 - 1, null);
-            }
+                break;
         }
         /**
          * der abgebaute Block-Content wird dem Inventar hinzugefügt (fonktioniert noch nicht, weil ich null zuruck bekomme, aber auch wenn ich nur "Dirt" eingebe)
          */
-        System.out.println(b.getName());
+        //System.out.println(b.getName());
         //ih.addNewItem(b.getName());
         return  b;
 

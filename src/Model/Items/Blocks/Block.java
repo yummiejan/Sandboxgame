@@ -1,6 +1,5 @@
 package Model.Items.Blocks;
 
-import Model.DrawableObject;
 import Model.Items.Item;
 import View.DrawingPanel;
 
@@ -16,7 +15,7 @@ import java.io.IOException;
 public abstract class Block extends Item /*implements DrawableObject*/ {
 
     private Rectangle2D.Double rectangle;
-    private Image image,coal,grass,stone,wood,brushes,dirt;
+    private Image image,coal, grass,stone,wood,brushes,dirt;
     private double posX, posY;
     private double height = 50, width = 50;
     private boolean solid;
@@ -30,6 +29,7 @@ public abstract class Block extends Item /*implements DrawableObject*/ {
         rectangle = new Rectangle2D.Double(posX, posY, height, width);
         this.solid = solid;
         this.name = name;
+
         try {
             coal = ImageIO.read(new File("images/coal.png"));
             stone = ImageIO.read(new File("images/stone.png"));
@@ -47,7 +47,7 @@ public abstract class Block extends Item /*implements DrawableObject*/ {
         }else if(name == "Wood") {
             image = wood;
         }else if(name == "Grass") {
-            System.out.print("a");
+            System.out.print("Es macht keinen Sinn!");
             image = grass;
         }else if(name == "Brushes") {
             image = brushes;

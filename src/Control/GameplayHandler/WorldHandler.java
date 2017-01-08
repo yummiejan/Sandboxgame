@@ -104,7 +104,7 @@ public class WorldHandler implements InteractableObject{
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-        //g2d.drawImage(currentBackground,0,0,null);
+        g2d.drawImage(currentBackground,-15,0,null);
     }
 
     @Override
