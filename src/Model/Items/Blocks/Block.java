@@ -16,7 +16,7 @@ import java.io.IOException;
 public abstract class Block extends Item /*implements DrawableObject*/ {
 
     private Rectangle2D.Double rectangle;
-    private Image image;
+    private Image image,coal,grass,stone,wood,brushes,dirt;
     private double posX, posY;
     private double height = 50, width = 50;
     private boolean solid;
@@ -30,42 +30,28 @@ public abstract class Block extends Item /*implements DrawableObject*/ {
         rectangle = new Rectangle2D.Double(posX, posY, height, width);
         this.solid = solid;
         this.name = name;
+        try {
+            coal = ImageIO.read(new File("images/coal.png"));
+            stone = ImageIO.read(new File("images/stone.png"));
+            wood = ImageIO.read(new File("images/wood.png"));
+            grass = ImageIO.read(new File("images/grass.png"));
+            brushes = ImageIO.read(new File("images/brushes.png"));
+            dirt = ImageIO.read(new File("images/dirt.png"));
+        } catch (IOException e) {
+        }
+
         if(name == "Coal") {
-            try {
-                image = ImageIO.read(new File("images/coal.png"));
-            } catch (IOException e) {
-            }
-        }else if(name == "Grass") {
-            try {
-                image = ImageIO.read(new File("images/grass.png"));
-            } catch (IOException e) {
-            }
+            image = coal;
         }else if(name == "Stone") {
-            try {
-                image = ImageIO.read(new File("images/stone.png"));
-            } catch (IOException e) {
-            }
+            image = stone;
         }else if(name == "Wood") {
-            try {
-                image = ImageIO.read(new File("images/wood.png"));
-            } catch (IOException e) {
-            }
+            image = wood;
         }else if(name == "Grass") {
-            try {
-                image = ImageIO.read(new File("images/grass.png"));
-            } catch (IOException e) {
-            }
+            image = grass;
         }else if(name == "Brushes") {
-            System.out.println("adawdw");
-            try {
-                image = ImageIO.read(new File("images/brushes.png"));
-            } catch (IOException e) {
-            }
+            image = brushes;
         }else if(name == "Dirt") {
-            try {
-                image = ImageIO.read(new File("images/dirt.png"));
-            } catch (IOException e) {
-            }
+            image = dirt;
         }
     }
 
