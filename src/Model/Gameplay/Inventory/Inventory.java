@@ -137,9 +137,11 @@ public class Inventory implements InteractableObject {
                     }else if (itemPlace[i][j].top() == "Furnace") {
 
                     }else if(itemPlace[i][j].top() == "Stick"){
-                        g2d.setColor(new Color(92, 36, 2));
-                        g2d.draw(stickLine);
-                        stickLine.setLine(posX + i * 35 + 17.5, posY + j * 35 + 8.75, posX + i * 35 + 17.5, posY + j * 35 + 25);
+                        try {
+                            image = ImageIO.read(new File("images/stick_inv.png"));
+                        } catch (IOException e) {
+                        }
+                        g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
                         g2d.setColor(new Color(0, 0, 0));
                         if(itemPlace[i][j].getSize() < 9) {
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
@@ -147,7 +149,11 @@ public class Inventory implements InteractableObject {
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
                         }
                     }else if(itemPlace[i][j].top() == "Pickaxe"){
-                        //Bild für Pickaxe
+                        try {
+                            image = ImageIO.read(new File("images/pickaxe_inv.png"));
+                        } catch (IOException e) {
+                        }
+                        g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
                         g2d.setColor(new Color(0, 0, 0));
                         if(itemPlace[i][j].getSize() < 9) {
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
@@ -155,18 +161,22 @@ public class Inventory implements InteractableObject {
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
                         }
                     }else if(itemPlace[i][j].top() == "Wood") {
-                        g2d.setColor(new Color(45, 19, 2));
-                        g2d.fill(woodRectangle);
-                        woodRectangle.setFrame(posX + i *35 + 8.75,posY + j *35 + 8.75, 18, 18);
+                        try {
+                            image = ImageIO.read(new File("images/wood_inv.png"));
+                        } catch (IOException e) {
+                        }
+                        g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
                         if (itemPlace[i][j].getSize() < 9) {
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
                         } else {
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
                         }
                     } else if(itemPlace[i][j].top() == "Stone") {
-                        g2d.setColor(new Color(52, 51, 51));
-                        g2d.fill(woodRectangle);
-                        woodRectangle.setFrame(posX + i *35 + 8.75,posY + j *35 + 8.75, 18, 18);
+                        try {
+                            image = ImageIO.read(new File("images/stone_inv.png"));
+                        } catch (IOException e) {
+                        }
+                        g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
                         if (itemPlace[i][j].getSize() < 9) {
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
                         } else {
