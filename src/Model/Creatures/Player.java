@@ -129,8 +129,12 @@ public class Player extends Creature implements InteractableObject {
 
     @Override
     public void update(double dt) {
-        posY += velY * dt;
-        velY += gravity * dt;
+        //if(posY > 1) {
+            posY += velY * dt;
+            velY += gravity * dt;
+        //}else if(posY <= 1){
+            //posY = 2;
+        //}
 
         if(isBlock(3)){
             velY = 0.0;
