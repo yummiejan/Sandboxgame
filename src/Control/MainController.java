@@ -7,6 +7,7 @@ import Model.Gameplay.Inventory.CraftingTableInventory;
 import Model.InteractableObject;
 import View.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -24,5 +25,6 @@ public class MainController {
         frame.getActiveDrawingPanel().addObject(handler2);
         handler = new WorldHandler(frame);
         frame.getActiveDrawingPanel().addObject(handler);
+        //JOptionPane.showMessageDialog(frame, "Press ESC to pause.");
     }
 }
