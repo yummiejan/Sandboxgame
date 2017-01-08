@@ -41,6 +41,9 @@ public class InventoryHandler implements InteractableObject{
         for (int i = 0; i < 256; i++) {
             addNewItem("Coal");
         }
+        for (int i = 0; i < 256; i++) {
+            addNewItem("Stick");
+        }
 
 
 
