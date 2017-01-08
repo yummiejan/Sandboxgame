@@ -102,7 +102,9 @@ public class Player extends Creature implements InteractableObject {
             direction = 3;
         }
         if (key==KeyEvent.VK_Q){
-            destroy();
+            if(isBlock(direction)) {
+                destroy();
+            }
         }
         if (key==KeyEvent.VK_R){
             System.out.println(hb.getPlace(hb.getChosenX()).top() == "Dirt");
