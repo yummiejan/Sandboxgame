@@ -51,10 +51,6 @@ public class Player extends Creature implements InteractableObject {
         this.wh = wh;
         this.ih = ih;
 
-        //playerStanding = null;
-        //playerRight = null;
-        //playerLeft = null;
-
         gravity = 200;
 
         try {
@@ -133,11 +129,8 @@ public class Player extends Creature implements InteractableObject {
 
     @Override
     public void update(double dt) {
-
         posY += velY * dt;
         velY += gravity * dt;
-        //System.out.println(posY);
-        //System.out.println(onGround);
 
         if(isBlock(3)){
             velY = 0.0;
@@ -231,6 +224,11 @@ public class Player extends Creature implements InteractableObject {
         return  b;
 
     }
+
+    /**
+     * Places a block.
+     * @param b given block to be places
+     */
     public void place(Block b){
         if(direction==0){
             wh.setAllBlocks((posX/50)+1,posY/50+1,b);
@@ -240,6 +238,9 @@ public class Player extends Creature implements InteractableObject {
 
     }
 
+    /**
+     * Starts the Jump
+     */
     public void startJump(){
         if(onGround){
             velY=-200.0;
@@ -247,6 +248,9 @@ public class Player extends Creature implements InteractableObject {
         }
     }
 
+    /**
+     * Ends the Jump once a certain velocity has been reached.
+     */
     public void endJump(){
         if(velY < -100.0)
             velY = -100.0;
