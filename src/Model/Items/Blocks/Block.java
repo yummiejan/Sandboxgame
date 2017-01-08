@@ -47,6 +47,7 @@ public abstract class Block extends Item /*implements DrawableObject*/ {
         }else if(name == "Wood") {
             image = wood;
         }else if(name == "Grass") {
+            System.out.print("a");
             image = grass;
         }else if(name == "Brushes") {
             image = brushes;
