@@ -41,7 +41,7 @@ public class FurnaceHandler implements InteractableObject {
     public FurnaceHandler(MainFrame frame, Furnace furnace) {
         if(guiDisplayed) {
             try {
-                furnaceGui = ImageIO.read(new File("images/furnace_gui.png"));
+                furnaceGui = ImageIO.read(new File("images/Furnace_GUI.png"));
             } catch (IOException e) {
             }
         }
