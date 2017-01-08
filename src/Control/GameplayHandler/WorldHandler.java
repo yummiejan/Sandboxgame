@@ -29,12 +29,14 @@ public class WorldHandler implements InteractableObject{
 
     public WorldHandler(MainFrame frame){
         this.frame = frame;
+
         try {
             //background = ImageIO.read(new File("images/background.png"));
             invBackground = ImageIO.read(new File("images/background.png"));
         } catch (IOException e) {}
 
         currentBackground = background;
+
         allBlocks = new Block[23][13];
         for (int i = 0; i < allBlocks.length; i++) {
             int counter = (int) (Math.random() * 2) + 6;
