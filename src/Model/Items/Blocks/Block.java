@@ -35,8 +35,33 @@ public abstract class Block extends Item /*implements DrawableObject*/ {
                 image = ImageIO.read(new File("images/coal.png"));
             } catch (IOException e) {
             }
-        }
-        if(name == "Dirt") {
+        }else if(name == "Grass") {
+            try {
+                image = ImageIO.read(new File("images/grass.png"));
+            } catch (IOException e) {
+            }
+        }else if(name == "Stone") {
+            try {
+                image = ImageIO.read(new File("images/stone.png"));
+            } catch (IOException e) {
+            }
+        }else if(name == "Wood") {
+            try {
+                image = ImageIO.read(new File("images/wood.png"));
+            } catch (IOException e) {
+            }
+        }else if(name == "Grass") {
+            try {
+                image = ImageIO.read(new File("images/grass.png"));
+            } catch (IOException e) {
+            }
+        }else if(name == "Brushes") {
+            System.out.println("adawdw");
+            try {
+                image = ImageIO.read(new File("images/brushes.png"));
+            } catch (IOException e) {
+            }
+        }else if(name == "Dirt") {
             try {
                 image = ImageIO.read(new File("images/dirt.png"));
             } catch (IOException e) {

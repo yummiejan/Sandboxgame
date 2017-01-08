@@ -107,7 +107,7 @@ public class Player extends Creature implements InteractableObject {
             }
         }
         if (key==KeyEvent.VK_R){
-            System.out.println(hb.getPlace(hb.getChosenX()).top() == "Dirt");
+            System.out.println(hb.getPlace(hb.getChosenX()).top());
             place(new Dirt((posX / 50) + 1, posY / 50 + 1));//,wh));
 
         }

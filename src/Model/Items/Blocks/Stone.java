@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
  */
 public class Stone extends Block  {
 
-    public Stone(double posX, double posY, boolean solid, String name) {
+    public Stone(double posX, double posY) {
         super(posX, posY, true, "Stone");
     }
 

@@ -6,12 +6,12 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 
 /**
- * Created by Felix on 07.01.2017.
+ * Created by Felix on 08.01.2017.
  */
-public class Wood extends Block {
+public class Grass extends Block {
 
-    public Wood(double posX, double posY) {
-        super(posX, posY, false, "Wood");
+    public Grass(double posX, double posY) {
+        super(posX, posY, true, "Grass");
     }
 
     @Override
@@ -31,6 +31,11 @@ public class Wood extends Block {
 
     @Override
     public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void update(double dt) {
 
     }
 }
