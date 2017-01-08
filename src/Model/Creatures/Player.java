@@ -123,6 +123,7 @@ public class Player extends Creature implements InteractableObject {
     @Override
     public void mouseReleased(MouseEvent e) {
 
+
     }
 
     @Override
