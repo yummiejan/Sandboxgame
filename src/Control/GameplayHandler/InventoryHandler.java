@@ -445,4 +445,8 @@ public class InventoryHandler implements InteractableObject{
     public boolean firstInvDisplayed() {
         return firstInventory.isDisplayed();
     }
+
+    public Hotbar getFirstHotbar() {
+        return firstHotbar;
+    }
 }

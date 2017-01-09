@@ -102,8 +102,9 @@ public class Player extends Creature implements InteractableObject {
                     }
                     break;
                 case KeyEvent.VK_R:
-                    //System.out.println(hb.getPlace(hb.getChosenX()).top());
-                    //place(new Dirt((posX / 50) + 1, posY / 50 + 1));
+                    if(ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Dirt") {
+                        place(new Dirt((posX / 50) + 1, (posY / 50) + 1));
+                    }
                     break;
             }
         }
@@ -294,8 +295,8 @@ public class Player extends Creature implements InteractableObject {
     public void place(Block b){
         if(direction==0){
             wh.setAllBlocks((posX/50)+1,posY/50+1,b);
-            wh.getFrame().getActiveDrawingPanel().addObject(wh.getAllBlocks((posX)+1,posY/50+1));
-            hb.getPlace(hb.getChosenX()/50).pop();
+            wh.getFrame().getActiveDrawingPanel().addObject(wh.getAllBlocks((posX/50)+1,(posY/50)+1));
+            ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).pop();
         }
 
     }
