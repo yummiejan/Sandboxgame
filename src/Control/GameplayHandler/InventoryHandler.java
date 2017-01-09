@@ -8,6 +8,7 @@ import Model.InteractableObject;
 import Model.Gameplay.Inventory.Inventory;
 import Model.Items.Blocks.Block;
 import Model.Items.Blocks.CraftingTable;
+import Model.Items.Blocks.Furnace;
 import View.DrawingPanel;
 import View.MainFrame;
 
@@ -24,7 +25,6 @@ public class InventoryHandler implements InteractableObject{
     private Inventory firstInventory;
     private Hotbar firstHotbar;
     private CraftingTableInventory firstCTI;
-    private Player player;
 
     public InventoryHandler(MainFrame frame) {
         this.frame = frame;
@@ -366,7 +366,27 @@ public class InventoryHandler implements InteractableObject{
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        if(e.getX() > firstCTI.CTIgetPosX() + (firstCTI.getCraftingPlaceLength() * 35) + 10 && e.getX() < firstCTI.CTIgetPosX() + (firstCTI.getCraftingPlaceLength() * 35) + 45){
+            if(e.getY() < 35) {
+                firstCTI.getCraftList().toFirst();
+                if(firstCTI.getCraftList().getContent().toString() == "Pickaxe");
+                firstCTI.getCraftingPlace(0,0).push("Stone");
+                firstCTI.getCraftingPlace(1,0).push("Stone");
+                firstCTI.getCraftingPlace(2,0).push("Stone");
+                firstCTI.getCraftingPlace(1,1).push("Stick");
+                firstCTI.getCraftingPlace(1,2).push("Stick");
+                for (int i = 0; i < 2; i++) {
+                    removeItem("Stone");
+                }
+                for (int i = 0; i < 1 ; i++) {
+                    removeItem("Stick");
+                }
+            }else if(e.getY() < 70){
+                System.out.println(e.getX());
+            }else if(e.getY() < 105){
+                System.out.println(e.getX());
+            }
+        }
     }
 
     @Override

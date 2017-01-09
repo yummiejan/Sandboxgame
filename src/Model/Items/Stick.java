@@ -10,8 +10,11 @@ import java.awt.event.MouseEvent;
  */
 public class Stick extends Item{
 
+    private String recipe[];
+
     public Stick() {
         super("Stick");
+        createRecipe();
     }
 
     @Override
@@ -37,5 +40,11 @@ public class Stick extends Item{
     @Override
     public void mouseReleased(MouseEvent e) {
 
+    }
+
+    public void createRecipe(){
+        recipe = new String[2];
+        recipe[0] = "Wood";
+        recipe[1] = "Wood";
     }
 }

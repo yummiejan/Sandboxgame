@@ -3,10 +3,6 @@ package Model.Gameplay.Inventory;
 import Model.DataStructures.*;
 import Model.DataStructures.List;
 import Model.InteractableObject;
-import Model.Items.Blocks.Wood;
-import Model.Items.Item;
-import Model.Items.Pickaxe;
-import Model.Items.Stick;
 import View.DrawingPanel;
 
 import javax.imageio.ImageIO;
@@ -18,6 +14,10 @@ import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
 
+import static java.awt.event.InputEvent.BUTTON1_MASK;
+import static java.awt.event.MouseEvent.BUTTON1;
+import static java.awt.event.MouseEvent.MOUSE_CLICKED;
+
 /**
  * Created by Felix on 07.01.2017.
  */
@@ -25,12 +25,10 @@ public class CraftingTableInventory implements InteractableObject{
 
     private Rectangle2D.Double backRectangle;
     private Rectangle2D.Double itemRectangle;
-    private Rectangle2D.Double woodRectangle;
-    private Line2D.Double stickLine;
 
 
     private List craftList;
-    private Stack craftingPlace[][];
+    private Stack<String> craftingPlace[][];
     private Image image;
 
     private double posX, posY;
@@ -45,15 +43,9 @@ public class CraftingTableInventory implements InteractableObject{
 
         backRectangle = new Rectangle2D.Double(posX,posY,craftingPlace.length,craftingPlace[0].length);
         itemRectangle = new Rectangle2D.Double(posX,posY,10,10);
-        woodRectangle = new Rectangle2D.Double(posX,posY,10,10);
-        stickLine = new Line2D.Double();
 
         addNewStack();
         createList();
-
-        craftList.toFirst();
-        //System.out.println(craftList);
-        //System.out.println(craftList.getContent());
     }
 
     @Override
@@ -84,11 +76,11 @@ public class CraftingTableInventory implements InteractableObject{
                     itemRectangle.setFrame(posX + i * 35, posY + j * 35, 35, 35);
                 }
             }
-            for (int i = 0; i < craftList.getSize(); i++) {
-                g2d.setColor(new Color(0, 0, 0, 100));
+            //for (int i = 0; i < craftList.getSize(); i++) {
                 g2d.draw(itemRectangle);
-                itemRectangle.setFrame((posX + craftingPlace.length* 35) +10, posY + i * 35, 35, 35);
-            }
+                itemRectangle.setFrame((posX + craftingPlace.length* 35) +10, posY + 35, 35, 35);
+                g2d.setColor(new Color(0, 0, 0));
+            //}
             for (int i = 0; i < craftingPlace.length; i++) {
                 for (int j = 0; j < craftingPlace[i].length; j++) {
                     if (craftingPlace[i][j].top() == "Stick") {
@@ -120,31 +112,29 @@ public class CraftingTableInventory implements InteractableObject{
                 }
             }
 
-            craftList.toFirst();
-            for (int i = 0; i < craftList.getSize(); i++) {
-                if(craftList.getContent() == "Stick"){
-                    try {
-                        image = ImageIO.read(new File("images/stick_inv.png"));
-                    } catch (IOException e) {
-                    }
-                    g2d.drawImage(image,(int)((posX + craftingPlace.length *35)+18.75), (int)(posY + i *35 + 8.75),null);
+
+            if(crafted() == "Stick"){
+                try {
+                    image = ImageIO.read(new File("images/stick_inv.png"));
+                } catch (IOException e) {
                 }
-                if(craftList.getContent() == "Pickaxe"){
-                    try {
-                        image = ImageIO.read(new File("images/pickaxe_inv.png"));
-                    } catch (IOException e) {
-                    }
-                    g2d.drawImage(image,(int)((posX + craftingPlace.length *35)+18.75), (int)(posY + i *35 + 8.75),null);
-                }
-                if(craftList.getContent() == "Wood"){
-                    try {
-                        image = ImageIO.read(new File("images/wood_inv.png"));
-                    } catch (IOException e) {
-                    }
-                    g2d.drawImage(image,(int)((posX + craftingPlace.length *35)+18.75), (int)(posY + i *35 + 8.75),null);
-                }
-                craftList.next();
+                g2d.drawImage(image,(int)((posX + craftingPlace.length *35)+18.75), (int)(posY + 35 + 8.75),null);
             }
+            if(crafted() == "Pickaxe"){
+                try {
+                    image = ImageIO.read(new File("images/pickaxe_inv.png"));
+                } catch (IOException e) {
+                }
+                g2d.drawImage(image,(int)((posX + craftingPlace.length *35)+18.75), (int)(posY + 35 + 8.75),null);
+            }
+            if(crafted() == "Wood"){
+                try {
+                    image = ImageIO.read(new File("images/wood_inv.png"));
+                } catch (IOException e) {
+                }
+                g2d.drawImage(image,(int)((posX + craftingPlace.length *35)+18.75), (int)(posY + 35 + 8.75),null);
+            }
+            craftList.next();
         }
     }
 
@@ -175,9 +165,6 @@ public class CraftingTableInventory implements InteractableObject{
         this.displayed = displayed;
     }
 
-    public double CTIgetPosY() {
-        return posY;
-    }
 
     public double CTIgetPosX() {
         return posX;
@@ -195,10 +182,17 @@ public class CraftingTableInventory implements InteractableObject{
         return craftingPlace[a][b];
     }
 
+    public List getCraftList() {
+        return craftList;
+    }
 
     public String crafted(){
         if(isDisplayed()) {
             if (getCraftingPlace(0, 0).top() == "Stick" && getCraftingPlace(1, 0).top() == "Stick" && getCraftingPlace(0, 1).top() == "Stick" && getCraftingPlace(1, 1).top() == "Stick") {
+                craftList.toFirst();
+                while(craftList.getContent() != "Wood"){
+                    craftList.next();
+                }
                 return "Wood";
             }
             if (getCraftingPlace(0, 0).top() == "Stone" && getCraftingPlace(1, 0).top() == "Stone" && getCraftingPlace(2, 0).top() == "Stone" && getCraftingPlace(1, 1).top() == "Stick" && getCraftingPlace(1, 2).top() == "Stick") {
