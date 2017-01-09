@@ -1,10 +1,11 @@
 Bugs
-- Reinsliden in Blöcke
-- Block wird erstellt jedoch wird er in der oberen Bilschrim ecke antatt an der gewünschten position gemalt
-    (der Block existiert aber an der erwünschten Stelle und man kann ihn dort auch abbauen aber halt kein Bild)
-    -> Fehlermeldung, wenn man den Block bauen will, ob an der gewünschten poisition schon ein Block steht oder nicht (ArryOutOfBounds)
+- Während des Sprunges kann man die Bewegungstasten, die nach rechts und links führen, einspammen und anschließend bewegt man sich soweit, wie oft man gedrückt hat. Dadurch kann es passieren,
+    dass man in der Luft läuft oder durch Blöcke slidet (ansonsten ist der Block-Slide-Fehler behoben)
+- Block wird erstellt, jedoch wird er in der oberen Bilschirmecke antatt an der gewünschten Position gemalt
+    (der Block existiert an der erwünschten Stelle und man kann ihn dort auch abbauen, aber halt Bild)
+    -> Fehlermeldung, wenn man den Block bauen will, ob an der gewünschten Position schon ein Block steht oder nicht (ArryOutOfBounds)
 - Wenn zwei Blöcke über einem ein Block ist und man springt, rutscht der Kopf in den Block rein
-- Beim Hinzufügen der Blöcke im Player uns Inventar kommt ein NullPointer
+- Beim Hinzufügen der Blöcke im Player ins Inventar kommt ein NullPointer
 
 
 Todo's innerhalb des Codes

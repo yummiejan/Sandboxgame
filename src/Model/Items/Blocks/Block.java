@@ -116,15 +116,4 @@ public abstract class Block extends Item /*implements DrawableObject*/ {
     public double getPosY(){
         return posY;
     }
-
-    /**
-     * Geplante Methode fürs Interagieren mit Blöcken.
-     * @param block Block, mit dem interagiert.
-     */
-
-    public void interact(Block block) {
-        if(name == "Furnace") {
-
-        } else System.out.println("No interaction possible with "+name);
-    }
 }

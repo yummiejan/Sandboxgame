@@ -32,6 +32,7 @@ public class Player extends Creature implements InteractableObject {
 
     private int direction = 0;
     private boolean up = false;
+    private boolean moveBlocked;
 
     private BufferedImage playerStanding,playerRight,playerLeft;
     private Image currentImage;
@@ -57,72 +58,79 @@ public class Player extends Creature implements InteractableObject {
 
     @Override
     public void keyPressed(int key) {
-        switch (key) {
-            case KeyEvent.VK_W:
-                if (!isBlock(2)) {
-                    startJump();
-                }
-                break;
-            case KeyEvent.VK_A:
-                currentImage = playerLeft;
-                //posX = posX - 50;
-                break;
-            case KeyEvent.VK_D:
-                currentImage = playerRight;
-                //posX = posX + 50;
-                break;
+        if(!moveBlocked) {
+            switch (key) {
+                case KeyEvent.VK_W:
+                    if (!isBlock(2)) {
+                        startJump();
+                    }
+                    break;
+                case KeyEvent.VK_A:
+                    currentImage = playerLeft;
+                    //posX = posX - 50;
+                    break;
+                case KeyEvent.VK_D:
+                    currentImage = playerRight;
+                    //posX = posX + 50;
+                    break;
+            }
         }
     }
 
     @Override
     public void keyReleased(int key) {
-        switch (key) {
-            case KeyEvent.VK_W:
-                endJump();
-                direction = 2;
-                break;
-            case KeyEvent.VK_A:
-                if (posX > 0) {
-                    currentImage = playerStanding;
-                    direction = 1;
-                    if (!isBlock(1) && !isBlock(5)) {
-                        //posX -= 50;
-                        wantedX -= 50;
+        if(!moveBlocked) {
+            switch (key) {
+                case KeyEvent.VK_W:
+                    endJump();
+                    direction = 2;
+                    break;
+                case KeyEvent.VK_A:
+                    if (posX > 0) {
+                        currentImage = playerStanding;
+                        direction = 1;
+                        if (!isBlock(1) && !isBlock(5)) {
+                            if (isBlock(3)) {
+                                //posX -= 50;
+                                wantedX -= 50;
+                            } else if (!isBlock(7)) {
+                                wantedX -= 50;
+                            }
+                        }
                     }
-                }
-                break;
-            case KeyEvent.VK_S:
-                direction = 3;
-                break;
-            case KeyEvent.VK_D:
-                if (posX < wh.getAllBlocks(22, 12).getPosX()) {
-                    currentImage = playerStanding;
-                    direction = 0;
-                    if (!isBlock(0) && !isBlock(4)) {
-                        //posX += 50;
-                        wantedX += 50;
+                    break;
+                case KeyEvent.VK_S:
+                    direction = 3;
+                    break;
+                case KeyEvent.VK_D:
+                    if (posX < wh.getAllBlocks(22, 12).getPosX()) {
+                        currentImage = playerStanding;
+                        direction = 0;
+                        if (!isBlock(0) && !isBlock(4)) {
+                            if (isBlock(3)) {
+                                //posX += 50;
+                                wantedX += 50;
+                            } else if (!isBlock(6)) {
+                                wantedX += 50;
+                            }
+                        }
                     }
-                }
-                break;
-
-            case KeyEvent.VK_Q:
-                destroy();
-                break;
-            case KeyEvent.VK_R:
-                System.out.println(hb.getPlace(hb.getChosenX()).top());
-                place(new Dirt((posX / 50) + 1, posY / 50 + 1));//,wh));
-                break;
-            case KeyEvent.VK_SHIFT:
-                if (up) {
-                    up = false;
-                } else {
-                    up = true;
-                }
-                break;
-        }
-        if(key == KeyEvent.VK_F && getBlock() != null) {
-            //System.out.println(getBlock().getName());
-            getBlock().interact(getBlock());
+                    break;
+                case KeyEvent.VK_Q:
+                    destroy();
+                    break;
+                case KeyEvent.VK_R:
+                    System.out.println(hb.getPlace(hb.getChosenX()).top());
+                    place(new Dirt((posX / 50) + 1, posY / 50 + 1));//,wh));
+                    break;
+                case KeyEvent.VK_SHIFT:
+                    if (up) {
+                        up = false;
+                    } else {
+                        up = true;
+                    }
+                    break;
+            }
         }
     }
 
@@ -182,6 +190,12 @@ public class Player extends Creature implements InteractableObject {
             case 5:
                 b = wh.getAllBlocks(wantedX / 50 - 1, posY / 50);
                 break;
+            case 6:
+                b = wh.getAllBlocks(wantedX / 50 + 1, posY / 50 + 2);
+                break;
+            case 7:
+                b = wh.getAllBlocks(wantedX / 50 - 1, posY / 50 + 2);
+                break;
         }
         if(b == null){
             return false;
@@ -190,10 +204,6 @@ public class Player extends Creature implements InteractableObject {
             return true;
         }
         return false;
-        /*if(getBlock() != null) {
-            if (getBlock().isSolid()) return true;
-        }
-        return false;*/
     }
 
     /**
@@ -307,4 +317,7 @@ public class Player extends Creature implements InteractableObject {
             velY = -100.0;
     }
 
+    public void setMoveBlocked(boolean moveBlocked) {
+        this.moveBlocked = moveBlocked;
+    }
 }

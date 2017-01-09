@@ -18,11 +18,9 @@ import java.awt.event.MouseEvent;
 public class MainController {
     private MainFrame frame;
     private WorldHandler handler;
-    private InventoryHandler handler2;
+
 
     public MainController(MainFrame frame){
-        handler2 = new InventoryHandler(frame);
-        frame.getActiveDrawingPanel().addObject(handler2);
         handler = new WorldHandler(frame);
         frame.getActiveDrawingPanel().addObject(handler);
         //JOptionPane.showMessageDialog(frame, "Press ESC to pause.");

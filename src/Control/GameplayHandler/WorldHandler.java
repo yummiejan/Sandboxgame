@@ -9,6 +9,7 @@ import View.MainFrame;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class WorldHandler implements InteractableObject{
 
     private Block allBlocks[][];
     private MainFrame frame;
+    private InventoryHandler invHandler;
     private InventoryHandler ih;
     private Image currentBackground,background,invBackground;
     private Player player;
@@ -30,7 +32,8 @@ public class WorldHandler implements InteractableObject{
 
     public WorldHandler(MainFrame frame){
         this.frame = frame;
-
+        invHandler = new InventoryHandler(frame);
+        frame.getActiveDrawingPanel().addObject(invHandler);
         try {
             //background = ImageIO.read(new File("images/background.png"));
             invBackground = ImageIO.read(new File("images/background.png"));
@@ -94,7 +97,32 @@ public class WorldHandler implements InteractableObject{
 
     @Override
     public void keyReleased(int key) {
+        if(key == KeyEvent.VK_F && player.getBlock() != null) {
+            if(player.getBlock().getName().equals("Furnace")) {
+                if(!furnaceHandler.getGuiDisplayed()){
+                    furnaceHandler.setGuiDisplayed(true);
+                    player.setMoveBlocked(true);
+                } else {
+                    furnaceHandler.setGuiDisplayed(false);
+                    player.setMoveBlocked(false);
+                }
+            } else System.out.println("You cannot interact with this Block.");
+        }
+        if(invAndFurnaceOpened()) {
+            if(key == KeyEvent.VK_MINUS) {
+                if(furnaceHandler.getCurrentPlace() == 1) {
+                    //nvHandler.addNewItem();
+                    furnaceHandler.removeObject();
+                } else if(furnaceHandler.getCurrentPlace() == 2) {
+                    furnaceHandler.removeFuel();
+                } else if(furnaceHandler.getCurrentPlace() == 3) {
+                    furnaceHandler.removeProduct();
+                }
+            }
+            if(key == KeyEvent.VK_PLUS) {
 
+            }
+        }
     }
 
     @Override
@@ -135,5 +163,12 @@ public class WorldHandler implements InteractableObject{
     public MainFrame getFrame()
     {
         return frame;
+    }
+
+    public boolean invAndFurnaceOpened() {
+        if(furnaceHandler.getGuiDisplayed() && invHandler.firstInvDisplayed()) {
+            return true;
+        }
+        return false;
     }
 }

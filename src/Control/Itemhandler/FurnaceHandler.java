@@ -1,5 +1,6 @@
 package Control.Itemhandler;
 
+import Control.GameplayHandler.WorldHandler;
 import Model.DataStructures.Queue;
 import Model.DataStructures.Stack;
 import Model.InteractableObject;
@@ -24,9 +25,10 @@ public class FurnaceHandler implements InteractableObject {
 
     private Queue objectQueue, fuelQueue;
     private Stack productStack;
+    private String currentObject;
     private int objectCounter, fuelCounter, productCounter;
     private Furnace furnace;
-    private boolean guiDisplayed = false;
+    private boolean guiDisplayed;
     private Image furnaceGui;
     private int currentPlace = 1;
     private Rectangle2D.Double currentRectangle;
@@ -39,22 +41,22 @@ public class FurnaceHandler implements InteractableObject {
     private Image image3;
 
     public FurnaceHandler(MainFrame frame, Furnace furnace) {
-        if(guiDisplayed) {
-            try {
-                furnaceGui = ImageIO.read(new File("images/Furnace_GUI.png"));
-            } catch (IOException e) {
-            }
-        }
         currentRectangle = new Rectangle2D.Double(x,y,52,52);
         loadingBalken = new Rectangle2D.Double(700,85,l,10);
         objectQueue = new Queue<String>();
         fuelQueue = new Queue<String>();
         productStack = new Stack<String>();
+        this.furnace = furnace;
     }
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
         if (guiDisplayed){
+            try {
+                furnaceGui = ImageIO.read(new File("images/Furnace_GUI.png"));
+            } catch (IOException e) {
+            }
+
             g2d.drawImage(furnaceGui,650,0,null);
             g2d.setColor(Color.red);
 
@@ -157,21 +159,27 @@ public class FurnaceHandler implements InteractableObject {
                 while(l <= 300) {
                     l += 20 * dt;
                     recipes(dt);
+                    furnace.setActivated(true);
                 }
+                furnace.setActivated(false);
                 fuelQueue.dequeue();
                 l = 0;
             } else if(fuelQueue.front() == "Wood") {
                 while(l <= 300) {
                     l += 50 * dt;
                     recipes(dt);
+                    furnace.setActivated(true);
                 }
+                furnace.setActivated(false);
                 fuelQueue.dequeue();
                 l = 0;
             } else if(fuelQueue.front() == "Stick") {
                 while(l <= 300) {
                     l += 100 * dt;
                     recipes(dt);
+                    furnace.setActivated(true);
                 }
+                furnace.setActivated(false);
                 fuelQueue.dequeue();
                 l = 0;
             }
@@ -181,15 +189,6 @@ public class FurnaceHandler implements InteractableObject {
     @Override
     public void keyReleased(int key) {
         if(guiDisplayed){
-            if(key == KeyEvent.VK_PLUS) {
-                if(currentPlace == 1) {
-                    removeObject();
-                } else if(currentPlace == 2) {
-                    removeFuel();
-                } else if(currentPlace == 3) {
-                    removeProduct();
-                }
-            }
             if(key == KeyEvent.VK_8) {
                 currentPlace = 1;
                 x = 699;
@@ -276,8 +275,19 @@ public class FurnaceHandler implements InteractableObject {
         }
     }
 
+    /*public void getCurrentObject() {
+        if (currentPlace == 1) {
+
+        }
+    }*/
+
     public void setGuiDisplayed(boolean guiDisplayed) {
         this.guiDisplayed = guiDisplayed;
     }
 
+    public boolean getGuiDisplayed() { return guiDisplayed; }
+
+    public int getCurrentPlace() {
+        return currentPlace;
+    }
 }
