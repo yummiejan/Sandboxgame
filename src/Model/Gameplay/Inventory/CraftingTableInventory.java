@@ -193,13 +193,21 @@ public class CraftingTableInventory implements InteractableObject{
                 while(craftList.getContent() != "Wood"){
                     craftList.next();
                 }
-                return "Wood";
+                return craftList.getContent().toString();
             }
             if (getCraftingPlace(0, 0).top() == "Stone" && getCraftingPlace(1, 0).top() == "Stone" && getCraftingPlace(2, 0).top() == "Stone" && getCraftingPlace(1, 1).top() == "Stick" && getCraftingPlace(1, 2).top() == "Stick") {
-                return "Pickaxe";
+                craftList.toFirst();
+                while(craftList.getContent() != "Pickaxe"){
+                    craftList.next();
+                }
+                return craftList.getContent().toString();
             }
             if (getCraftingPlace(1, 1).top() == "Wood" && getCraftingPlace(1, 2).top() == "Wood") {
-                return "Stick";
+                craftList.toFirst();
+                while(craftList.getContent() != "Stick"){
+                    craftList.next();
+                }
+                return craftList.getContent().toString();
             }
         }
 
