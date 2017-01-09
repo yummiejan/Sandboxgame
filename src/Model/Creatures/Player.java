@@ -64,14 +64,46 @@ public class Player extends Creature implements InteractableObject {
                     if (!isBlock(2)) {
                         startJump();
                     }
+                    direction = 2;
                     break;
                 case KeyEvent.VK_A:
                     currentImage = playerLeft;
-                    //posX = posX - 50;
+                    if (!isBlock(1) && !isBlock(5)) {
+                        if (isBlock(3)) {
+                            wantedX -= 50;
+                        } else if (!isBlock(7)) {
+                            wantedX -= 50;
+                        }
+                    }
+                    direction = 1;
+                    break;
+                case KeyEvent.VK_S:
+                    direction = 3;
                     break;
                 case KeyEvent.VK_D:
                     currentImage = playerRight;
-                    //posX = posX + 50;
+                    if (!isBlock(0) && !isBlock(4)) {
+                        if (isBlock(3)) {
+                            wantedX += 50;
+                        } else if (!isBlock(6)) {
+                            wantedX += 50;
+                        }
+                    }
+                    direction = 0;
+                    break;
+                case KeyEvent.VK_Q:
+                    destroy();
+                    break;
+                case KeyEvent.VK_SHIFT:
+                    if (up) {
+                        up = false;
+                    } else {
+                        up = true;
+                    }
+                    break;
+                case KeyEvent.VK_R:
+                    //System.out.println(hb.getPlace(hb.getChosenX()).top());
+                    //place(new Dirt((posX / 50) + 1, posY / 50 + 1));
                     break;
             }
         }
@@ -83,52 +115,14 @@ public class Player extends Creature implements InteractableObject {
             switch (key) {
                 case KeyEvent.VK_W:
                     endJump();
-                    direction = 2;
                     break;
                 case KeyEvent.VK_A:
-                    if (posX > 0) {
-                        currentImage = playerStanding;
-                        direction = 1;
-                        if (!isBlock(1) && !isBlock(5)) {
-                            if (isBlock(3)) {
-                                //posX -= 50;
-                                wantedX -= 50;
-                            } else if (!isBlock(7)) {
-                                wantedX -= 50;
-                            }
-                        }
-                    }
+                    currentImage = playerStanding;
                     break;
                 case KeyEvent.VK_S:
-                    direction = 3;
                     break;
                 case KeyEvent.VK_D:
-                    if (posX < wh.getAllBlocks(22, 12).getPosX()) {
-                        currentImage = playerStanding;
-                        direction = 0;
-                        if (!isBlock(0) && !isBlock(4)) {
-                            if (isBlock(3)) {
-                                //posX += 50;
-                                wantedX += 50;
-                            } else if (!isBlock(6)) {
-                                wantedX += 50;
-                            }
-                        }
-                    }
-                    break;
-                case KeyEvent.VK_Q:
-                    destroy();
-                    break;
-                case KeyEvent.VK_R:
-                    System.out.println(hb.getPlace(hb.getChosenX()).top());
-                    place(new Dirt((posX / 50) + 1, posY / 50 + 1));//,wh));
-                    break;
-                case KeyEvent.VK_SHIFT:
-                    if (up) {
-                        up = false;
-                    } else {
-                        up = true;
-                    }
+                    currentImage = playerStanding;
                     break;
             }
         }
@@ -229,6 +223,10 @@ public class Player extends Creature implements InteractableObject {
         return b;
     }
 
+    /**
+     * Zerstört den Block in der Blickrichtung.
+     * @return Zerstörter Block
+     */
     public Block destroy(){
         Block b = null;
         switch (direction){
@@ -287,8 +285,8 @@ public class Player extends Creature implements InteractableObject {
     }
 
     /**
-     * Places a block.
-     * @param b given block to be places
+     * Plaziert einen Block
+     * @param b Block der plaziert werden soll
      */
     public void place(Block b){
         if(direction==0){
@@ -300,7 +298,7 @@ public class Player extends Creature implements InteractableObject {
     }
 
     /**
-     * Starts the Jump
+     * Startet einen Sprung
      */
     public void startJump(){
         if(onGround){
@@ -310,13 +308,17 @@ public class Player extends Creature implements InteractableObject {
     }
 
     /**
-     * Ends the Jump once a certain velocity has been reached.
+     * Endet den Sprung wenn eine bestimmte Velocity erreicht wird.
      */
     public void endJump(){
         if(velY < -100.0)
             velY = -100.0;
     }
 
+    /**
+     *
+     * @param moveBlocked
+     */
     public void setMoveBlocked(boolean moveBlocked) {
         this.moveBlocked = moveBlocked;
     }
