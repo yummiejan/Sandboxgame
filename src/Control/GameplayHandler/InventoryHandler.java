@@ -35,14 +35,8 @@ public class InventoryHandler implements InteractableObject{
         frame.getActiveDrawingPanel().addObject(firstHotbar);
         firstCTI = new CraftingTableInventory(frame.getActiveDrawingPanel().getWidth()-315, 0);
         frame.getActiveDrawingPanel().addObject(firstCTI);
-        for (int i = 0; i < 256; i++) {
-            addNewItem("Dirt");
-        }
-        for (int i = 0; i < 256; i++) {
-            addNewItem("Coal");
-        }
-        for (int i = 0; i < 256; i++) {
-            addNewItem("Stick");
+        for (int i = 0; i < 64; i++) {
+            addNewItem("Wood");
         }
 
 
@@ -132,7 +126,7 @@ public class InventoryHandler implements InteractableObject{
                         help2.push(firstHotbar.getPlace(0).top());
                         firstHotbar.getPlace(0).pop();
                     }
-                    for (int i = 0; i < help.getSize(); i++) {
+                    for (int i = 0;  i < 64 && !help2.isEmpty(); i++) {
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).push(help2.top());
                         help2.pop();
                     }

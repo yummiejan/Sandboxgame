@@ -110,6 +110,12 @@ public class CraftingTableInventory implements InteractableObject{
                         } catch (IOException e) {
                         }
                         g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
+                    }else if(craftingPlace[i][j].top() == "Pickaxe") {
+                        try {
+                            image = ImageIO.read(new File("images/pickaxe_inv.png"));
+                        } catch (IOException e) {
+                        }
+                        g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
                     }
                 }
             }

@@ -3,9 +3,8 @@ package Model.Creatures;
 import Control.GameplayHandler.InventoryHandler;
 import Control.GameplayHandler.WorldHandler;
 import Model.Gameplay.Inventory.Hotbar;
-import Model.Items.Blocks.Block;
+import Model.Items.Blocks.*;
 import Model.InteractableObject;
-import Model.Items.Blocks.Dirt;
 import View.DrawingPanel;
 
 import javax.imageio.ImageIO;
@@ -104,6 +103,12 @@ public class Player extends Creature implements InteractableObject {
                 case KeyEvent.VK_R:
                     if(ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Dirt") {
                         place(new Dirt((posX / 50) + 1, (posY / 50) + 1));
+                    }else if(ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Coal") {
+                        place(new Coal((posX / 50) + 1, (posY / 50) + 1));
+                    }else if(ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Stone") {
+                        place(new Stone((posX / 50) + 1, (posY / 50) + 1));
+                    }else if(ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Wood") {
+                        place(new Wood((posX / 50) + 1, (posY / 50) + 1));
                     }
                     break;
             }

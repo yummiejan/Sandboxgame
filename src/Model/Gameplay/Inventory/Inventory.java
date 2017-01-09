@@ -166,6 +166,7 @@ public class Inventory implements InteractableObject {
                         } catch (IOException e) {
                         }
                         g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
+                        g2d.setColor(new Color(0, 0, 0));
                         if (itemPlace[i][j].getSize() < 9) {
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
                         } else {
@@ -177,6 +178,7 @@ public class Inventory implements InteractableObject {
                         } catch (IOException e) {
                         }
                         g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
+                        g2d.setColor(new Color(0, 0, 0));
                         if (itemPlace[i][j].getSize() < 9) {
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
                         } else {
