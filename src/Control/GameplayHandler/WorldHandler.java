@@ -47,6 +47,10 @@ public class WorldHandler implements InteractableObject{
             int counter = (int) (Math.random() * 2) + 4;
             int counter2 = 5;//(int) (Math.random() * 200) + 4;
             for (int j = 0; j < allBlocks[i].length; j++) {
+                if(counter == j){
+                    allBlocks[i][j] = new Grass(i * 50, (j)*50);
+                    frame.getActiveDrawingPanel().addObject(allBlocks[i][j]);
+                }
                 if (j > counter) {
                     int random = (int) (Math.random() * 3) + 1;
                     if (random == 1 && j > counter + 3 ) {
@@ -56,11 +60,10 @@ public class WorldHandler implements InteractableObject{
                     } else {
                         allBlocks[i][j] = new Dirt(i * 50, j * 50);
                     }
-                    //allBlocks[i][xBlockLevel(i)-1] = new Grass(i * 50, (xBlockLevel(i)-1)*50);
                     frame.getActiveDrawingPanel().addObject(allBlocks[i][j]);
-
                 }
             }
+
         }
         furnace = new Furnace(0, (xBlockLevel(0)-1)*50);
         allBlocks[0][xBlockLevel(0)-1] = furnace;

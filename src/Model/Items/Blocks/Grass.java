@@ -15,11 +15,6 @@ public class Grass extends Block {
     }
 
     @Override
-    public void draw(DrawingPanel dp, Graphics2D g2d) {
-
-    }
-
-    @Override
     public void keyPressed(int key) {
 
     }
