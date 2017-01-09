@@ -116,8 +116,6 @@ public class InventoryHandler implements InteractableObject{
                 //Zwei Hilfstacks werden erzeugt, damit dort die Stacks zum Tauschen kurz gespeichert werden können
                 Stack help = new Stack<String>();
                 Stack help2 = new Stack<String>();
-                System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35));
-                System.out.println(firstHotbar.getPlace(0));
                 if (firstHotbar.getPlace(0).isEmpty()) {
                     //wenn der Platz in der Hotbar leer ist, werden einfach alle Items in dem Stack des Platzes hinzugefügt
                     while (!firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).isEmpty()) {
@@ -147,8 +145,6 @@ public class InventoryHandler implements InteractableObject{
             if (key == KeyEvent.VK_NUMPAD2) {
                 Stack help = new Stack<String>();
                 Stack help2 = new Stack<String>();
-                System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35));
-
                 if (firstHotbar.getPlace(1).isEmpty()) {
                     while (!firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).isEmpty()) {
                         firstHotbar.getPlace(1).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
@@ -176,8 +172,6 @@ public class InventoryHandler implements InteractableObject{
             if (key == KeyEvent.VK_NUMPAD3) {
                 Stack help = new Stack<String>();
                 Stack help2 = new Stack<String>();
-                System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35));
-
                 if (firstHotbar.getPlace(2).isEmpty()) {
                     while (!firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).isEmpty()) {
                         firstHotbar.getPlace(2).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
@@ -205,8 +199,6 @@ public class InventoryHandler implements InteractableObject{
             if (key == KeyEvent.VK_NUMPAD4) {
                 Stack help = new Stack<String>();
                 Stack help2 = new Stack<String>();
-                System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35));
-
                 if (firstHotbar.getPlace(3).isEmpty()) {
                     while (!firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).isEmpty()) {
                         firstHotbar.getPlace(3).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
@@ -234,8 +226,6 @@ public class InventoryHandler implements InteractableObject{
             if (key == KeyEvent.VK_NUMPAD5) {
                 Stack help = new Stack<String>();
                 Stack help2 = new Stack<String>();
-                System.out.println(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35));
-                System.out.println(firstHotbar.getPlace(4).top());
                 if (firstHotbar.getPlace(4).isEmpty()) {
                     while (!firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).isEmpty()) {
                         firstHotbar.getPlace(4).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
@@ -403,7 +393,7 @@ public class InventoryHandler implements InteractableObject{
         boolean added = false;
         for (int i = 0; i < firstInventory.getItemPlace().length; i++) {
             for (int j = 0; j < firstInventory.getItemPlaceLength(i); j++) {
-                if (firstInventory.getItemPlacePlace(i, j).top() == itemName && firstInventory.getItemPlacePlace(i, j).getSize() < 64 ) {
+                if (firstInventory.getItemPlacePlace(i, j).top() != null && firstInventory.getItemPlacePlace(i, j).top().equals(itemName) && firstInventory.getItemPlacePlace(i, j).getSize() < 64 ) {
                     firstInventory.getItemPlacePlace(i, j).push(itemName);
                     added = true;
                     break;

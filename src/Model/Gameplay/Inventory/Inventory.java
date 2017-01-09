@@ -183,7 +183,6 @@ public class Inventory implements InteractableObject {
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
                         }
                     }
-
                 }
             }
 

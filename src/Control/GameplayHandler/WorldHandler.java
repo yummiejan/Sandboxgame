@@ -24,7 +24,6 @@ public class WorldHandler implements InteractableObject{
     private Block allBlocks[][];
     private MainFrame frame;
     private InventoryHandler invHandler;
-    private InventoryHandler ih;
     private Image currentBackground,background,invBackground;
     private Player player;
     private Furnace furnace;
@@ -73,7 +72,7 @@ public class WorldHandler implements InteractableObject{
         allBlocks[22][xBlockLevel(0)-1] = new CraftingTable(frame.getWidth()-65, (xBlockLevel(22)-1)*50,this);
         frame.getActiveDrawingPanel().addObject(allBlocks[22][xBlockLevel(0)-1]);
         int x = (int)(Math.random()*19+2);
-        player = new Player(x*50,(xBlockLevel(x)-2)*50,this,ih);
+        player = new Player(x*50,(xBlockLevel(x)-2)*50,this,invHandler);
         frame.getActiveDrawingPanel().addObject(player);
     }
 
