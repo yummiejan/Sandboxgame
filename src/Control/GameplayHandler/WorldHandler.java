@@ -50,6 +50,7 @@ public class WorldHandler implements InteractableObject{
                     allBlocks[i][j] = new Grass(i * 50, j*50);
                     frame.getActiveDrawingPanel().addObject(allBlocks[i][j]);
                 }
+                //TODO Random Chance für grass spawnen
                 if(counter == (j-1) /*&& grassChance == 0*/){
                     allBlocks[i][j] = new Brushes(i * 50, (j-2)*50);
                     frame.getActiveDrawingPanel().addObject(allBlocks[i][j]);
