@@ -15,22 +15,12 @@ public class Grass extends Block {
     }
 
     @Override
-    public void keyPressed(int key) {
-
-    }
-
-    @Override
     public void keyReleased(int key) {
 
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void update(double dt) {
 
     }
 }

@@ -276,14 +276,14 @@ public class Player extends Creature implements InteractableObject {
                 break;
         }
         /**
-         * der abgebaute Block-Content wird dem Inventar hinzugefügt (fonktioniert noch nicht, weil ich null zuruck bekomme, aber auch wenn ich nur "Dirt" eingebe)
+         * der abgebaute Block-Content wird dem Inventar hinzugefügt.
          */
         if(b.getName() == "Grass") {
             ih.addNewItem("Dirt");
         }else{
             ih.addNewItem(b.getName());
         }
-        return  b;
+        return b;
 
     }
 

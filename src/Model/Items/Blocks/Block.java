@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Created by 204g04 on 12.12.2016.
  */
-public abstract class Block extends Item /*implements DrawableObject*/ {
+public abstract class Block extends Item {
 
     private Rectangle2D.Double rectangle;
     private Image image,coal, grass,stone,wood,brushes,dirt;
