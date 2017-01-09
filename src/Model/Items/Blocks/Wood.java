@@ -15,16 +15,6 @@ public class Wood extends Block {
     }
 
     @Override
-    public void draw(DrawingPanel dp, Graphics2D g2d) {
-
-    }
-
-    @Override
-    public void keyPressed(int key) {
-
-    }
-
-    @Override
     public void keyReleased(int key) {
 
     }
