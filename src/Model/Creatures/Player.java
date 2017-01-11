@@ -240,14 +240,40 @@ public class Player extends Creature implements InteractableObject {
                 if (up){
                     if(isBlock(4)){
                         b = wh.getAllBlocks((posX / 50) + 1, posY / 50);
-                        wh.getAllBlocks((posX / 50) + 1, posY / 50).setDisplayed(false);
-                        wh.setAllBlocks((posX / 50) + 1, posY / 50, null);
+                        if(b.getName() == "Stone" || b.getName() == "Coal"){
+                            if(ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe"){
+                                wh.getAllBlocks((posX / 50) + 1, posY / 50).setDisplayed(false);
+                                wh.setAllBlocks((posX / 50) + 1, posY / 50, null);
+                                ih.addNewItem(b.getName());
+                            }
+                        }else {
+                            wh.getAllBlocks((posX / 50) + 1, posY / 50).setDisplayed(false);
+                            wh.setAllBlocks((posX / 50) + 1, posY / 50, null);
+                            if(b.getName() == "Grass") {
+                                ih.addNewItem("Dirt");
+                            }else{
+                                ih.addNewItem(b.getName());
+                            }
+                        }
                     }
                 }else{
                     if (isBlock(0)){
                         b = wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1);
-                        wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1).setDisplayed(false);
-                        wh.setAllBlocks((posX / 50) + 1, posY / 50 + 1, null);
+                        if(b.getName() == "Stone" || b.getName() == "Coal") {
+                            if (ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe") {
+                                wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1).setDisplayed(false);
+                                wh.setAllBlocks((posX / 50) + 1, posY / 50 + 1, null);
+                                ih.addNewItem(b.getName());
+                            }
+                        }else{
+                            wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1).setDisplayed(false);
+                            wh.setAllBlocks((posX / 50) + 1, posY / 50 + 1, null);
+                            if(b.getName() == "Grass") {
+                                ih.addNewItem("Dirt");
+                            }else{
+                                ih.addNewItem(b.getName());
+                            }
+                        }
                     }
                 }
                 break;
@@ -255,39 +281,83 @@ public class Player extends Creature implements InteractableObject {
                 if(up){
                     if(isBlock(5)){
                         b = wh.getAllBlocks((posX / 50) - 1, posY / 50);
-                        wh.getAllBlocks((posX / 50) - 1, posY / 50).setDisplayed(false);
-                        wh.setAllBlocks((posX / 50) - 1, posY / 50, null);
+                        if(b.getName() == "Stone" || b.getName() == "Coal") {
+                            if (ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe") {
+                                wh.getAllBlocks((posX / 50) - 1, posY / 50).setDisplayed(false);
+                                wh.setAllBlocks((posX / 50) - 1, posY / 50, null);
+                                ih.addNewItem(b.getName());
+                            }
+                        }else{
+                            wh.getAllBlocks((posX / 50) - 1, posY / 50).setDisplayed(false);
+                            wh.setAllBlocks((posX / 50) - 1, posY / 50, null);
+                            if(b.getName() == "Grass") {
+                                ih.addNewItem("Dirt");
+                            }else{
+                                ih.addNewItem(b.getName());
+                            }
+                        }
                     }
                 }else{
                     if(isBlock(1)) {
                         b = wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1);
-                        wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1).setDisplayed(false);
-                        wh.setAllBlocks((posX / 50) - 1, posY / 50 + 1, null);
+                        if(b.getName() == "Stone" || b.getName() == "Coal") {
+                            if (ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe") {
+                                wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1).setDisplayed(false);
+                                wh.setAllBlocks((posX / 50) - 1, posY / 50 + 1, null);
+                                ih.addNewItem(b.getName());
+                            }
+                        }else{
+                            wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1).setDisplayed(false);
+                            wh.setAllBlocks((posX / 50) - 1, posY / 50 + 1, null);
+                            if(b.getName() == "Grass") {
+                                ih.addNewItem("Dirt");
+                            }else{
+                                ih.addNewItem(b.getName());
+                            }
+                        }
                     }
                 }
                 break;
             case 2:
                 if(isBlock(2)&&(wh.xBlockLevel(posX/50)<12)){
                     b = wh.getAllBlocks((posX / 50), posY / 50 - 1);
-                    wh.getAllBlocks((posX / 50), posY / 50 - 1).setDisplayed(false);
-                    wh.setAllBlocks((posX / 50), posY / 50 - 1, null);
+                    if(b.getName() == "Stone" || b.getName() == "Coal") {
+                        if (ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe") {
+                            wh.getAllBlocks((posX / 50), posY / 50 - 1).setDisplayed(false);
+                            wh.setAllBlocks((posX / 50), posY / 50 - 1, null);
+                            ih.addNewItem(b.getName());
+                        }
+                    }else{
+                        wh.getAllBlocks((posX / 50), posY / 50 - 1).setDisplayed(false);
+                        wh.setAllBlocks((posX / 50), posY / 50 - 1, null);
+                        if(b.getName() == "Grass") {
+                            ih.addNewItem("Dirt");
+                        }else{
+                            ih.addNewItem(b.getName());
+                        }
+                    }
                 }
                 break;
             case 3:
                 if(isBlock(3)&&(wh.xBlockLevel(posX/50)<12)){
                     b = wh.getAllBlocks((posX / 50), posY / 50 + 2);
-                    wh.getAllBlocks((posX / 50), posY / 50 + 2).setDisplayed(false);
-                    wh.setAllBlocks((posX / 50), posY / 50 + 2, null);
+                    if(b.getName() == "Stone" || b.getName() == "Coal") {
+                        if (ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe") {
+                            wh.getAllBlocks((posX / 50), posY / 50 + 2).setDisplayed(false);
+                            wh.setAllBlocks((posX / 50), posY / 50 + 2, null);
+                            ih.addNewItem(b.getName());
+                        }
+                    }else{
+                        wh.getAllBlocks((posX / 50), posY / 50 + 2).setDisplayed(false);
+                        wh.setAllBlocks((posX / 50), posY / 50 + 2, null);
+                        if(b.getName() == "Grass") {
+                            ih.addNewItem("Dirt");
+                        }else{
+                            ih.addNewItem(b.getName());
+                        }
+                    }
                 }
                 break;
-        }
-        /**
-         * der abgebaute Block-Content wird dem Inventar hinzugefügt.
-         */
-        if(b.getName() == "Grass") {
-            ih.addNewItem("Dirt");
-        }else{
-            ih.addNewItem(b.getName());
         }
         return b;
 
