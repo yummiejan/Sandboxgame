@@ -418,7 +418,7 @@ public class InventoryHandler implements InteractableObject{
             }
 
         }
-        if(added == false) {
+        if(!added) {
             for (int i = 0; i < firstInventory.getItemPlace().length; i++) {
                 for (int j = 0; j < firstInventory.getItemPlaceLength(i); j++) {
                     if(firstInventory.getItemPlacePlace(i,j).isEmpty()){
@@ -458,6 +458,16 @@ public class InventoryHandler implements InteractableObject{
 
     public boolean firstInvDisplayed() {
         return firstInventory.isDisplayed();
+    }
+
+
+    public void removeCurrentItem() {
+        firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
+    }
+
+    public String getCurrentItem() {
+        String thing = ""+firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top();
+        return thing;
     }
 
     public Hotbar getFirstHotbar() {

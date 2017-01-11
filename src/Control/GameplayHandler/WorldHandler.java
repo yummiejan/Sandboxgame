@@ -44,7 +44,7 @@ public class WorldHandler implements InteractableObject{
         allBlocks = new Block[23][13];
         for (int i = 0; i < allBlocks.length; i++) {
             int counter = (int)(Math.random() * 2) + 4;
-            int grassChance =(int)(Math.random());
+            int grassChance = (int)(Math.random());
             for (int j = 0; j < allBlocks[i].length; j++) {
                 if(counter == j){
                     allBlocks[i][j] = new Grass(i * 50, j*50);
@@ -121,16 +121,24 @@ public class WorldHandler implements InteractableObject{
         if(invAndFurnaceOpened()) {
             if(key == KeyEvent.VK_MINUS) {
                 if(furnaceHandler.getCurrentPlace() == 1) {
-                    //nvHandler.addNewItem();
+                    invHandler.addNewItem(furnaceHandler.getFrontOQ());
                     furnaceHandler.removeObject();
                 } else if(furnaceHandler.getCurrentPlace() == 2) {
+                    invHandler.addNewItem(furnaceHandler.getFrontFQ());
                     furnaceHandler.removeFuel();
                 } else if(furnaceHandler.getCurrentPlace() == 3) {
+                    invHandler.addNewItem(furnaceHandler.getTopPS());
                     furnaceHandler.removeProduct();
                 }
             }
             if(key == KeyEvent.VK_PLUS) {
-
+                if(furnaceHandler.getCurrentPlace() == 1) {
+                    furnaceHandler.addObject(invHandler.getCurrentItem());
+                    invHandler.removeCurrentItem();
+                } else if(furnaceHandler.getCurrentPlace() == 2) {
+                    furnaceHandler.addFuel(invHandler.getCurrentItem());
+                    invHandler.removeCurrentItem();
+                }
             }
         }
     }
@@ -180,7 +188,7 @@ public class WorldHandler implements InteractableObject{
         return frame;
     }
 
-    public boolean invAndFurnaceOpened() {
+    private boolean invAndFurnaceOpened() {
         if(furnaceHandler.getGuiDisplayed() && invHandler.firstInvDisplayed()) {
             return true;
         }

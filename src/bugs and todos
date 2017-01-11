@@ -6,6 +6,9 @@ Bugs
     -> Fehlermeldung, wenn man den Block bauen will, ob an der gewünschten Position schon ein Block steht oder nicht (ArryOutOfBounds)
 - Wenn zwei Blöcke über einem ein Block ist und man springt, rutscht der Kopf in den Block rein
 - Beim Hinzufügen der Blöcke im Player ins Inventar kommt ein NullPointer
+- Man kann aus dem Fenster springen
+- Wenn man gehen durchdrückt und z.B. 5 Blöcke vor einem ein Loch ist, fliegt der Spieler nach 2 Blöcken durch den Boden,
+    und das so tief, wie das Loch, das z.B. 5 Blöcke vor ihm ist, tief ist.
 
 
 Todo's innerhalb des Codes

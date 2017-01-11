@@ -25,8 +25,8 @@ public class Inventory implements InteractableObject {
     private Rectangle2D.Double woodRectangle;
     private Line2D.Double stickLine;
     private Image image;
-    private Stack itemPlace[][];
-    private Stack armorPlace[];
+    private Stack<String> itemPlace[][];
+    private Stack<String> armorPlace[];
     private double posX, posY, chosenX, chosenY;
     private boolean displayed;
 
@@ -53,7 +53,7 @@ public class Inventory implements InteractableObject {
         /**
          * Steuerung des roten Rechtecks innerhalb des Inventars mit den Pfeiltasten
          */
-        if(displayed == true){
+        if(displayed){
             if (key == KeyEvent.VK_RIGHT && chosenX < (itemPlace.length-1) * 35) {
                 chosenX = chosenX + 35;
             }else if (key == KeyEvent.VK_LEFT && chosenX > 0) {
@@ -78,7 +78,7 @@ public class Inventory implements InteractableObject {
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-        if(displayed == true) {
+        if(displayed) {
             /**
              * Zeichnen des Inventars selber
              */
@@ -199,7 +199,6 @@ public class Inventory implements InteractableObject {
                     }
                 }
             }
-
         }
     }
 
