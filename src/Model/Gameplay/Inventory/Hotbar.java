@@ -149,6 +149,18 @@ public class Hotbar implements InteractableObject {
                         }else{
                             g2d.drawString("" + place[i].getSize(), (int) (posX -125) + i * 35 + 23, (int) posY + 32);
                         }
+                }else if(place[i].top() == "Woodpickaxe") {
+                    try {
+                        image = ImageIO.read(new File("images/pickaxe_inv.png"));
+                    } catch (IOException e) {
+                    }
+                    g2d.drawImage(image, (int) (posX - 125 + i * 35 + 8.75), (int) (posY + 8.75), null);
+                    g2d.setColor(new Color(0, 0, 0));
+                    if (place[i].getSize() < 9) {
+                        g2d.drawString("" + place[i].getSize(), (int) (posX - 125) + i * 35 + 28, (int) posY + 32);
+                    } else {
+                        g2d.drawString("" + place[i].getSize(), (int) (posX - 125) + i * 35 + 23, (int) posY + 32);
+                    }
                 }
             }
             /**

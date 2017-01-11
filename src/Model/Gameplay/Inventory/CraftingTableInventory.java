@@ -134,6 +134,13 @@ public class CraftingTableInventory implements InteractableObject{
                 }
                 g2d.drawImage(image,(int)((posX + craftingPlace.length *35)+18.75), (int)(posY + 35 + 8.75),null);
             }
+            if(crafted() == "Woodpickaxe"){
+                try {
+                    image = ImageIO.read(new File("images/pickaxe_inv.png"));
+                } catch (IOException e) {
+                }
+                g2d.drawImage(image,(int)((posX + craftingPlace.length *35)+18.75), (int)(posY + 35 + 8.75),null);
+            }
             craftList.next();
         }
     }
@@ -145,6 +152,7 @@ public class CraftingTableInventory implements InteractableObject{
 
     public void createList(){
         craftList.append("Pickaxe");
+        craftList.append("Woodpickaxe");
         craftList.append("Stick");
         craftList.append("Wood");
     }
@@ -194,17 +202,21 @@ public class CraftingTableInventory implements InteractableObject{
                     craftList.next();
                 }
                 return craftList.getContent().toString();
-            }
-            if (getCraftingPlace(0, 0).top() == "Stone" && getCraftingPlace(1, 0).top() == "Stone" && getCraftingPlace(2, 0).top() == "Stone" && getCraftingPlace(1, 1).top() == "Stick" && getCraftingPlace(1, 2).top() == "Stick") {
+            }else if (getCraftingPlace(0, 0).top() == "Stone" && getCraftingPlace(1, 0).top() == "Stone" && getCraftingPlace(2, 0).top() == "Stone" && getCraftingPlace(1, 1).top() == "Stick" && getCraftingPlace(1, 2).top() == "Stick") {
                 craftList.toFirst();
                 while(craftList.getContent() != "Pickaxe"){
                     craftList.next();
                 }
                 return craftList.getContent().toString();
-            }
-            if (getCraftingPlace(1, 1).top() == "Wood" && getCraftingPlace(1, 2).top() == "Wood") {
+            }else if (getCraftingPlace(1, 1).top() == "Wood" && getCraftingPlace(1, 2).top() == "Wood") {
                 craftList.toFirst();
                 while(craftList.getContent() != "Stick"){
+                    craftList.next();
+                }
+                return craftList.getContent().toString();
+            }else if (getCraftingPlace(0, 0).top() == "Wood" && getCraftingPlace(1, 0).top() == "Wood" && getCraftingPlace(2, 0).top() == "Wood" && getCraftingPlace(1, 1).top() == "Stick" && getCraftingPlace(1, 2).top() == "Stick") {
+                craftList.toFirst();
+                while(craftList.getContent() != "Woodpickaxe"){
                     craftList.next();
                 }
                 return craftList.getContent().toString();
