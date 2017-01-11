@@ -147,7 +147,7 @@ public class WorldHandler implements InteractableObject{
 
     @Override
     public void update(double dt) {
-        //System.out.println(currentBackground.getSource());
+
     }
 
     /**
@@ -157,7 +157,12 @@ public class WorldHandler implements InteractableObject{
      * @return
      */
     public Block getAllBlocks(int a, int b) {
-        return allBlocks[a][b];
+        try {
+            return allBlocks[a][b];
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+        }
+        return null;
     }
 
     /**

@@ -401,4 +401,8 @@ public class Player extends Creature implements InteractableObject {
     public void setMoveBlocked(boolean moveBlocked) {
         this.moveBlocked = moveBlocked;
     }
+
+    public int getPosY() {
+        return posY;
+    }
 }
