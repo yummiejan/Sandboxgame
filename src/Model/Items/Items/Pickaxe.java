@@ -1,22 +1,17 @@
-package Model.Items;
+package Model.Items.Items;
 
+import Model.Items.Item;
 import View.DrawingPanel;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 
 /**
  * Created by Felix on 07.01.2017.
  */
-public class Pickaxe extends Item{
+public class Pickaxe extends Item {
 
     public Pickaxe() {
         super("Pickaxe");
-    }
-
-    @Override
-    public void keyPressed(int key) {
-
     }
 
     @Override
@@ -26,16 +21,6 @@ public class Pickaxe extends Item{
 
     @Override
     public void update(double dt) {
-
-    }
-
-    @Override
-    public void keyReleased(int key) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
 
     }
 }

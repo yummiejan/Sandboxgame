@@ -1,25 +1,20 @@
-package Model.Items;
+package Model.Items.Items;
 
+import Model.Items.Item;
 import View.DrawingPanel;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 
 /**
  * Created by Felix on 07.01.2017.
  */
-public class Stick extends Item{
+public class Stick extends Item {
 
-    private String recipe[];
+    private String[] recipe;
 
     public Stick() {
         super("Stick");
         createRecipe();
-    }
-
-    @Override
-    public void keyPressed(int key) {
-        super.keyPressed(key);
     }
 
     @Override
@@ -29,16 +24,6 @@ public class Stick extends Item{
 
     @Override
     public void update(double dt) {
-
-    }
-
-    @Override
-    public void keyReleased(int key) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
 
     }
 

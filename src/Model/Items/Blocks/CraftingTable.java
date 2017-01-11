@@ -1,12 +1,10 @@
 package Model.Items.Blocks;
 
-import Control.GameplayHandler.InventoryHandler;
 import Control.GameplayHandler.WorldHandler;
 import Model.DrawableObject;
 import View.DrawingPanel;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
@@ -15,10 +13,7 @@ import java.awt.geom.Rectangle2D;
  */
 public class CraftingTable extends Block implements DrawableObject{
 
-    private InventoryHandler ih;
-
     private Rectangle2D.Double rectangle;
-    private Rectangle2D.Double rectangle2;
     private Rectangle2D.Double craftField;
     private Line2D.Double line;
     private Line2D.Double line2;
@@ -31,10 +26,9 @@ public class CraftingTable extends Block implements DrawableObject{
 
 
 
-    public CraftingTable(double posX, double posY, WorldHandler wh) {
-        super(posX,posY,true,"Craftingtable");
+    public CraftingTable(double posX, double posY) {
+        super(posX, posY, true, "Craftingtable");
         rectangle = new Rectangle2D.Double(posX, posY, 50, 50);
-        rectangle2 = new Rectangle2D.Double(posX, posY, 50, 50);
         craftField = new Rectangle2D.Double(posX, posY, 50, 8);
         line = new Line2D.Double(posX+10,posY,posX+10,posY+50);
         line2 = new Line2D.Double(posX+20,posY,posX+20,posY+50);
@@ -44,7 +38,6 @@ public class CraftingTable extends Block implements DrawableObject{
         line6 = new Line2D.Double(posX,posY+20,posX+50,posY+20);
         line7 = new Line2D.Double(posX,posY+30,posX+50,posY+30);
         line8 = new Line2D.Double(posX,posY+40,posX+50,posY+40);
-
     }
 
     @Override
@@ -65,20 +58,5 @@ public class CraftingTable extends Block implements DrawableObject{
             g2d.setColor(new Color(90, 29, 21));
             g2d.fill(craftField);
         }
-    }
-
-    @Override
-    public void keyPressed(int key) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(int key) {
-
     }
 }

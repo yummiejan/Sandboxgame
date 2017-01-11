@@ -8,9 +8,6 @@ import java.util.ArrayList;
  */
 public class MainFrame extends JFrame {
 
-    // Attribute
-
-    // Referenzen
     private DrawingPanel activePanel;
     private ArrayList<DrawingPanel> panels;
 
