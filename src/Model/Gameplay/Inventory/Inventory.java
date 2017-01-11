@@ -186,7 +186,7 @@ public class Inventory implements InteractableObject {
                         }
                     }else if(itemPlace[i][j].top() == "Woodpickaxe"){
                         try {
-                            image = ImageIO.read(new File("images/pickaxe_inv.png"));
+                            image = ImageIO.read(new File("images/pickaxe_wood_inv.png"));
                         } catch (IOException e) {
                         }
                         g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
