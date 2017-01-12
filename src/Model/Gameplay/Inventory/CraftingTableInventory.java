@@ -204,25 +204,25 @@ public class CraftingTableInventory implements InteractableObject{
      */
     public String crafted(){
         if(displayed) {
-           if (getCraftingPlace(0, 0).top() == "Stick" && getCraftingPlace(1, 0).top() == "Stick" && getCraftingPlace(0, 1).top() == "Stick" && getCraftingPlace(1, 1).top() == "Stick") {
+           if (getCraftingPlace(0, 0).top() == "Stick" && getCraftingPlace(1, 0).top() == "Stick" && getCraftingPlace(0, 1).top() == "Stick" && getCraftingPlace(1, 1).top() == "Stick" && getCraftingPlace(0, 2).top() == null && getCraftingPlace(1, 2).top() == null && getCraftingPlace(2, 2).top() == null && getCraftingPlace(2, 1).top() == null && getCraftingPlace(2, 2).top() == null && getCraftingPlace(2, 0).top() == null) {
                 craftList.toFirst();
                 while(craftList.getContent() != "Wood"){
                     craftList.next();
                 }
                 return craftList.getContent().toString();
-            }else if (getCraftingPlace(0, 0).top() == "Stone" && getCraftingPlace(1, 0).top() == "Stone" && getCraftingPlace(2, 0).top() == "Stone" && getCraftingPlace(1, 1).top() == "Stick" && getCraftingPlace(1, 2).top() == "Stick") {
+            }else if (getCraftingPlace(0, 0).top() == "Stone" && getCraftingPlace(1, 0).top() == "Stone" && getCraftingPlace(2, 0).top() == "Stone" && getCraftingPlace(1, 1).top() == "Stick" && getCraftingPlace(1, 2).top() == "Stick" && getCraftingPlace(0, 2).top() == null && getCraftingPlace(0, 1).top() == null && getCraftingPlace(2, 2).top() == null && getCraftingPlace(2, 1).top() == null) {
                 craftList.toFirst();
                 while(craftList.getContent() != "Pickaxe"){
                     craftList.next();
                 }
                 return craftList.getContent().toString();
-           }else if (getCraftingPlace(1, 1).top() == "Wood" && getCraftingPlace(1, 2).top() == "Wood") {
+           }else if (getCraftingPlace(1, 1).top() == "Wood" && getCraftingPlace(1, 2).top() == "Wood" && getCraftingPlace(0, 0).top() == null && getCraftingPlace(0, 1).top() == null && getCraftingPlace(0, 2).top() == null && getCraftingPlace(1, 0).top() == null && getCraftingPlace(2, 0).top() == null && getCraftingPlace(2, 1).top() == null && getCraftingPlace(2, 2).top() == null) {
                 craftList.toFirst();
                 while(craftList.getContent() != "Stick"){
                     craftList.next();
                 }
                 return craftList.getContent().toString();
-           }else if (getCraftingPlace(0, 0).top() == "Wood" && getCraftingPlace(1, 0).top() == "Wood" && getCraftingPlace(2, 0).top() == "Wood" && getCraftingPlace(1, 1).top() == "Stick" && getCraftingPlace(1, 2).top() == "Stick") {
+           }else if (getCraftingPlace(0, 0).top() == "Wood" && getCraftingPlace(1, 0).top() == "Wood" && getCraftingPlace(2, 0).top() == "Wood" && getCraftingPlace(1, 1).top() == "Stick" && getCraftingPlace(1, 2).top() == "Stick" && getCraftingPlace(0, 2).top() == null && getCraftingPlace(0, 1).top() == null && getCraftingPlace(2, 2).top() == null && getCraftingPlace(2, 1).top() == null) {
                 craftList.toFirst();
                 while(craftList.getContent() != "Woodpickaxe"){
                     craftList.next();
