@@ -5,9 +5,10 @@ import Model.Items.Item;
 import View.DrawingPanel;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.*;
+import javax.sound.sampled.spi.AudioFileReader;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by 204g04 on 12.12.2016.
@@ -15,6 +16,8 @@ import java.io.IOException;
 public abstract class Block extends Item {
 
     private Image image, coal, grass, stone, wood, brushes, dirt;
+    private File sound;
+    private Clip clip;
     private double posX, posY;
     private boolean solid;
     private String name;
@@ -34,7 +37,19 @@ public abstract class Block extends Item {
             grass = ImageIO.read(new File("images/grass.png"));
             brushes = ImageIO.read(new File("images/brushes.png"));
             dirt = ImageIO.read(new File("images/dirt.png"));
-        } catch (IOException e) {
+            sound = new File("sounds/stone.wav");
+
+        } catch (Exception e) {
+
+        }
+
+        try {
+            AudioInputStream stream = AudioSystem.getAudioInputStream(sound);
+            AudioFormat format = stream.getFormat();
+            DataLine.Info info = new DataLine.Info(Clip.class, format);
+            clip = (Clip) AudioSystem.getLine(info);
+        } catch (Exception e) {
+
         }
 
         switch (name) {
@@ -85,6 +100,12 @@ public abstract class Block extends Item {
      */
     public void setDisplayed(boolean displayed) {
         this.displayed = displayed;
+        try {
+            clip.open(); // reserviert Ressourcen
+            clip.start(); //Clip wird abgespielt
+        } catch (Exception e){
+
+        }
     }
 
     /**
