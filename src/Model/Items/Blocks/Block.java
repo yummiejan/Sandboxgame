@@ -88,6 +88,7 @@ public abstract class Block extends Item {
 
     }
 
+
     /**
      * Checks if the current block is solid or not.
      * @return state of the block
