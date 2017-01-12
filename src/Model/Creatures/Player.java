@@ -14,7 +14,6 @@ import java.awt.event.MouseEvent;;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Timer;
 
 /**
  * Created by Fyn on 09.12.2016.
@@ -23,16 +22,12 @@ public class Player extends Creature implements InteractableObject {
 
     private WorldHandler wh;
     private InventoryHandler ih;
-    private Hotbar hb;
-
     private int posX, posY, wantedX;
     private double velY,gravity;
     private boolean onGround;
-
     private int direction = 0;
-    private boolean up = false;
+    private boolean up;
     private boolean moveBlocked;
-
     private BufferedImage playerStanding,playerRight,playerLeft;
     private Image currentImage;
 

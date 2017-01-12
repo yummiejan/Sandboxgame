@@ -10,7 +10,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by Felix on 12.12.2016.
@@ -24,7 +23,7 @@ public class Hotbar implements InteractableObject {
     private Image image, coal, dirt, stick, pickaxe, wood, stone, woodpickaxe;
     private int posX, posY, chosenX;
     private Stack<String> place[];
-    private boolean displayed;
+    private boolean displayed = true;
 
     public Hotbar(int posX, int posY) {
         this.posX = posX;

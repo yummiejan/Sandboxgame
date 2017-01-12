@@ -11,7 +11,6 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by Felix on 12.12.2016.
@@ -189,7 +188,6 @@ public class Inventory implements InteractableObject {
     public boolean isDisplayed() {
         return displayed;
     }
-
 
     /**
      * @param a

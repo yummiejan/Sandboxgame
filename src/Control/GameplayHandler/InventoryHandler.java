@@ -30,7 +30,6 @@ public class InventoryHandler implements InteractableObject{
         this.frame = frame;
         firstInventory = new Inventory(0, 0);
         frame.getActiveDrawingPanel().addObject(firstInventory);
-        firstInventory.setDisplayed(false);
         firstHotbar = new Hotbar(frame.getActiveDrawingPanel().getWidth() / 2, 0);
         frame.getActiveDrawingPanel().addObject(firstHotbar);
         firstCTI = new CraftingTableInventory(frame.getActiveDrawingPanel().getWidth()-315, 0);

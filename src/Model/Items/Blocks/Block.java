@@ -1,6 +1,5 @@
 package Model.Items.Blocks;
 
-import Model.DrawableObject;
 import Model.Items.Item;
 import View.DrawingPanel;
 
@@ -38,7 +37,6 @@ public abstract class Block extends Item {
             brushes = ImageIO.read(new File("images/brushes.png"));
             dirt = ImageIO.read(new File("images/dirt.png"));
             sound = new File("sounds/stone.wav");
-
         } catch (Exception e) {
 
         }
