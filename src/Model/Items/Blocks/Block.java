@@ -14,7 +14,7 @@ import java.io.*;
  */
 public abstract class Block extends Item {
 
-    private Image image, coal, grass, stone, wood, brushes, dirt;
+    private Image image, coal, grass, stone, wood, brushes, dirt, craftingtable;
     private File sound;
     private Clip clip;
     private double posX, posY;
@@ -37,6 +37,7 @@ public abstract class Block extends Item {
             brushes = ImageIO.read(new File("images/brushes.png"));
             dirt = ImageIO.read(new File("images/dirt.png"));
             sound = new File("sounds/stone.wav");
+            craftingtable = ImageIO.read(new File("images/craftingtable.png"));
         } catch (Exception e) {
 
         }
@@ -69,6 +70,9 @@ public abstract class Block extends Item {
             case "Dirt":
                 image = dirt;
                 break;
+            case "Craftingtable":
+                image = craftingtable;
+                break;
         }
     }
 
@@ -83,6 +87,7 @@ public abstract class Block extends Item {
     public void update(double dt) {
 
     }
+
 
     /**
      * Checks if the current block is solid or not.
