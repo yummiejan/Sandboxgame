@@ -24,6 +24,7 @@ public class Hotbar implements InteractableObject {
     private int posX, posY, chosenX;
     private Stack<String> place[];
     private boolean displayed = true;
+    private boolean escape;
 
     public Hotbar(int posX, int posY) {
         this.posX = posX;
@@ -53,7 +54,7 @@ public class Hotbar implements InteractableObject {
         /**
          * Steuerung des roten Rechtecks mit Tasten
          */
-        if(displayed){
+        if (displayed && !escape) {
             switch (key) {
                 case KeyEvent.VK_1:
                     chosenX = 450;
@@ -177,5 +178,9 @@ public class Hotbar implements InteractableObject {
      */
     public int getChosenX() {
         return chosenX;
+    }
+
+    public void setEscape(boolean escape) {
+        this.escape = escape;
     }
 }

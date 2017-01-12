@@ -26,6 +26,7 @@ public class FurnaceHandler implements InteractableObject {
     private int objectCounter, fuelCounter, productCounter;
     private Furnace furnace;
     private boolean guiDisplayed;
+    private boolean escape;
     private Image furnaceGui;
     private int currentPlace = 1;
     private Rectangle2D.Double currentRectangle;
@@ -73,9 +74,9 @@ public class FurnaceHandler implements InteractableObject {
             /**
              * Der Ladebalken, der die aktuelle Produktion wiedergibt.
              */
-            loadingBalken.setFrame(700, 85, l, 10);
             g2d.draw(loadingBalken);
             g2d.fill(loadingBalken);
+            loadingBalken.setFrame(700, 85, l, 10);
             /**
              * Das vorderste bzw. oberste Objekt wird gemalt.
              */
@@ -175,21 +176,23 @@ public class FurnaceHandler implements InteractableObject {
 
     @Override
     public void keyReleased(int key) {
-        /**
-         * Die Auswahl wird hier gesteuert.
-         */
-        if(guiDisplayed){
-            if(key == KeyEvent.VK_8) {
-                currentPlace = 1;
-                x = 699;
-            }
-            if(key == KeyEvent.VK_9) {
-                currentPlace = 2;
-                x = 868;
-            }
-            if(key == KeyEvent.VK_0) {
-                currentPlace = 3;
-                x = 1037;
+        if(!escape) {
+            /**
+             * Die Auswahl wird hier gesteuert.
+             */
+            if (guiDisplayed) {
+                if (key == KeyEvent.VK_8) {
+                    currentPlace = 1;
+                    x = 699;
+                }
+                if (key == KeyEvent.VK_9) {
+                    currentPlace = 2;
+                    x = 868;
+                }
+                if (key == KeyEvent.VK_0) {
+                    currentPlace = 3;
+                    x = 1037;
+                }
             }
         }
     }
@@ -306,5 +309,9 @@ public class FurnaceHandler implements InteractableObject {
 
     public int getCurrentPlace() {
         return currentPlace;
+    }
+
+    public void setEscape(boolean escape) {
+        this.escape = escape;
     }
 }

@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
 
@@ -28,6 +29,8 @@ public class WorldHandler implements InteractableObject{
     private Player player;
     private Furnace furnace;
     private FurnaceHandler furnaceHandler;
+    private boolean escape;
+    private Rectangle2D.Double escapeRectangle;
 
     public WorldHandler(MainFrame frame){
         this.frame = frame;
@@ -38,6 +41,7 @@ public class WorldHandler implements InteractableObject{
             invBackground = ImageIO.read(new File("images/background.png"));
         } catch (IOException e) {}
         currentBackground = background;
+        escapeRectangle = new Rectangle2D.Double(-10, -10, 1200, 700);
 
         allBlocks = new Block[23][13];
         for (int i = 0; i < allBlocks.length; i++) {
@@ -138,6 +142,23 @@ public class WorldHandler implements InteractableObject{
                 }
             }
         }
+        if(key == KeyEvent.VK_ESCAPE) {
+            if(!escape) {
+                escape = true;
+                player.setMoveBlocked(true);
+                furnaceHandler.setEscape(true);
+                invHandler.setEscape(true);
+                invHandler.getFirstHotbar().setEscape(true);
+                invHandler.getFirstIventory().setEscape(true);
+            } else {
+                escape = false;
+                player.setMoveBlocked(false);
+                furnaceHandler.setEscape(false);
+                invHandler.setEscape(false);
+                invHandler.getFirstHotbar().setEscape(false);
+                invHandler.getFirstIventory().setEscape(false);
+            }
+        }
     }
 
     @Override
@@ -147,7 +168,12 @@ public class WorldHandler implements InteractableObject{
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-        g2d.drawImage(currentBackground,-15,0,null);
+        g2d.drawImage(currentBackground, -15, 0, null);
+        if (escape) {
+            g2d.setColor(new Color(0, 0, 0, 200));
+            g2d.draw(escapeRectangle);
+            g2d.fill(escapeRectangle);
+        }
     }
 
     @Override

@@ -28,6 +28,7 @@ public class Inventory implements InteractableObject {
     private Stack<String> armorPlace[];
     private double posX, posY, chosenX, chosenY;
     private boolean displayed;
+    private boolean escape;
 
     public Inventory(double posX, double posY) {
         this.posX = posX;
@@ -61,15 +62,15 @@ public class Inventory implements InteractableObject {
         /**
          * Steuerung des roten Rechtecks innerhalb des Inventars mit den Pfeiltasten
          */
-        if(displayed){
+        if (displayed && !escape) {
             if (key == KeyEvent.VK_RIGHT && chosenX < (itemPlace.length - 1) * 35) {
                 chosenX += 35;
-            }else if (key == KeyEvent.VK_LEFT && chosenX > 0) {
+            } else if (key == KeyEvent.VK_LEFT && chosenX > 0) {
                 chosenX -= 35;
-            }else if (key == KeyEvent.VK_UP && chosenY > 0) {
+            } else if (key == KeyEvent.VK_UP && chosenY > 0) {
                 chosenY -= 35;
-            }else if (key == KeyEvent.VK_DOWN && chosenY < (itemPlace[0].length - 1) * 35) {
-                chosenY +=  35;
+            } else if (key == KeyEvent.VK_DOWN && chosenY < (itemPlace[0].length - 1) * 35) {
+                chosenY += 35;
             }
         }
     }
@@ -239,5 +240,9 @@ public class Inventory implements InteractableObject {
      */
     public double getChosenY() {
         return chosenY;
+    }
+
+    public void setEscape(boolean escape) {
+        this.escape = escape;
     }
 }
