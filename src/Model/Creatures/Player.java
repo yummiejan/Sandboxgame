@@ -2,7 +2,6 @@ package Model.Creatures;
 
 import Control.GameplayHandler.InventoryHandler;
 import Control.GameplayHandler.WorldHandler;
-import Model.Gameplay.Inventory.Hotbar;
 import Model.Items.Blocks.*;
 import Model.InteractableObject;
 import View.DrawingPanel;
@@ -25,10 +24,10 @@ public class Player extends Creature implements InteractableObject {
     private int posX, posY, wantedX;
     private double velY,gravity;
     private boolean onGround;
-    private int direction = 0;
+    private int direction;
     private boolean up;
     private boolean moveBlocked;
-    private BufferedImage playerStanding,playerRight,playerLeft;
+    private BufferedImage playerStanding, playerRight, playerLeft;
     private Image currentImage;
 
     public Player(int posX, int posY, WorldHandler wh, InventoryHandler ih) {
@@ -36,17 +35,14 @@ public class Player extends Creature implements InteractableObject {
         this.posY = posY;
         this.wh = wh;
         this.ih = ih;
-
         gravity = 200;
         wantedX = posX;
-
         try {
             playerStanding = ImageIO.read(new File("images/character_front.png"));
             playerRight = ImageIO.read(new File("images/character_right.png"));
             playerLeft = ImageIO.read(new File("images/character_left.png"));
         } catch (IOException e) {
         }
-
         currentImage = playerStanding;
     }
 
@@ -96,6 +92,7 @@ public class Player extends Creature implements InteractableObject {
                     }
                     break;
                 case KeyEvent.VK_R:
+                    //TODO Bauen ermöglichen und Bugs fixen
                     if(ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Dirt") {
                         place(new Dirt((posX / 50) + 1, (posY / 50) + 1));
                     }else if(ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Coal") {
@@ -132,7 +129,6 @@ public class Player extends Creature implements InteractableObject {
     @Override
     public void mouseReleased(MouseEvent e) {
 
-
     }
 
     @Override
@@ -148,7 +144,6 @@ public class Player extends Creature implements InteractableObject {
             velY = 0.0;
             onGround = true;
         }
-
         if(wantedX < posX){
             posX -= 5;
         }else if(wantedX > posX){
@@ -209,33 +204,33 @@ public class Player extends Creature implements InteractableObject {
     public Block getBlock(){
         Block b;
         if (direction == 0 && !up){
-            b = wh.getAllBlocks(posX/50+1, posY/50+1);
+            b = wh.getAllBlocks(posX / 50 + 1, posY / 50 + 1);
         }else if (direction == 1 && !up){
-            b = wh.getAllBlocks(posX/50-1, posY/50+1);
+            b = wh.getAllBlocks(posX / 50 - 1, posY / 50 + 1);
         }else if (direction == 2){
-            b = wh.getAllBlocks(posX/50, posY/50-1);
+            b = wh.getAllBlocks(posX / 50, posY / 50 - 1);
         }else if (direction == 3){
-            b = wh.getAllBlocks(posX/50, posY/50+2);
+            b = wh.getAllBlocks(posX / 50, posY / 50 + 2);
         }else if (direction == 0){
-            b = wh.getAllBlocks(posX/50+1, posY/50);
+            b = wh.getAllBlocks(posX / 50 + 1, posY / 50);
         }else if (direction == 1){
-            b = wh.getAllBlocks(posX/50-1, posY/50);
+            b = wh.getAllBlocks(posX / 50 - 1, posY / 50);
         }else b = null;
         return b;
     }
 
     /**
      * Zerstört den Block in der Blickrichtung.
-     * @return Zerstörter Block
+     * @return zerstörter Block
      */
-    public Block destroy(){
+    private Block destroy(){
         Block b = null;
         switch (direction){
             case 0:
                 if (up){
                     if(isBlock(4)){
                         b = wh.getAllBlocks((posX / 50) + 1, posY / 50);
-                        if(b.getName() == "Stone" || b.getName() == "Coal"){
+                        if(b.getName().equals("Stone") || b.getName().equals("Coal")){
                             if(ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe"){
                                 wh.getAllBlocks((posX / 50) + 1, posY / 50).setDisplayed(false);
                                 wh.setAllBlocks((posX / 50) + 1, posY / 50, null);
@@ -244,7 +239,7 @@ public class Player extends Creature implements InteractableObject {
                         }else {
                             wh.getAllBlocks((posX / 50) + 1, posY / 50).setDisplayed(false);
                             wh.setAllBlocks((posX / 50) + 1, posY / 50, null);
-                            if(b.getName() == "Grass") {
+                            if(b.getName().equals("Grass")) {
                                 ih.addNewItem("Dirt");
                             }else{
                                 ih.addNewItem(b.getName());
@@ -254,7 +249,7 @@ public class Player extends Creature implements InteractableObject {
                 }else{
                     if (isBlock(0)){
                         b = wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1);
-                        if(b.getName() == "Stone" || b.getName() == "Coal") {
+                        if(b.getName().equals("Stone") || b.getName().equals("Coal")) {
                             if (ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe") {
                                 wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1).setDisplayed(false);
                                 wh.setAllBlocks((posX / 50) + 1, posY / 50 + 1, null);
@@ -263,7 +258,7 @@ public class Player extends Creature implements InteractableObject {
                         }else{
                             wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1).setDisplayed(false);
                             wh.setAllBlocks((posX / 50) + 1, posY / 50 + 1, null);
-                            if(b.getName() == "Grass") {
+                            if(b.getName().equals("Grass")) {
                                 ih.addNewItem("Dirt");
                             }else{
                                 ih.addNewItem(b.getName());
@@ -276,7 +271,7 @@ public class Player extends Creature implements InteractableObject {
                 if(up){
                     if(isBlock(5)){
                         b = wh.getAllBlocks((posX / 50) - 1, posY / 50);
-                        if(b.getName() == "Stone" || b.getName() == "Coal") {
+                        if(b.getName().equals("Stone") || b.getName().equals("Coal")) {
                             if (ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe") {
                                 wh.getAllBlocks((posX / 50) - 1, posY / 50).setDisplayed(false);
                                 wh.setAllBlocks((posX / 50) - 1, posY / 50, null);
@@ -285,7 +280,7 @@ public class Player extends Creature implements InteractableObject {
                         }else{
                             wh.getAllBlocks((posX / 50) - 1, posY / 50).setDisplayed(false);
                             wh.setAllBlocks((posX / 50) - 1, posY / 50, null);
-                            if(b.getName() == "Grass") {
+                            if(b.getName().equals("Grass")) {
                                 ih.addNewItem("Dirt");
                             }else{
                                 ih.addNewItem(b.getName());
@@ -295,7 +290,7 @@ public class Player extends Creature implements InteractableObject {
                 }else{
                     if(isBlock(1)) {
                         b = wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1);
-                        if(b.getName() == "Stone" || b.getName() == "Coal") {
+                        if(b.getName().equals("Stone") || b.getName().equals("Coal")) {
                             if (ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe") {
                                 wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1).setDisplayed(false);
                                 wh.setAllBlocks((posX / 50) - 1, posY / 50 + 1, null);
@@ -304,7 +299,7 @@ public class Player extends Creature implements InteractableObject {
                         }else{
                             wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1).setDisplayed(false);
                             wh.setAllBlocks((posX / 50) - 1, posY / 50 + 1, null);
-                            if(b.getName() == "Grass") {
+                            if(b.getName().equals("Grass")) {
                                 ih.addNewItem("Dirt");
                             }else{
                                 ih.addNewItem(b.getName());
@@ -314,9 +309,9 @@ public class Player extends Creature implements InteractableObject {
                 }
                 break;
             case 2:
-                if(isBlock(2)&&(wh.xBlockLevel(posX/50)<12)){
+                if(isBlock(2) && (wh.xBlockLevel(posX / 50) < 12)){
                     b = wh.getAllBlocks((posX / 50), posY / 50 - 1);
-                    if(b.getName() == "Stone" || b.getName() == "Coal") {
+                    if(b.getName().equals("Stone") || b.getName().equals("Coal")) {
                         if (ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe") {
                             wh.getAllBlocks((posX / 50), posY / 50 - 1).setDisplayed(false);
                             wh.setAllBlocks((posX / 50), posY / 50 - 1, null);
@@ -325,7 +320,7 @@ public class Player extends Creature implements InteractableObject {
                     }else{
                         wh.getAllBlocks((posX / 50), posY / 50 - 1).setDisplayed(false);
                         wh.setAllBlocks((posX / 50), posY / 50 - 1, null);
-                        if(b.getName() == "Grass") {
+                        if(b.getName().equals("Grass")) {
                             ih.addNewItem("Dirt");
                         }else{
                             ih.addNewItem(b.getName());
@@ -334,9 +329,9 @@ public class Player extends Creature implements InteractableObject {
                 }
                 break;
             case 3:
-                if(isBlock(3)&&(wh.xBlockLevel(posX/50)<12)){
+                if(isBlock(3) && (wh.xBlockLevel(posX / 50) < 12)){
                     b = wh.getAllBlocks((posX / 50), posY / 50 + 2);
-                    if(b.getName() == "Stone" || b.getName() == "Coal") {
+                    if(b.getName().equals("Stone") || b.getName().equals("Coal")) {
                         if (ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe") {
                             wh.getAllBlocks((posX / 50), posY / 50 + 2).setDisplayed(false);
                             wh.setAllBlocks((posX / 50), posY / 50 + 2, null);
@@ -345,7 +340,7 @@ public class Player extends Creature implements InteractableObject {
                     }else{
                         wh.getAllBlocks((posX / 50), posY / 50 + 2).setDisplayed(false);
                         wh.setAllBlocks((posX / 50), posY / 50 + 2, null);
-                        if(b.getName() == "Grass") {
+                        if(b.getName().equals("Grass")) {
                             ih.addNewItem("Dirt");
                         }else{
                             ih.addNewItem(b.getName());
@@ -355,28 +350,26 @@ public class Player extends Creature implements InteractableObject {
                 break;
         }
         return b;
-
     }
 
     /**
      * Plaziert einen Block
      * @param b Block der plaziert werden soll
      */
-    public void place(Block b){
-        if(direction==0){
-            wh.setAllBlocks((posX/50)+1,posY/50+1,b);
-            wh.getFrame().getActiveDrawingPanel().addObject(wh.getAllBlocks((posX/50)+1,(posY/50)+1));
-            ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).pop();
+    private void place(Block b){
+        if(direction == 0){
+            wh.setAllBlocks(posX / 50 + 1, posY / 50 + 1, b);
+            wh.getFrame().getActiveDrawingPanel().addObject(wh.getAllBlocks((posX / 50) + 1, (posY / 50) + 1));
+            ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).pop();
         }
-
     }
 
     /**
      * Startet einen Sprung
      */
-    public void startJump(){
+    private void startJump(){
         if(onGround){
-            velY=-200.0;
+            velY = -200.0;
             onGround = false;
         }
     }
@@ -384,19 +377,22 @@ public class Player extends Creature implements InteractableObject {
     /**
      * Endet den Sprung wenn eine bestimmte Velocity erreicht wird.
      */
-    public void endJump(){
+    private void endJump(){
         if(velY < -100.0)
             velY = -100.0;
     }
 
     /**
-     *
+     * Wenn moveBlocked false ist, kann man sich nicht bewegen.
      * @param moveBlocked
      */
     public void setMoveBlocked(boolean moveBlocked) {
         this.moveBlocked = moveBlocked;
     }
 
+    /**
+     * @return die y-Position.
+     */
     public int getPosY() {
         return posY;
     }

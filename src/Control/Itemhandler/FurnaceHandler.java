@@ -1,10 +1,8 @@
 package Control.Itemhandler;
 
-import Control.GameplayHandler.WorldHandler;
 import Model.DataStructures.Queue;
 import Model.DataStructures.Stack;
 import Model.InteractableObject;
-import Model.Items.Item;
 import Model.Items.Blocks.Furnace;
 import View.DrawingPanel;
 import View.MainFrame;
@@ -16,13 +14,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
 
 /**
  * Created by Alex on 15.12.2016.
  */
 public class FurnaceHandler implements InteractableObject {
 
+    private MainFrame frame;
     private Queue objectQueue, fuelQueue;
     private Stack productStack;
     private int objectCounter, fuelCounter, productCounter;
@@ -35,23 +33,29 @@ public class FurnaceHandler implements InteractableObject {
     private int x = 699; //49, 49+52+117, 49+52+117+52+117 verrechnet :(
     private int y = 107; //107,
     private int l, i;
-    private Image image;
-    private Image image2;
-    private Image image3;
+    private Image image, image2, image3, dirt, wood, stone, coal, stick;
 
     public FurnaceHandler(MainFrame frame, Furnace furnace) {
+        this.frame = frame;
         currentRectangle = new Rectangle2D.Double(x,y,52,52);
         loadingBalken = new Rectangle2D.Double(700,85,l,10);
         objectQueue = new Queue<String>();
         fuelQueue = new Queue<String>();
         productStack = new Stack<String>();
         this.furnace = furnace;
+        try {
+            stone = ImageIO.read(new File("images/stone_inv.png"));
+            coal = ImageIO.read(new File("images/coal_inv.png"));
+            dirt = ImageIO.read(new File("images/dirt_inv.png"));
+            stick = ImageIO.read(new File("images/stick_inv.png"));
+            wood = ImageIO.read(new File("images/wood_inv.png"));
+        } catch (Exception e) {
+        }
     }
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
         if (guiDisplayed){
-
             /**
              * Bild des GUIs wird geladen und gemalt.
              */
@@ -59,99 +63,65 @@ public class FurnaceHandler implements InteractableObject {
                 furnaceGui = ImageIO.read(new File("images/Furnace_GUI.png"));
             } catch (IOException e) {
             }
-
-            g2d.drawImage(furnaceGui,650,0,null);
+            g2d.drawImage(furnaceGui, 650, 0, null);
             g2d.setColor(Color.red);
-
             /**
              * Zeigt die aktuelle Auswahl an.
              */
             g2d.draw(currentRectangle);
             currentRectangle.setFrame(x, y, 52, 52);
-
             /**
              * Der Ladebalken, der die aktuelle Produktion wiedergibt.
              */
-            loadingBalken.setFrame(700,85,l,10);
+            loadingBalken.setFrame(700, 85, l, 10);
             g2d.draw(loadingBalken);
             g2d.fill(loadingBalken);
-
             /**
              * Das vorderste bzw. oberste Objekt wird gemalt.
              */
             if(!objectQueue.isEmpty()){
-                System.out.println((objectQueue.front()+"asdf"));
+                System.out.println((objectQueue.front()));
                 if (objectQueue.front().equals("Dirt")) {
-                    try {
-                        image = ImageIO.read(new File("images/dirt_inv.png"));
-                    } catch (IOException e) {
-                    }
+                    image = dirt;
                 }else if(objectQueue.front().equals("Wood")) {
-                    try {
-                        image = ImageIO.read(new File("images/wood_inv.png"));
-                    } catch (IOException e) {
-                    }
+                    image = wood;
                 } else if(objectQueue.front().equals("Stone")) {
-                    try {
-                        image = ImageIO.read(new File("images/stone_inv.png"));
-                    } catch (IOException e) {
-                    }
+                    image = stone;
                 }
                 g2d.drawImage(image, 714, 122, null);
-                g2d.setColor(new Color(0, 0, 0));
+                g2d.setColor(Color.BLACK);
                 if (objectCounter <= 9) {
                     g2d.drawString("" + objectCounter, 714 + 28, 122 + 32);
                 } else {
                     g2d.drawString("" + objectCounter, 714 + 23, 122 + 32);
                 }
-
             }
-
             if(!fuelQueue.isEmpty()) {
                 if (fuelQueue.front().equals("Coal")) {
-                    try {
-                        image2 = ImageIO.read(new File("images/coal_inv.png"));
-                    } catch (IOException e) {
-                    }
+                    image2 = coal;
                 }else if(fuelQueue.front().equals("Wood")) {
-                    try {
-                        image2 = ImageIO.read(new File("images/wood_inv.png"));
-                    } catch (IOException e) {
-                    }
+                    image2 = wood;
                 } else if(fuelQueue.front().equals("Stick")) {
-                    try {
-                        image2 = ImageIO.read(new File("images/stick_inv.png"));
-                    } catch (IOException e) {
-                    }
+                    image2 = stick;
                 }
                 g2d.drawImage(image2, 883, 122, null);
-                g2d.setColor(new Color(0, 0, 0));
+                g2d.setColor(Color.BLACK);
                 if (fuelCounter <= 9) {
                     g2d.drawString("" + fuelCounter, 883 + 28, 122 + 32);
                 } else {
                     g2d.drawString("" + fuelCounter, 883 + 23, 122 + 32);
                 }
             }
-
             if(!productStack.isEmpty()) {
                 if (productStack.top().equals("Dirt")) {
-                    try {
-                        image3 = ImageIO.read(new File("images/dirt_inv.png"));
-                    } catch (IOException e) {
-                    }
+                    image3 = dirt;
                 }else if(productStack.top().equals("Coal")) {
-                    try {
-                        image3 = ImageIO.read(new File("images/coal_inv.png"));
-                    } catch (IOException e) {
-                    }
+                    image3 = coal;
                 } else if(productStack.top().equals("Stone")) {
-                    try {
-                        image3 = ImageIO.read(new File("images/stone_inv.png"));
-                    } catch (IOException e) {
-                    }
+                    image3 = stone;
                 }
                 g2d.drawImage(image3, 1052, 122, null);
-                g2d.setColor(new Color(0, 0, 0));
+                g2d.setColor(Color.BLACK);
                 if (productCounter <= 9) {
                     g2d.drawString("" + productCounter, 1052 + 28, 122 + 32);
                 } else {
@@ -311,8 +281,7 @@ public class FurnaceHandler implements InteractableObject {
     }
 
     /**
-     * Drei Getter für die
-     * @return
+     * Getter und Setter für Stacks bzw. Queues, die Anzeige und den aktuellen Slot
      */
 
     public String getFrontOQ() {
@@ -331,7 +300,9 @@ public class FurnaceHandler implements InteractableObject {
         this.guiDisplayed = guiDisplayed;
     }
 
-    public boolean getGuiDisplayed() { return guiDisplayed; }
+    public boolean getGuiDisplayed() {
+        return guiDisplayed;
+    }
 
     public int getCurrentPlace() {
         return currentPlace;

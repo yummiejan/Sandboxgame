@@ -24,7 +24,7 @@ public class WorldHandler implements InteractableObject{
     private Block allBlocks[][];
     private MainFrame frame;
     private InventoryHandler invHandler;
-    private Image currentBackground,background,invBackground;
+    private Image currentBackground, background, invBackground;
     private Player player;
     private Furnace furnace;
     private FurnaceHandler furnaceHandler;
@@ -37,9 +37,7 @@ public class WorldHandler implements InteractableObject{
             //background = ImageIO.read(new File("images/background.png"));
             invBackground = ImageIO.read(new File("images/background.png"));
         } catch (IOException e) {}
-
         currentBackground = background;
-
 
         allBlocks = new Block[23][13];
         for (int i = 0; i < allBlocks.length; i++) {
@@ -47,12 +45,12 @@ public class WorldHandler implements InteractableObject{
             int grassChance = (int)(Math.random());
             for (int j = 0; j < allBlocks[i].length; j++) {
                 if(counter == j){
-                    allBlocks[i][j] = new Grass(i * 50, j*50);
+                    allBlocks[i][j] = new Grass(i * 50, j * 50);
                     frame.getActiveDrawingPanel().addObject(allBlocks[i][j]);
                 }
                 //TODO Random Chance für grass spawnen & Grass muss mit entfernt werden, wenn dadrunter der Block abgebaut wird
-                if(counter == (j-1) /*&& grassChance == 0*/){
-                    allBlocks[i][j] = new Brushes(i * 50, (j-2)*50);
+                if(counter == (j - 1) /*&& grassChance == 0*/){
+                    allBlocks[i][j] = new Brushes(i * 50, (j - 2) * 50);
                     frame.getActiveDrawingPanel().addObject(allBlocks[i][j]);
                     //grassChance = (int)(Math.random());
                 }else{
@@ -72,15 +70,15 @@ public class WorldHandler implements InteractableObject{
             }
 
         }
-        furnace = new Furnace(0, (xBlockLevel(0)-1)*50);
-        allBlocks[0][xBlockLevel(0)-1] = furnace;
+        furnace = new Furnace(0, (xBlockLevel(0) - 1) * 50);
+        allBlocks[0][xBlockLevel(0) - 1] = furnace;
         frame.getActiveDrawingPanel().addObject(allBlocks[0][xBlockLevel(0)]);
         furnaceHandler = new FurnaceHandler(frame, furnace);
         frame.getActiveDrawingPanel().addObject(furnaceHandler);
-        allBlocks[22][xBlockLevel(0)-1] = new CraftingTable(frame.getWidth()-65, (xBlockLevel(22)-1)*50);
-        frame.getActiveDrawingPanel().addObject(allBlocks[22][xBlockLevel(0)-1]);
-        int x = (int)(Math.random()*19+2);
-        player = new Player(x*50,(xBlockLevel(x)-2)*50,this,invHandler);
+        allBlocks[22][xBlockLevel(0)-1] = new CraftingTable(frame.getWidth() - 65, (xBlockLevel(22) - 1) * 50);
+        frame.getActiveDrawingPanel().addObject(allBlocks[22][xBlockLevel(0) - 1]);
+        int x = (int)(Math.random() * 19 + 2);
+        player = new Player(x*50,(xBlockLevel(x) - 2) * 50, this, invHandler);
         frame.getActiveDrawingPanel().addObject(player);
     }
 
@@ -89,7 +87,6 @@ public class WorldHandler implements InteractableObject{
      * @param x Die zu analysierende Stelle.
      * @return Anzahl der sich auf einer x-Koordinate befindende Blöcke.
      */
-
     public int xBlockLevel(int x){
         int n = 0;
         for(int i = 0; i < allBlocks[x].length; i++){
@@ -159,7 +156,7 @@ public class WorldHandler implements InteractableObject{
     }
 
     /**
-     *
+     * Vermeidet, dass eine Fehlermeldung kommt, sobald man am Rand ist.
      * @param a
      * @param b
      * @return
@@ -174,7 +171,7 @@ public class WorldHandler implements InteractableObject{
     }
 
     /**
-     *
+     * Setzt an der gewünschten Stelle den gewünschten Block.
      * @param a
      * @param b
      * @param block
@@ -188,6 +185,9 @@ public class WorldHandler implements InteractableObject{
         return frame;
     }
 
+    /**
+     * @return ob Inventar und Ofen offen sind.
+     */
     private boolean invAndFurnaceOpened() {
         if(furnaceHandler.getGuiDisplayed() && invHandler.firstInvDisplayed()) {
             return true;

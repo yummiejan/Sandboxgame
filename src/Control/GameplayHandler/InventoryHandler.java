@@ -1,14 +1,10 @@
 package Control.GameplayHandler;
 
-import Model.Creatures.Player;
 import Model.DataStructures.Stack;
 import Model.Gameplay.Inventory.CraftingTableInventory;
 import Model.Gameplay.Inventory.Hotbar;
 import Model.InteractableObject;
 import Model.Gameplay.Inventory.Inventory;
-import Model.Items.Blocks.Block;
-import Model.Items.Blocks.CraftingTable;
-import Model.Items.Blocks.Furnace;
 import View.DrawingPanel;
 import View.MainFrame;
 
@@ -32,14 +28,14 @@ public class InventoryHandler implements InteractableObject{
         frame.getActiveDrawingPanel().addObject(firstInventory);
         firstHotbar = new Hotbar(frame.getActiveDrawingPanel().getWidth() / 2, 0);
         frame.getActiveDrawingPanel().addObject(firstHotbar);
-        firstCTI = new CraftingTableInventory(frame.getActiveDrawingPanel().getWidth()-315, 0);
+        firstCTI = new CraftingTableInventory(frame.getActiveDrawingPanel().getWidth() - 315, 0);
         frame.getActiveDrawingPanel().addObject(firstCTI);
         for (int i = 0; i < 64; i++) {
             addNewItem("Wood");
         }
-
-
-
+        for (int i = 0; i < 64; i++) {
+            addNewItem("Dirt");
+        }
     }
 
     @Override
@@ -53,14 +49,14 @@ public class InventoryHandler implements InteractableObject{
          * Das gecraftete Item wird dem Inventar hinzugefügt
          */
         if( key == KeyEvent.VK_ENTER){
-            if(firstCTI.crafted() == "Stick"){
+            if(firstCTI.crafted().equals("Stick")){
                 for (int i = 0; i < 4; i++) {
                     addNewItem(firstCTI.crafted());
                 }
-            }else if(firstCTI.crafted() != "Nichts"){
+            }else if(!firstCTI.crafted().equals("Nichts")){
                 addNewItem(firstCTI.crafted());
             }
-            if(firstCTI.crafted() != "Nichts") {
+            if(!firstCTI.crafted().equals("Nichts")) {
                 firstCTI.getCraftingPlace(0, 0).pop();
                 firstCTI.getCraftingPlace(0, 1).pop();
                 firstCTI.getCraftingPlace(0, 2).pop();
@@ -71,11 +67,11 @@ public class InventoryHandler implements InteractableObject{
                 firstCTI.getCraftingPlace(2, 1).pop();
                 firstCTI.getCraftingPlace(2, 2).pop();
             }else{
-                for (int i = 0; i < firstCTI.getCraftingPlaceLength() ; i++) {
+                for (int i = 0; i < firstCTI.getCraftingPlaceLength(); i++) {
                     for (int j = 0; j < firstCTI.aGetCraftingPlaceLength(i); j++) {
-                        if(!firstCTI.getCraftingPlace(i,j).isEmpty()){
-                            addNewItem(firstCTI.getCraftingPlace(i,j).top().toString());
-                            firstCTI.getCraftingPlace(i,j).pop();
+                        if(!firstCTI.getCraftingPlace(i, j).isEmpty()){
+                            addNewItem(firstCTI.getCraftingPlace(i, j).top().toString());
+                            firstCTI.getCraftingPlace(i, j).pop();
                         }
                     }
                 }
@@ -242,7 +238,6 @@ public class InventoryHandler implements InteractableObject{
                         help.pop();
                     }
                 }
-
             }
         }else{
             /**
@@ -349,13 +344,6 @@ public class InventoryHandler implements InteractableObject{
             System.out.println("Hotbar:" + firstHotbar.getPlace(3).top());
             System.out.println("Hotbar:" + firstHotbar.getPlace(4).top());
         }
-
-
-
-
-
-
-
     }
 
     @Override
@@ -365,10 +353,10 @@ public class InventoryHandler implements InteractableObject{
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(e.getX() > firstCTI.CTIgetPosX() + (firstCTI.getCraftingPlaceLength() * 35) + 10 && e.getX() < firstCTI.CTIgetPosX() + (firstCTI.getCraftingPlaceLength() * 35) + 45){
+        if(e.getX() > firstCTI.CTIgetPosX() + (firstCTI.getCraftingPlaceLength() * 35) + 10 && e.getX() < firstCTI.CTIgetPosX() + firstCTI.getCraftingPlaceLength() * 35 + 45){
             if(e.getY() < 35) {
                 firstCTI.getCraftList().toFirst();
-                if(firstCTI.getCraftList().getContent().toString() == "Pickaxe");
+                if(firstCTI.getCraftList().getContent().toString().equals("Pickaxe"));
                 firstCTI.getCraftingPlace(0,0).push("Stone");
                 firstCTI.getCraftingPlace(1,0).push("Stone");
                 firstCTI.getCraftingPlace(2,0).push("Stone");
@@ -435,7 +423,6 @@ public class InventoryHandler implements InteractableObject{
 
     /**
      * Removes given Item from the inventory.
-     *
      * @param itemName Item to be removed from the Inventory.
      */
 
@@ -455,20 +442,31 @@ public class InventoryHandler implements InteractableObject{
         }
     }
 
+    /**
+     * @return ob das Inventar geöffnet ist.
+     */
     public boolean firstInvDisplayed() {
         return firstInventory.isDisplayed();
     }
 
-
+    /**
+     * Entfernt das aktuell ausgewählte Objekt.
+     */
     public void removeCurrentItem() {
         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
     }
 
+    /**
+     * @return das aktuelle Objekt.
+     */
     public String getCurrentItem() {
         String thing = ""+firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top();
         return thing;
     }
 
+    /**
+     * @return die Hotbar.
+     */
     public Hotbar getFirstHotbar() {
         return firstHotbar;
     }
