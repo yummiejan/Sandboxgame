@@ -24,7 +24,7 @@ public class Inventory implements InteractableObject {
     private Rectangle2D.Double chooseRectangle;
     private Rectangle2D.Double woodRectangle;
     private Line2D.Double stickLine;
-    private Image image;
+    private Image image, coal, dirt, stick, pickaxe, wood, stone, woodpickaxe;
     private Stack<String> itemPlace[][];
     private Stack<String> armorPlace[];
     private double posX, posY, chosenX, chosenY;
@@ -39,13 +39,22 @@ public class Inventory implements InteractableObject {
         rectangle = new Rectangle2D.Double(posX, posY, 10, 10);
         rectangle2 = new Rectangle2D.Double(posX, posY, 10, 10);
         chooseRectangle = new Rectangle2D.Double(chosenX, chosenY, 10, 10);
-        stickLine = new Line2D.Double(posX,posY,posX,posY);
-        woodRectangle = new Rectangle2D.Double(posX,posY,10,10);
-
+        stickLine = new Line2D.Double(posX, posY, posX, posY);
+        woodRectangle = new Rectangle2D.Double(posX, posY, 10, 10);
         itemPlace = new Stack[10][4];
         armorPlace = new Stack[4];
-
         addNewStack();
+        try {
+            coal = ImageIO.read(new File("images/coal_inv.png"));
+            stone = ImageIO.read(new File("images/stone_inv.png"));
+            wood = ImageIO.read(new File("images/wood_inv.png"));
+            stick = ImageIO.read(new File("images/stick_inv.png"));
+            dirt = ImageIO.read(new File("images/dirt_inv.png"));
+            pickaxe = ImageIO.read(new File("images/pickaxe_inv.png"));
+            woodpickaxe = ImageIO.read(new File("images/pickaxe_wood_inv.png"));
+        } catch (Exception e) {
+
+        }
     }
 
     @Override
@@ -54,14 +63,14 @@ public class Inventory implements InteractableObject {
          * Steuerung des roten Rechtecks innerhalb des Inventars mit den Pfeiltasten
          */
         if(displayed){
-            if (key == KeyEvent.VK_RIGHT && chosenX < (itemPlace.length-1) * 35) {
-                chosenX = chosenX + 35;
+            if (key == KeyEvent.VK_RIGHT && chosenX < (itemPlace.length - 1) * 35) {
+                chosenX += 35;
             }else if (key == KeyEvent.VK_LEFT && chosenX > 0) {
-                chosenX = chosenX - 35;
+                chosenX -= 35;
             }else if (key == KeyEvent.VK_UP && chosenY > 0) {
-                chosenY = chosenY - 35;
-            }else if (key == KeyEvent.VK_DOWN && chosenY < (itemPlace[0].length-1) * 35) {
-                chosenY = chosenY + 35;
+                chosenY -= 35;
+            }else if (key == KeyEvent.VK_DOWN && chosenY < (itemPlace[0].length - 1) * 35) {
+                chosenY +=  35;
             }
         }
     }
@@ -80,7 +89,7 @@ public class Inventory implements InteractableObject {
     public void draw(DrawingPanel dp, Graphics2D g2d) {
         if(displayed) {
             /**
-             * Zeichnen des Inventars selber
+             * Zeichnen des Inventars
              */
             g2d.setColor(new Color(79, 79, 79, 100));
             g2d.fill(backRectangle);
@@ -98,6 +107,7 @@ public class Inventory implements InteractableObject {
                 rectangle2.setFrame(posX + 35 * itemPlace.length + 20, posY + i * 35, 35, 35);
 
             }
+
             /**
              * Rotes Rechteck zum Auswählen der Items
              */
@@ -110,88 +120,35 @@ public class Inventory implements InteractableObject {
             */
             for (int i = 0; i < itemPlace.length; i++) {
                 for (int j = 0; j < itemPlace[i].length; j++) {
-                    if (itemPlace[i][j].top() == "Coal") {
-                        try {
-                            image = ImageIO.read(new File("images/coal_inv.png"));
-                        } catch (IOException e) {
+                    if(!itemPlace[i][j].isEmpty()) {
+                        switch (itemPlace[i][j].top()) {
+                            case "Coal":
+                                image = coal;
+                                break;
+                            case "Dirt":
+                                image = dirt;
+                                break;
+                            case "Furnace":
+                                break;
+                            case "Stick":
+                                image = stick;
+                                break;
+                            case "Pickaxe":
+                                image = pickaxe;
+                                break;
+                            case "Wood":
+                                image = wood;
+                                break;
+                            case "Stone":
+                                image = stone;
+                                break;
+                            case "Woodpickaxe":
+                                image = woodpickaxe;
+                                break;
                         }
-                        g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
+                        g2d.drawImage(image, (int) (posX + i * 35 + 8.75), (int) (posY + j * 35 + 8.75), null);
                         g2d.setColor(new Color(0, 0, 0));
-                        if(itemPlace[i][j].getSize() < 9) {
-                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
-                        }else{
-                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
-                        }
-                    }else if (itemPlace[i][j].top() == "Dirt") {
-                        try {
-                            image = ImageIO.read(new File("images/dirt_inv.png"));
-                        } catch (IOException e) {
-                        }
-                        g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
-                        g2d.setColor(new Color(0, 0, 0));
-                        if(itemPlace[i][j].getSize() < 9) {
-                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
-                        }else{
-                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
-                        }
-                    }else if (itemPlace[i][j].top() == "Furnace") {
-
-                    }else if(itemPlace[i][j].top() == "Stick"){
-                        try {
-                            image = ImageIO.read(new File("images/stick_inv.png"));
-                        } catch (IOException e) {
-                        }
-                        g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
-                        g2d.setColor(new Color(0, 0, 0));
-                        if(itemPlace[i][j].getSize() < 9) {
-                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
-                        }else{
-                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
-                        }
-                    }else if(itemPlace[i][j].top() == "Pickaxe"){
-                        try {
-                            image = ImageIO.read(new File("images/pickaxe_inv.png"));
-                        } catch (IOException e) {
-                        }
-                        g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
-                        g2d.setColor(new Color(0, 0, 0));
-                        if(itemPlace[i][j].getSize() < 9) {
-                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
-                        }else{
-                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
-                        }
-                    }else if(itemPlace[i][j].top() == "Wood") {
-                        try {
-                            image = ImageIO.read(new File("images/wood_inv.png"));
-                        } catch (IOException e) {
-                        }
-                        g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
-                        g2d.setColor(new Color(0, 0, 0));
-                        if (itemPlace[i][j].getSize() < 9) {
-                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
-                        } else {
-                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
-                        }
-                    } else if(itemPlace[i][j].top() == "Stone") {
-                        try {
-                            image = ImageIO.read(new File("images/stone_inv.png"));
-                        } catch (IOException e) {
-                        }
-                        g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
-                        g2d.setColor(new Color(0, 0, 0));
-                        if (itemPlace[i][j].getSize() < 9) {
-                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
-                        } else {
-                            g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
-                        }
-                    }else if(itemPlace[i][j].top() == "Woodpickaxe"){
-                        try {
-                            image = ImageIO.read(new File("images/pickaxe_wood_inv.png"));
-                        } catch (IOException e) {
-                        }
-                        g2d.drawImage(image,(int)(posX + i * 35 + 8.75), (int)(posY + j * 35 + 8.75),null);
-                        g2d.setColor(new Color(0, 0, 0));
-                        if (itemPlace[i][j].getSize() < 9) {
+                        if (itemPlace[i][j].getSize() <= 9) {
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
                         } else {
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 23, (int) posY + j * 35 + 32);
@@ -210,18 +167,25 @@ public class Inventory implements InteractableObject {
     /**
      * Den Plätzen des Inventars werden jeweils ein String-Stack zugewiesen
      */
-    public void addNewStack(){
+    private void addNewStack(){
         for (int i = 0; i < itemPlace.length ; i++) {
             for (int j = 0; j < itemPlace[i].length; j++) {
-                itemPlace[i][j] = new Stack<String>();
+                itemPlace[i][j] = new Stack<>();
             }
         }
     }
 
+    /**
+     * Legt fest, ob das Inventar angezeigt wird oder nicht.
+     * @param displayed
+     */
     public void setDisplayed(boolean displayed) {
         this.displayed = displayed;
     }
 
+    /**
+     * @return ob das Inventar angezeigt wird.
+     */
     public boolean isDisplayed() {
         return displayed;
     }
@@ -238,40 +202,43 @@ public class Inventory implements InteractableObject {
 
     /**
      * @param a
-     * @return die y-Länge in Array-länge
+     * @return die y-Länge in Array-Länge
      */
     public int getItemPlaceLength(int a) {
         return itemPlace[a].length;
     }
 
+    /**
+     * @return den 2D-Stack-Array
+     */
     public Stack[][] getItemPlace() {
         return itemPlace;
     }
 
-    public void setItemPlace(Stack item, int a, int b) {
-        itemPlace[a][b] = item;
-    }
-
-    public Stack getArmorPlace(int a) {
-        return armorPlace[a];
-    }
-
-    public void setArmorPlace(Stack armor, int a) {
-        armorPlace[a] = armor;
-    }
-
+    /**
+     * @return die x-Position.
+     */
     public double getPosX() {
         return posX;
     }
 
+    /**
+     * @return die y-Position.
+     */
     public double getPosY() {
         return posY;
     }
 
+    /**
+     * @return die x-Position des Auswahlquadrates.
+     */
     public double getChosenX() {
         return chosenX;
     }
 
+    /**
+     * @return die y-Position des Auswahlquadrates.
+     */
     public double getChosenY() {
         return chosenY;
     }

@@ -21,9 +21,9 @@ public class Hotbar implements InteractableObject {
     private Rectangle2D.Double rectangle;
     private Rectangle2D.Double itemRectangle;
     private Rectangle2D.Double chooseRectangle;
-    private Image image;
+    private Image image, coal, dirt, stick, pickaxe, wood, stone, woodpickaxe;
     private int posX, posY, chosenX;
-    private Stack place[];
+    private Stack<String> place[];
     private boolean displayed;
 
     public Hotbar(int posX, int posY) {
@@ -31,11 +31,22 @@ public class Hotbar implements InteractableObject {
         this.posY = posY;
         chosenX = 450;
         place = new Stack[5];
-        rectangle = new Rectangle2D.Double(posX,posY,250,50);
-        backRectangle = new Rectangle2D.Double(posX,posY,250,50);
-        itemRectangle = new Rectangle2D.Double(posX+2.5, posY+2.5, 5, 5);
+        rectangle = new Rectangle2D.Double(posX, posY, 250, 50);
+        backRectangle = new Rectangle2D.Double(posX, posY, 250, 50);
+        itemRectangle = new Rectangle2D.Double(posX + 2.5, posY + 2.5, 5, 5);
         chooseRectangle = new Rectangle2D.Double(chosenX, posY, 10, 10);
         addNewStack();
+        try {
+            coal = ImageIO.read(new File("images/coal_inv.png"));
+            stone = ImageIO.read(new File("images/stone_inv.png"));
+            wood = ImageIO.read(new File("images/wood_inv.png"));
+            stick = ImageIO.read(new File("images/stick_inv.png"));
+            dirt = ImageIO.read(new File("images/dirt_inv.png"));
+            pickaxe = ImageIO.read(new File("images/pickaxe_inv.png"));
+            woodpickaxe = ImageIO.read(new File("images/pickaxe_wood_inv.png"));
+        } catch (Exception e) {
+
+        }
     }
 
     @Override
@@ -43,17 +54,23 @@ public class Hotbar implements InteractableObject {
         /**
          * Steuerung des roten Rechtecks mit Tasten
          */
-        if(displayed == true){
-            if (key == KeyEvent.VK_1) {
-                chosenX = 450;
-            }else if (key == KeyEvent.VK_2) {
-                chosenX = 485;
-            }else if (key == KeyEvent.VK_3) {
-                chosenX = 520;
-            }else if (key == KeyEvent.VK_4) {
-                chosenX = 555;
-            }else if (key == KeyEvent.VK_5) {
-                chosenX = 590;
+        if(displayed){
+            switch (key) {
+                case KeyEvent.VK_1:
+                    chosenX = 450;
+                    break;
+                case KeyEvent.VK_2:
+                    chosenX = 485;
+                    break;
+                case KeyEvent.VK_3:
+                    chosenX = 520;
+                    break;
+                case KeyEvent.VK_4:
+                    chosenX = 555;
+                    break;
+                case KeyEvent.VK_5:
+                    chosenX = 590;
+                    break;
             }
         }
     }
@@ -70,101 +87,48 @@ public class Hotbar implements InteractableObject {
 
     @Override
     public void draw(DrawingPanel dp, Graphics2D g2d) {
-        if(displayed = true) {
+        if(displayed) {
             /**
              * Items werden im Inventar gezeichnet und ein Stack auf eine Größe von 64 Items beschränkt
              */
             for (int i = 0; i < place.length; i++) {
-                if (place[i].top() == "Coal") {
-                    try {
-                        image = ImageIO.read(new File("images/coal_inv.png"));
-                    } catch (IOException e) {
+                if(!place[i].isEmpty()) {
+                    switch (place[i].top()) {
+                        case "Coal":
+                            image = coal;
+                            break;
+                        case "Dirt":
+                            image = dirt;
+                            break;
+                        case "Furnace":
+                            break;
+                        case "Stick":
+                            image = stick;
+                            break;
+                        case "Pickaxe":
+                            image = pickaxe;
+                            break;
+                        case "Wood":
+                            image = wood;
+                            break;
+                        case "Stone":
+                            image = stone;
+                            break;
+                        case "Woodpickaxe":
+                            image = woodpickaxe;
+                            break;
                     }
-                    g2d.drawImage(image,(int)(posX -125 + i * 35 + 8.75),(int)(posY +8.75) ,null);
-                    if(place[i].getSize() < 9) {
-                        g2d.drawString("" + place[i].getSize(), (int) (posX - 125) + i * 35 + 28, (int) posY + 32);
+                    g2d.drawImage(image, (int)(posX - 125 + i * 35 + 8.75), (int)(posY + 8.75), null);
+                    if(place[i].getSize() <= 9) {
+                        g2d.drawString("" + place[i].getSize(), posX - 125 + i * 35 + 28, posY + 32);
                     }else{
-                        g2d.drawString("" + place[i].getSize(), (int) (posX - 125) + i * 35 + 23, (int) posY + 32);
-                    }
-                }
-                if (place[i].top() == "Dirt") {
-                    try {
-                        image = ImageIO.read(new File("images/dirt_inv.png"));
-                    } catch (IOException e) {
-                    }
-                    g2d.drawImage(image,(int)(posX -125 + i * 35 + 8.75), (int)(posY +8.75) ,null);
-                    if(place[i].getSize() < 9) {
-                        g2d.drawString("" + place[i].getSize(), (int) (posX -125) + i * 35 + 28, (int) posY + 32);
-                    }else{
-                        g2d.drawString("" + place[i].getSize(), (int) (posX -125) + i * 35 + 23, (int) posY + 32);
-                    }
-                }
-                if (place[i].top() == "Furnace") {
-
-                    }else if(place[i].top() == "Stick"){
-                    try {
-                        image = ImageIO.read(new File("images/stick_inv.png"));
-                    } catch (IOException e) {
-                    }
-                    g2d.drawImage(image,(int)(posX -125 + i * 35 + 8.75), (int)(posY + 8.75),null);
-                    g2d.setColor(new Color(0, 0, 0));
-                        if(place[i].getSize() < 9) {
-                            g2d.drawString("" + place[i].getSize(), (int) (posX -125) + i * 35 + 28, (int) posY + 32);
-                        }else{
-                            g2d.drawString("" + place[i].getSize(), (int) (posX -125) + i * 35 + 23, (int) posY + 32);
-                        }
-                }else if(place[i].top() == "Pickaxe"){
-                    try {
-                        image = ImageIO.read(new File("images/pickaxe_inv.png"));
-                    } catch (IOException e) {
-                    }
-                    g2d.drawImage(image,(int)(posX -125 + i * 35 + 8.75), (int)(posY + 8.75),null);
-                    g2d.setColor(new Color(0, 0, 0));
-                        if(place[i].getSize() < 9) {
-                            g2d.drawString("" + place[i].getSize(), (int) (posX -125) + i * 35 + 28, (int) posY + 32);
-                        }else{
-                            g2d.drawString("" + place[i].getSize(), (int) (posX -125) + i * 35 + 23, (int) posY + 32);
-                        }
-                }else if(place[i].top() == "Wood") {
-                    try {
-                        image = ImageIO.read(new File("images/wood_inv.png"));
-                    } catch (IOException e) {
-                    }
-                    g2d.drawImage(image,(int)(posX -125 + i * 35 + 8.75), (int)(posY + 8.75),null);
-                    g2d.setColor(new Color(0, 0, 0));
-                        if(place[i].getSize() < 9) {
-                            g2d.drawString("" + place[i].getSize(), (int) (posX -125) + i * 35 + 28, (int) posY + 32);
-                        }else{
-                            g2d.drawString("" + place[i].getSize(), (int) (posX -125) + i * 35 + 23, (int) posY + 32);
-                        }
-                } else if(place[i].top() == "Stone") {
-                    try {
-                        image = ImageIO.read(new File("images/stone_inv.png"));
-                    } catch (IOException e) {
-                    }
-                    g2d.drawImage(image,(int)(posX -125 + i * 35 + 8.75), (int)(posY + 8.75),null);
-                    g2d.setColor(new Color(0, 0, 0));
-                        if(place[i].getSize() < 9) {
-                            g2d.drawString("" + place[i].getSize(), (int) (posX -125) + i * 35 + 28, (int) posY + 32);
-                        }else{
-                            g2d.drawString("" + place[i].getSize(), (int) (posX -125) + i * 35 + 23, (int) posY + 32);
-                        }
-                }else if(place[i].top() == "Woodpickaxe") {
-                    try {
-                        image = ImageIO.read(new File("images/pickaxe_wood_inv.png"));
-                    } catch (IOException e) {
-                    }
-                    g2d.drawImage(image, (int) (posX - 125 + i * 35 + 8.75), (int) (posY + 8.75), null);
-                    g2d.setColor(new Color(0, 0, 0));
-                    if (place[i].getSize() < 9) {
-                        g2d.drawString("" + place[i].getSize(), (int) (posX - 125) + i * 35 + 28, (int) posY + 32);
-                    } else {
-                        g2d.drawString("" + place[i].getSize(), (int) (posX - 125) + i * 35 + 23, (int) posY + 32);
+                        g2d.drawString("" + place[i].getSize(), posX - 125 + i * 35 + 23, posY + 32);
                     }
                 }
             }
+
             /**
-             * Zeichnen der Hotbar selber
+             * Zeichnen der Hotbar
              */
             g2d.setColor(new Color(79, 79, 79, 100));
             g2d.fill(backRectangle);
@@ -188,16 +152,15 @@ public class Hotbar implements InteractableObject {
     /**
      * den Plätzen werden String-Stacks hinzugefügt
      */
-    public void addNewStack(){
+    private void addNewStack(){
         for (int i = 0; i < place.length; i++) {
-            place[i] = new Stack<String>();
+            place[i] = new Stack<>();
         }
     }
 
-    public void setDisplayed(boolean displayed) {
-        this.displayed = displayed;
-    }
-
+    /**
+     * @return ob die Hotbar angezeigt wird.
+     */
     public boolean isDisplayed() {
         return displayed;
     }
@@ -206,10 +169,13 @@ public class Hotbar implements InteractableObject {
      * @param a
      * @return den Stack an der Stelle a
      */
-    public Stack getPlace(double a) {
-        return place[(int)a];
+    public Stack getPlace(int a) {
+        return place[a];
     }
 
+    /**
+     * @return die y-Position des Auswahlquadrates.
+     */
     public int getChosenX() {
         return chosenX;
     }
