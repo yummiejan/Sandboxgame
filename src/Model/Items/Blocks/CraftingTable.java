@@ -1,6 +1,5 @@
 package Model.Items.Blocks;
 
-import Model.DrawableObject;
 import View.DrawingPanel;
 
 import java.awt.*;
@@ -10,7 +9,7 @@ import java.awt.geom.Rectangle2D;
 /**
  * Created by Felix on 07.01.2017.
  */
-public class CraftingTable extends Block implements DrawableObject{
+public class CraftingTable extends Block {
 
     private Rectangle2D.Double rectangle;
     private Rectangle2D.Double craftField;
@@ -22,8 +21,6 @@ public class CraftingTable extends Block implements DrawableObject{
     private Line2D.Double line6;
     private Line2D.Double line7;
     private Line2D.Double line8;
-
-
 
     public CraftingTable(double posX, double posY) {
         super(posX, posY, true, "Craftingtable");
