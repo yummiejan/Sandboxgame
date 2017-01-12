@@ -36,6 +36,9 @@ public class InventoryHandler implements InteractableObject{
         for (int i = 0; i < 64; i++) {
             addNewItem("Dirt");
         }
+        for (int i = 0; i < 640; i++) {
+            addNewItem("Stick");
+        }
     }
 
     @Override
@@ -403,7 +406,6 @@ public class InventoryHandler implements InteractableObject{
             if(added){
                 break;
             }
-
         }
         if(!added) {
             for (int i = 0; i < firstInventory.getItemPlace().length; i++) {

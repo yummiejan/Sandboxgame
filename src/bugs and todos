@@ -8,7 +8,13 @@ Bugs
 - Man kann aus dem Fenster springen
 - Wenn man gehen durchdrückt und z.B. 5 Blöcke vor einem ein Loch ist, fliegt der Spieler nach 2 Blöcken durch den Boden,
     und das so tief, wie das Loch, das z.B. 5 Blöcke vor ihm tief ist.
-
+- Bugs beim Inventory:
+    - Wenn man einen leeren Slot in die Hotbar einfügt, wird der Stack in der Hotbar gelöscht
+    - Wenn man das gleiche bei dem Craftingtable tut, kommen ununterbrochen Fehlermeldungen
+    - Wenn man z.B. Holz craften will, wird eine Steinspitzhacke angezeigt
+    - Selbst wenn das Craftingrezept falsch ist (also z.B. das ganze Feld voller Sticks ist, kann man das Objekt craften
+    - Wie entfernt man gecraftete Objekte?
+    - MousePressed führt in dem Zustand teilweise zu Problemen
 
 Todo's innerhalb des Codes
 - funktionsfähiger Ofen
