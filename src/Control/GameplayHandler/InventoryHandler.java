@@ -106,7 +106,7 @@ public class InventoryHandler implements InteractableObject{
              * Items werden mit den Num-Tasten in die Hotbar gezogen
              */
             if (!firstCTI.isDisplayed()) {
-                if (key == KeyEvent.VK_NUMPAD1) {
+                if (key == KeyEvent.VK_NUMPAD1 && firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top() != null) {
                     //Zwei Hilfstacks werden erzeugt, damit dort die Stacks zum Tauschen kurz gespeichert werden können
                     Stack help = new Stack<String>();
                     Stack help2 = new Stack<String>();
@@ -126,7 +126,7 @@ public class InventoryHandler implements InteractableObject{
                             help2.push(firstHotbar.getPlace(0).top());
                             firstHotbar.getPlace(0).pop();
                         }
-                        for (int i = 0; i < 64 && !help2.isEmpty(); i++) {
+                        for (int i = 0;  i < 64 && !help2.isEmpty(); i++) {
                             firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).push(help2.top());
                             help2.pop();
                         }
@@ -136,7 +136,7 @@ public class InventoryHandler implements InteractableObject{
                         }
                     }
                 }
-                if (key == KeyEvent.VK_NUMPAD2) {
+                if (key == KeyEvent.VK_NUMPAD2 && firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top() != null) {
                     Stack help = new Stack<String>();
                     Stack help2 = new Stack<String>();
                     if (firstHotbar.getPlace(1).isEmpty()) {
@@ -163,7 +163,7 @@ public class InventoryHandler implements InteractableObject{
                         }
                     }
                 }
-                if (key == KeyEvent.VK_NUMPAD3) {
+                if (key == KeyEvent.VK_NUMPAD3 && firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top() != null) {
                     Stack help = new Stack<String>();
                     Stack help2 = new Stack<String>();
                     if (firstHotbar.getPlace(2).isEmpty()) {
@@ -190,7 +190,7 @@ public class InventoryHandler implements InteractableObject{
                         }
                     }
                 }
-                if (key == KeyEvent.VK_NUMPAD4) {
+                if (key == KeyEvent.VK_NUMPAD4 && firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top() != null) {
                     Stack help = new Stack<String>();
                     Stack help2 = new Stack<String>();
                     if (firstHotbar.getPlace(3).isEmpty()) {
@@ -217,7 +217,7 @@ public class InventoryHandler implements InteractableObject{
                         }
                     }
                 }
-                if (key == KeyEvent.VK_NUMPAD5) {
+                if (key == KeyEvent.VK_NUMPAD5 && firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top() != null) {
                     Stack help = new Stack<String>();
                     Stack help2 = new Stack<String>();
                     if (firstHotbar.getPlace(4).isEmpty()) {
@@ -244,23 +244,23 @@ public class InventoryHandler implements InteractableObject{
                         }
                     }
                 }
-            } else {
+            }else{
                 /**
                  * Bedinung des Craftingfeldes
                  */
-                if (key == KeyEvent.VK_NUMPAD1) {
+                if(key == KeyEvent.VK_NUMPAD1 && firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top() != null){
                     //Wenn der Platz leer ist, wird ganz normal das oberste Item des ausgewählten Stacks im Inventar hinzugefügt
-                    if (firstCTI.getCraftingPlace(0, 2).isEmpty()) {
+                    if(firstCTI.getCraftingPlace(0,2).isEmpty()) {
                         firstCTI.getCraftingPlace(0, 2).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
-                    } else {
+                    }else{
                         //Wenn doch etwas in dem Feld ist, wird dieses item dem Inventar wieder hinzugefügt (addNewItem) und der obrige Prozess wiederholt sich
                         addNewItem(firstCTI.getCraftingPlace(0, 2).top().toString());
                         firstCTI.getCraftingPlace(0, 2).pop();
                         firstCTI.getCraftingPlace(0, 2).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                     }
-                } else if (key == KeyEvent.VK_NUMPAD2) {
+                }else if(key == KeyEvent.VK_NUMPAD2 && firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top() != null) {
                     if (firstCTI.getCraftingPlace(1, 2).isEmpty()) {
                         firstCTI.getCraftingPlace(1, 2).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
@@ -270,7 +270,7 @@ public class InventoryHandler implements InteractableObject{
                         firstCTI.getCraftingPlace(1, 2).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                     }
-                } else if (key == KeyEvent.VK_NUMPAD3) {
+                }else if(key == KeyEvent.VK_NUMPAD3 && firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top() != null) {
                     if (firstCTI.getCraftingPlace(2, 2).isEmpty()) {
                         firstCTI.getCraftingPlace(2, 2).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
@@ -280,7 +280,7 @@ public class InventoryHandler implements InteractableObject{
                         firstCTI.getCraftingPlace(2, 2).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                     }
-                } else if (key == KeyEvent.VK_NUMPAD4) {
+                }else if(key == KeyEvent.VK_NUMPAD4 && firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top() != null) {
                     if (firstCTI.getCraftingPlace(0, 1).isEmpty()) {
                         firstCTI.getCraftingPlace(0, 1).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
@@ -290,7 +290,7 @@ public class InventoryHandler implements InteractableObject{
                         firstCTI.getCraftingPlace(0, 1).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                     }
-                } else if (key == KeyEvent.VK_NUMPAD5) {
+                }else if(key == KeyEvent.VK_NUMPAD5 && firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top() != null) {
                     if (firstCTI.getCraftingPlace(1, 1).isEmpty()) {
                         firstCTI.getCraftingPlace(1, 1).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
@@ -298,7 +298,7 @@ public class InventoryHandler implements InteractableObject{
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).push(firstCTI.getCraftingPlace(1, 1).top());
                         firstCTI.getCraftingPlace(1, 1).pop();
                     }
-                } else if (key == KeyEvent.VK_NUMPAD6) {
+                }else if(key == KeyEvent.VK_NUMPAD6 && firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top() != null) {
                     if (firstCTI.getCraftingPlace(2, 1).isEmpty()) {
                         firstCTI.getCraftingPlace(2, 1).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
@@ -308,7 +308,7 @@ public class InventoryHandler implements InteractableObject{
                         firstCTI.getCraftingPlace(2, 1).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                     }
-                } else if (key == KeyEvent.VK_NUMPAD7) {
+                }else if(key == KeyEvent.VK_NUMPAD7 && firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top() != null) {
                     if (firstCTI.getCraftingPlace(0, 0).isEmpty()) {
                         firstCTI.getCraftingPlace(0, 0).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
@@ -318,7 +318,7 @@ public class InventoryHandler implements InteractableObject{
                         firstCTI.getCraftingPlace(0, 0).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                     }
-                } else if (key == KeyEvent.VK_NUMPAD8) {
+                }else if(key == KeyEvent.VK_NUMPAD8 && firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top() != null) {
                     if (firstCTI.getCraftingPlace(1, 0).isEmpty()) {
                         firstCTI.getCraftingPlace(1, 0).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
@@ -328,8 +328,8 @@ public class InventoryHandler implements InteractableObject{
                         firstCTI.getCraftingPlace(1, 0).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                     }
-                } else if (key == KeyEvent.VK_NUMPAD9) {
-                    if (firstCTI.getCraftingPlace(2, 0).isEmpty()) {
+                }else if(key == KeyEvent.VK_NUMPAD9 && firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top() != null) {
+                        if (firstCTI.getCraftingPlace(2, 0).isEmpty()) {
                         firstCTI.getCraftingPlace(2, 0).push(firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top());
                         firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).pop();
                     } else {

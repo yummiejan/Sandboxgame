@@ -122,8 +122,6 @@ public class CraftingTableInventory implements InteractableObject{
 
     @Override
     public void update(double dt) {
-        System.out.println(craftList.getContent());
-
     }
 
     /**
