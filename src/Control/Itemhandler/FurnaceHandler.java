@@ -31,9 +31,9 @@ public class FurnaceHandler implements InteractableObject {
     private int currentPlace = 1;
     private Rectangle2D.Double currentRectangle;
     private Rectangle2D.Double loadingBalken;
-    private int x = 699; //49, 49+52+117, 49+52+117+52+117 verrechnet :(
-    private int y = 107; //107,
-    private int l, i;
+    private int x = 699;
+    private int y = 107;
+    private int l;
     private Image image, image2, image3, dirt, wood, stone, coal, stick;
 
     public FurnaceHandler(MainFrame frame, Furnace furnace) {
@@ -79,14 +79,13 @@ public class FurnaceHandler implements InteractableObject {
             /**
              * Der Ladebalken, der die aktuelle Produktion wiedergibt.
              */
+            loadingBalken.setFrame(700, 85, l, 10);
             g2d.draw(loadingBalken);
             g2d.fill(loadingBalken);
-            loadingBalken.setFrame(700, 85, l, 10);
             /**
              * Das vorderste bzw. oberste Objekt wird gemalt.
              */
             if(!objectQueue.isEmpty()){
-                System.out.println((objectQueue.front()));
                 if (objectQueue.front().equals("Dirt")) {
                     image = dirt;
                 }else if(objectQueue.front().equals("Wood")) {
@@ -110,12 +109,12 @@ public class FurnaceHandler implements InteractableObject {
                 } else if(fuelQueue.front().equals("Stick")) {
                     image2 = stick;
                 }
-                g2d.drawImage(image2, 883, 122, null);
+                g2d.drawImage(image2, 872, 122, null);
                 g2d.setColor(Color.BLACK);
                 if (fuelCounter <= 9) {
-                    g2d.drawString("" + fuelCounter, 883 + 28, 122 + 32);
+                    g2d.drawString("" + fuelCounter, 872 + 28, 122 + 32);
                 } else {
-                    g2d.drawString("" + fuelCounter, 883 + 23, 122 + 32);
+                    g2d.drawString("" + fuelCounter, 872 + 23, 122 + 32);
                 }
             }
             if(!productStack.isEmpty()) {
@@ -126,12 +125,12 @@ public class FurnaceHandler implements InteractableObject {
                 } else if(productStack.top().equals("Stone")) {
                     image3 = stone;
                 }
-                g2d.drawImage(image3, 1052, 122, null);
+                g2d.drawImage(image3, 1030, 122, null);
                 g2d.setColor(Color.BLACK);
                 if (productCounter <= 9) {
-                    g2d.drawString("" + productCounter, 1052 + 28, 122 + 32);
+                    g2d.drawString("" + productCounter, 1030 + 28, 122 + 32);
                 } else {
-                    g2d.drawString("" + productCounter, 1052 + 23, 122 + 32);
+                    g2d.drawString("" + productCounter, 1030 + 23, 122 + 32);
                 }
             }
         }
@@ -145,37 +144,14 @@ public class FurnaceHandler implements InteractableObject {
     @Override
     public void update(double dt) {
         /**
-         * Verschiedene Fuels haben verschiedene Lebensdauer.
+         * Sollte ursprünglich mit verschiedenen Lebensdauern pro Fuel arbeiten, aber die Inkompetenz hat gesiegt. (Lässt sich im Git nachschlagen.)
          */
-        if (!objectQueue.isEmpty() && !fuelQueue.isEmpty() && productCounter > 64) {
-            if(fuelQueue.front().equals("Coal")) {
-                while(l <= 300) {
-                    l += 20 * dt;
-                    recipes(dt);
-                    furnace.setActivated(true);
-                }
-                furnace.setActivated(false);
-                fuelQueue.dequeue();
-                l = 0;
-            } else if(fuelQueue.front().equals("Wood")) {
-                while(l <= 300) {
-                    l += 50 * dt;
-                    recipes(dt);
-                    furnace.setActivated(true);
-                }
-                furnace.setActivated(false);
-                fuelQueue.dequeue();
-                l = 0;
-            } else if(fuelQueue.front().equals("Stick")) {
-                while(l <= 300) {
-                    l += 100 * dt;
-                    recipes(dt);
-                    furnace.setActivated(true);
-                }
-                furnace.setActivated(false);
-                fuelQueue.dequeue();
-                l = 0;
-            }
+        if (!objectQueue.isEmpty() && !fuelQueue.isEmpty() && productCounter < 64) {
+            furnace.setActivated(true);
+            recipes();
+            removeFuel();
+        } else {
+            furnace.setActivated(false);
         }
     }
 
@@ -192,11 +168,11 @@ public class FurnaceHandler implements InteractableObject {
                 }
                 if (key == KeyEvent.VK_9) {
                     currentPlace = 2;
-                    x = 868;
+                    x = 857;
                 }
                 if (key == KeyEvent.VK_0) {
                     currentPlace = 3;
-                    x = 1037;
+                    x = 1015;
                 }
             }
         }
@@ -212,13 +188,8 @@ public class FurnaceHandler implements InteractableObject {
      * @param item Das anzuhängende Objekt.
      */
     public void addObject(String item) {
-        if (objectQueue.isEmpty()) {
-            objectQueue.enqueue(item);
-            objectCounter++;
-        } else if (objectCounter < 64 && objectQueue.front().equals(item)) {
-            objectQueue.enqueue(item);
-            objectCounter++;
-        }
+        objectQueue.enqueue(item);
+        objectCounter++;
     }
 
     /**
@@ -226,13 +197,17 @@ public class FurnaceHandler implements InteractableObject {
      * @param item Das anzuhängende Fuel.
      */
     public void addFuel(String item) {
-        if (fuelQueue.isEmpty()) {
-            fuelQueue.enqueue(item);
-            fuelCounter++;
-        } else if (fuelCounter < 64 && fuelQueue.front().equals(item)) {
-            fuelQueue.enqueue(item);
-            fuelCounter++;
-        }
+        fuelQueue.enqueue(item);
+        fuelCounter++;
+    }
+
+    /**
+     * Objekt wird zu Produkten hinzugefügt.
+     * @param item Das anzuhängende Produkt.
+     */
+    public void addProduct(String item) {
+        productStack.push(item);
+        productCounter++;
     }
 
     /**
@@ -260,31 +235,18 @@ public class FurnaceHandler implements InteractableObject {
     }
 
     /**
-     * Die Backrezepte. Aus Dreck wird Stein, aus Stein wird Dreck und aus Holz wird Kohle.
-     * @param dt Zeit.
+     * Die Backrezepte. Aus Dreck wird Stein, aus Stein wird Dreck und aus Holz wird Kohle..
      */
-    private void recipes(double dt) {
+    private void recipes() {
         if(objectQueue.front().equals("Wood")) {
-            while (i <= 100) {
-                i += 50 * dt;
-            }
-            productStack.push("Coal");
-            objectQueue.dequeue();
-            i = 0;
+            addProduct("Coal");
+            removeObject();
         } else if(objectQueue.front().equals("Stone")) {
-            while (i <= 100) {
-                i += 50 * dt;
-            }
-            productStack.push("Dirt");
-            objectQueue.dequeue();
-            i = 0;
+            addProduct("Dirt");
+            removeObject();
         } else if(objectQueue.front().equals("Dirt")) {
-            while (i <= 100) {
-                i += 50 * dt;
-            }
-            productStack.push("Stone");
-            objectQueue.dequeue();
-            i = 0;
+            addProduct("Stone");
+            removeObject();
         }
     }
 
@@ -318,5 +280,25 @@ public class FurnaceHandler implements InteractableObject {
 
     public void setEscape(boolean escape) {
         this.escape = escape;
+    }
+
+    public Queue getObjectQueue() {
+        return objectQueue;
+    }
+
+    public Queue getFuelQueue() {
+        return fuelQueue;
+    }
+
+    public Stack getProductStack() {
+        return productStack;
+    }
+
+    public int getObjectCounter() {
+        return objectCounter;
+    }
+
+    public int getFuelCounter() {
+        return fuelCounter;
     }
 }

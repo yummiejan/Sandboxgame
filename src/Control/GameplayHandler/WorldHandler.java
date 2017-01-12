@@ -129,24 +129,26 @@ public class WorldHandler implements InteractableObject{
         }
         if(invAndFurnaceOpened()) {
             if(key == KeyEvent.VK_MINUS) {
-                if(furnaceHandler.getCurrentPlace() == 1) {
+                if(furnaceHandler.getCurrentPlace() == 1 && !furnaceHandler.getObjectQueue().isEmpty()) {
                     invHandler.addNewItem(furnaceHandler.getFrontOQ());
                     furnaceHandler.removeObject();
-                } else if(furnaceHandler.getCurrentPlace() == 2) {
+                } else if(furnaceHandler.getCurrentPlace() == 2 && !furnaceHandler.getFuelQueue().isEmpty()) {
                     invHandler.addNewItem(furnaceHandler.getFrontFQ());
                     furnaceHandler.removeFuel();
-                } else if(furnaceHandler.getCurrentPlace() == 3) {
+                } else if(furnaceHandler.getCurrentPlace() == 3 && !furnaceHandler.getProductStack().isEmpty()) {
                     invHandler.addNewItem(furnaceHandler.getTopPS());
                     furnaceHandler.removeProduct();
                 }
             }
             if(key == KeyEvent.VK_PLUS) {
-                if(furnaceHandler.getCurrentPlace() == 1) {
+                if(furnaceHandler.getCurrentPlace() == 1 && furnaceHandler.getObjectCounter() < 64 && (invHandler.getCurrentItem().equals("Dirt") || invHandler.getCurrentItem().equals("Stone") || invHandler.getCurrentItem().equals("Wood"))) {
                     furnaceHandler.addObject(invHandler.getCurrentItem());
                     invHandler.removeCurrentItem();
-                } else if(furnaceHandler.getCurrentPlace() == 2) {
-                    furnaceHandler.addFuel(invHandler.getCurrentItem());
-                    invHandler.removeCurrentItem();
+                } else if(furnaceHandler.getCurrentPlace() == 2  && furnaceHandler.getFuelCounter() < 64 && (invHandler.getCurrentItem().equals("Coal") || invHandler.getCurrentItem().equals("Stick") || invHandler.getCurrentItem().equals("Wood"))) {
+                    if(furnaceHandler.getFuelQueue().isEmpty() || furnaceHandler.getFrontFQ().equals(invHandler.getCurrentItem())) {
+                        furnaceHandler.addFuel(invHandler.getCurrentItem());
+                        invHandler.removeCurrentItem();
+                    }
                 }
             }
         }
@@ -178,33 +180,37 @@ public class WorldHandler implements InteractableObject{
     public void draw(DrawingPanel dp, Graphics2D g2d) {
         g2d.drawImage(currentBackground, -15, 0, null);
         if (escape) {
-            g2d.setColor(new Color(0, 0, 0, 200));
+            g2d.setColor(new Color(0, 0, 0, 215));
             g2d.draw(escapeRectangle);
             g2d.fill(escapeRectangle);
             g2d.setColor(Color.WHITE);
             g2d.setFont(new Font("Minecraft", Font.PLAIN, 30));
-            g2d.drawString("Head coordinates: " + (player.getPosX() / 50 + 1) + ", " + (player.getPosY() / 50 + 1), 100, 100);
+            g2d.drawString("Head coordinates:   " + (player.getPosX() / 50 + 1) + ", " + (player.getPosY() / 50 + 1), 100, 100);
             String currentBlock;
             if (player.getBlock() == null) {
                 currentBlock = "None";
             } else {
                 currentBlock = player.getBlock().getName();
             }
-            g2d.drawString("Direction block: " + currentBlock, 100, 200);
+            g2d.drawString("Direction block:   " + currentBlock, 100, 160);
             String currentHItem;
             if (invHandler.getCurrentHItem().equals("null")) {
                 currentHItem = "None";
             } else {
                 currentHItem = "" + invHandler.getCurrentHItem();
             }
-            g2d.drawString("Current hotbar item: " + currentHItem, 100, 300);
+            g2d.drawString("Current hotbar item:   " + currentHItem, 100, 220);
             String currentIItem;
             if (invHandler.getCurrentItem().equals("null")) {
                 currentIItem = "None";
             } else {
                 currentIItem = invHandler.getCurrentItem();
             }
-            g2d.drawString("Current inventory item: " + currentIItem, 100, 400);
+            g2d.drawString("Current inventory item:   " + currentIItem, 100, 280);
+            g2d.drawString("Total jumps:   " + player.getJumps(), 100, 340);
+            g2d.drawString("Total moves:   " + player.getMoves(), 100, 400);
+            g2d.drawString("Total placed blocks:   " + player.getPlacedBlocks(), 100, 460);
+            g2d.drawString("Total ripped blocks:   " + player.getRippedBlocks(), 100, 520);
         }
     }
 

@@ -21,12 +21,9 @@ public class Player extends Creature implements InteractableObject {
 
     private WorldHandler wh;
     private InventoryHandler ih;
-    private int posX, posY, wantedX;
-    private double velY,gravity;
-    private boolean onGround;
-    private int direction;
-    private boolean up;
-    private boolean moveBlocked;
+    private int posX, posY, wantedX, direction, jumps, moves, placedBlocks, rippedBlocks;
+    private double velY, gravity;
+    private boolean onGround, up, moveBlocked;
     private BufferedImage playerStanding, playerRight, playerLeft;
     private Image currentImage;
 
@@ -52,6 +49,7 @@ public class Player extends Creature implements InteractableObject {
             switch (key) {
                 case KeyEvent.VK_W:
                     if (!isBlock(2)) {
+                        jumps++;
                         startJump();
                     }
                     direction = 2;
@@ -60,8 +58,10 @@ public class Player extends Creature implements InteractableObject {
                     currentImage = playerLeft;
                     if (!isBlock(1) && !isBlock(5)) {
                         if (isBlock(3)) {
+                            moves++;
                             wantedX -= 50;
                         } else if (!isBlock(7)) {
+                            moves++;
                             wantedX -= 50;
                         }
                     }
@@ -74,8 +74,10 @@ public class Player extends Creature implements InteractableObject {
                     currentImage = playerRight;
                     if (!isBlock(0) && !isBlock(4)) {
                         if (isBlock(3)) {
+                            moves++;
                             wantedX += 50;
                         } else if (!isBlock(6)) {
+                            moves++;
                             wantedX += 50;
                         }
                     }
@@ -229,6 +231,7 @@ public class Player extends Creature implements InteractableObject {
             case 0:
                 if (up){
                     if(isBlock(4)){
+                        rippedBlocks++;
                         b = wh.getAllBlocks((posX / 50) + 1, posY / 50);
                         if(b.getName().equals("Stone") || b.getName().equals("Coal")){
                             if(ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe"){
@@ -248,6 +251,7 @@ public class Player extends Creature implements InteractableObject {
                     }
                 }else{
                     if (isBlock(0)){
+                        rippedBlocks++;
                         b = wh.getAllBlocks((posX / 50) + 1, posY / 50 + 1);
                         if(b.getName().equals("Stone") || b.getName().equals("Coal")) {
                             if (ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe") {
@@ -270,6 +274,7 @@ public class Player extends Creature implements InteractableObject {
             case 1:
                 if(up){
                     if(isBlock(5)){
+                        rippedBlocks++;
                         b = wh.getAllBlocks((posX / 50) - 1, posY / 50);
                         if(b.getName().equals("Stone") || b.getName().equals("Coal")) {
                             if (ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe") {
@@ -289,6 +294,7 @@ public class Player extends Creature implements InteractableObject {
                     }
                 }else{
                     if(isBlock(1)) {
+                        rippedBlocks++;
                         b = wh.getAllBlocks((posX / 50) - 1, posY / 50 + 1);
                         if(b.getName().equals("Stone") || b.getName().equals("Coal")) {
                             if (ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe") {
@@ -310,6 +316,7 @@ public class Player extends Creature implements InteractableObject {
                 break;
             case 2:
                 if(isBlock(2) && (wh.xBlockLevel(posX / 50) < 12)){
+                    rippedBlocks++;
                     b = wh.getAllBlocks((posX / 50), posY / 50 - 1);
                     if(b.getName().equals("Stone") || b.getName().equals("Coal")) {
                         if (ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe") {
@@ -330,6 +337,7 @@ public class Player extends Creature implements InteractableObject {
                 break;
             case 3:
                 if(isBlock(3) && (wh.xBlockLevel(posX / 50) < 12)){
+                    rippedBlocks++;
                     b = wh.getAllBlocks((posX / 50), posY / 50 + 2);
                     if(b.getName().equals("Stone") || b.getName().equals("Coal")) {
                         if (ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).top() == "Pickaxe" || ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX()/35)-12).top() == "Woodpickaxe") {
@@ -358,6 +366,7 @@ public class Player extends Creature implements InteractableObject {
      */
     private void place(Block b){
         if(direction == 0){
+            placedBlocks++;
             wh.setAllBlocks(posX / 50 + 1, posY / 50 + 1, b);
             wh.getFrame().getActiveDrawingPanel().addObject(wh.getAllBlocks((posX / 50) + 1, (posY / 50) + 1));
             ih.getFirstHotbar().getPlace((ih.getFirstHotbar().getChosenX() / 35) - 12).pop();
@@ -402,5 +411,33 @@ public class Player extends Creature implements InteractableObject {
      */
     public int getPosX() {
         return posX;
+    }
+
+    /**
+     * @return Anzahl der Jumps.
+     */
+    public int getJumps() {
+        return jumps;
+    }
+
+    /**
+     * @return Anzahl der Schritte.
+     */
+    public int getMoves() {
+        return moves;
+    }
+
+    /**
+     * @return Anzahl gesetzter Blöcke.
+     */
+    public int getPlacedBlocks() {
+        return placedBlocks;
+    }
+
+    /**
+     * @return Anzahl abgebauter Blöcke.
+     */
+    public int getRippedBlocks() {
+        return rippedBlocks;
     }
 }
