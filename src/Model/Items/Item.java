@@ -14,7 +14,6 @@ public abstract class Item implements DrawableObject {
 
     public Item(String name) {
         this.name = name;
-
     }
 
     @Override

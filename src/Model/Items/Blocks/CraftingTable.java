@@ -1,6 +1,5 @@
 package Model.Items.Blocks;
 
-import Control.GameplayHandler.WorldHandler;
 import Model.DrawableObject;
 import View.DrawingPanel;
 
@@ -30,14 +29,14 @@ public class CraftingTable extends Block implements DrawableObject{
         super(posX, posY, true, "Craftingtable");
         rectangle = new Rectangle2D.Double(posX, posY, 50, 50);
         craftField = new Rectangle2D.Double(posX, posY, 50, 8);
-        line = new Line2D.Double(posX+10,posY,posX+10,posY+50);
-        line2 = new Line2D.Double(posX+20,posY,posX+20,posY+50);
-        line3 = new Line2D.Double(posX+30,posY,posX+30,posY+50);
-        line4 = new Line2D.Double(posX+40,posY,posX+40,posY+50);
-        line5 = new Line2D.Double(posX,posY+10,posX+50,posY+10);
-        line6 = new Line2D.Double(posX,posY+20,posX+50,posY+20);
-        line7 = new Line2D.Double(posX,posY+30,posX+50,posY+30);
-        line8 = new Line2D.Double(posX,posY+40,posX+50,posY+40);
+        line = new Line2D.Double(posX + 10, posY, posX + 10, posY + 50);
+        line2 = new Line2D.Double(posX + 20, posY, posX + 20, posY + 50);
+        line3 = new Line2D.Double(posX + 30, posY, posX + 30, posY + 50);
+        line4 = new Line2D.Double(posX + 40, posY, posX + 40, posY + 50);
+        line5 = new Line2D.Double(posX, posY + 10, posX + 50, posY + 10);
+        line6 = new Line2D.Double(posX, posY + 20, posX + 50, posY + 20);
+        line7 = new Line2D.Double(posX, posY + 30, posX + 50, posY + 30);
+        line8 = new Line2D.Double(posX, posY + 40, posX + 50, posY + 40);
     }
 
     @Override
@@ -45,7 +44,7 @@ public class CraftingTable extends Block implements DrawableObject{
         if(super.isDisplayed()){
             g2d.setColor(new Color(131, 66, 23));
             g2d.fill(rectangle);
-            g2d.setColor(new Color(0,0,0));
+            g2d.setColor(new Color(0, 0, 0));
             g2d.draw(rectangle);
             g2d.draw(line);
             g2d.draw(line2);

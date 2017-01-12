@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Created by 204g04 on 12.12.2016.
  */
-public abstract class Block extends Item implements DrawableObject {
+public abstract class Block extends Item {
 
     private Image image, coal, grass, stone, wood, brushes, dirt;
     private double posX, posY;
@@ -40,16 +40,22 @@ public abstract class Block extends Item implements DrawableObject {
         switch (name) {
             case "Coal":
                 image = coal;
+                break;
             case "Stone":
                 image = stone;
+                break;
             case "Wood":
                 image = wood;
+                break;
             case "Grass":
                 image = grass;
+                break;
             case "Brushes":
                 image = brushes;
+                break;
             case "Dirt":
                 image = dirt;
+                break;
         }
     }
 
@@ -97,10 +103,16 @@ public abstract class Block extends Item implements DrawableObject {
         return name;
     }
 
+    /**
+     * @return x-Position des Blocks.
+     */
     public double getPosX() {
         return posX;
     }
 
+    /**
+     * @return y-Position des Blocks.
+     */
     public double getPosY(){
         return posY;
     }
