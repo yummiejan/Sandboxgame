@@ -58,6 +58,11 @@ public class FurnaceHandler implements InteractableObject {
     public void draw(DrawingPanel dp, Graphics2D g2d) {
         if (guiDisplayed){
             /**
+             * Schriftart wird festgelegt. Original Minecraft-Font
+             */
+            g2d.setColor(Color.BLACK);
+            g2d.setFont(new Font("Minecraft", Font.PLAIN, 10));
+            /**
              * Bild des GUIs wird geladen und gemalt.
              */
             try {

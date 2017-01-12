@@ -353,6 +353,7 @@ public class InventoryHandler implements InteractableObject{
 
     @Override
     public void mouseReleased(MouseEvent e) {
+
     }
 
     @Override
@@ -439,6 +440,14 @@ public class InventoryHandler implements InteractableObject{
      */
     public String getCurrentItem() {
         String thing = ""+firstInventory.getItemPlacePlace(firstInventory.getChosenX() / 35, firstInventory.getChosenY() / 35).top();
+        return thing;
+    }
+
+    /**
+     * @return das aktuelle Objekt der Hotbar.
+     */
+    public String getCurrentHItem() {
+        String thing = "" + firstHotbar.getPlace((firstHotbar.getChosenX() - 450) / 35).top();
         return thing;
     }
 

@@ -12,6 +12,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 
@@ -31,6 +33,7 @@ public class WorldHandler implements InteractableObject{
     private FurnaceHandler furnaceHandler;
     private boolean escape;
     private Rectangle2D.Double escapeRectangle;
+    private Font font;
 
     public WorldHandler(MainFrame frame){
         this.frame = frame;
@@ -40,6 +43,11 @@ public class WorldHandler implements InteractableObject{
             //background = ImageIO.read(new File("images/background.png"));
             invBackground = ImageIO.read(new File("images/background.png"));
         } catch (IOException e) {}
+        try {
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/mcfont.ttf"));
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("fonts/mcfont.ttf")));
+        } catch (IOException | FontFormatException e) {}
         currentBackground = background;
         escapeRectangle = new Rectangle2D.Double(-10, -10, 1200, 700);
 
@@ -173,6 +181,30 @@ public class WorldHandler implements InteractableObject{
             g2d.setColor(new Color(0, 0, 0, 200));
             g2d.draw(escapeRectangle);
             g2d.fill(escapeRectangle);
+            g2d.setColor(Color.WHITE);
+            g2d.setFont(new Font("Minecraft", Font.PLAIN, 30));
+            g2d.drawString("Head coordinates: " + (player.getPosX() / 50 + 1) + ", " + (player.getPosY() / 50 + 1), 100, 100);
+            String currentBlock;
+            if (player.getBlock() == null) {
+                currentBlock = "None";
+            } else {
+                currentBlock = player.getBlock().getName();
+            }
+            g2d.drawString("Direction block: " + currentBlock, 100, 200);
+            String currentHItem;
+            if (invHandler.getCurrentHItem().equals("null")) {
+                currentHItem = "None";
+            } else {
+                currentHItem = "" + invHandler.getCurrentHItem();
+            }
+            g2d.drawString("Current hotbar item: " + currentHItem, 100, 300);
+            String currentIItem;
+            if (invHandler.getCurrentItem().equals("null")) {
+                currentIItem = "None";
+            } else {
+                currentIItem = invHandler.getCurrentItem();
+            }
+            g2d.drawString("Current inventory item: " + currentIItem, 100, 400);
         }
     }
 

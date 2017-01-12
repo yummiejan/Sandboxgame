@@ -122,6 +122,7 @@ public class CraftingTableInventory implements InteractableObject{
 
     @Override
     public void update(double dt) {
+
     }
 
     /**

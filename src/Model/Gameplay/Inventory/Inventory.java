@@ -147,7 +147,8 @@ public class Inventory implements InteractableObject {
                                 break;
                         }
                         g2d.drawImage(image, (int) (posX + i * 35 + 8.75), (int) (posY + j * 35 + 8.75), null);
-                        g2d.setColor(new Color(0, 0, 0));
+                        g2d.setColor(Color.BLACK);
+                        g2d.setFont(new Font("Minecraft", Font.PLAIN, 10));
                         if (itemPlace[i][j].getSize() <= 9) {
                             g2d.drawString("" + itemPlace[i][j].getSize(), (int) posX + i * 35 + 28, (int) posY + j * 35 + 32);
                         } else {

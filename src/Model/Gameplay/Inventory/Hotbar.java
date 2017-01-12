@@ -119,6 +119,8 @@ public class Hotbar implements InteractableObject {
                             break;
                     }
                     g2d.drawImage(image, (int)(posX - 125 + i * 35 + 8.75), (int)(posY + 8.75), null);
+                    g2d.setColor(Color.BLACK);
+                    g2d.setFont(new Font("Minecraft", Font.PLAIN, 10));
                     if(place[i].getSize() <= 9) {
                         g2d.drawString("" + place[i].getSize(), posX - 125 + i * 35 + 28, posY + 32);
                     }else{

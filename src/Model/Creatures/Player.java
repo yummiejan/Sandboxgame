@@ -396,4 +396,11 @@ public class Player extends Creature implements InteractableObject {
     public int getPosY() {
         return posY;
     }
+
+    /**
+     * @return die x-Position.
+     */
+    public int getPosX() {
+        return posX;
+    }
 }
