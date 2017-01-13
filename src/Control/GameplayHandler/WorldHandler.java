@@ -61,9 +61,9 @@ public class WorldHandler implements InteractableObject{
                 }
                 //TODO Random Chance für grass spawnen & Grass muss mit entfernt werden, wenn dadrunter der Block abgebaut wird
                 double randomGrass = (Math.random());
-                if(counter == j - 1 && randomGrass >= 0.3){
-                    allBlocks[i][j] = new Brushes(i * 50, (j - 2) * 50);
-                    frame.getActiveDrawingPanel().addObject(allBlocks[i][j]);
+                if(counter == j && randomGrass >= 0.3){
+                    allBlocks[i][j-1] = new Brushes(i * 50, (j - 1) * 50);
+                    frame.getActiveDrawingPanel().addObject(allBlocks[i][j-1]);
                 }
                 if (j > counter) {
                     int random = (int) (Math.random() * 3) + 1;

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>MainProgram</OriginalElement>
+  <nodes>
+    <node x="327.9285714285712" y="47.071428571428555">Model.Gameplay.Inventory.Inventory</node>
+    <node x="-272.7936507936507" y="-105.2142857142859">Model.Items.Blocks.Stone</node>
+    <node x="-516.3650793650792" y="219.92857142857133">Model.Items.Blocks.Brushes</node>
+    <node x="191.9999999999999" y="-887.4999999999999">Model.DrawableObject</node>
+    <node x="-767.4365079365078" y="232.78571428571405">Model.Items.Blocks.Wood</node>
+    <node x="-482.43650793650784" y="-261.85714285714295">Model.Items.Blocks.Dirt</node>
+    <node x="-773.1507936507937" y="-143.78571428571433">Model.Items.Blocks.Block</node>
+    <node x="-267.2222222222222" y="-5.571428571428783">Model.Items.Blocks.Grass</node>
+    <node x="849.4999999999997" y="-127.0">Control.Itemhandler.FurnaceHandler</node>
+    <node x="-39.0" y="137.4999999999999">Model.Gameplay.Inventory.Hotbar</node>
+    <node x="-717.3650793650793" y="-631.0714285714286">Model.Items.Items.Pickaxe</node>
+    <node x="1099.9999999999995" y="-792.9999999999997">Control.GameplayHandler.WorldHandler</node>
+    <node x="179.4999999999999" y="682.5">MainProgram</node>
+    <node x="-291.0" y="-206.5">Control.MainController</node>
+    <node x="-725.1507936507937" y="-790.4999999999999">Model.Items.Items.Stick</node>
+    <node x="1067.4999999999995" y="-496.4999999999999">Control.GameplayHandler.InventoryHandler</node>
+    <node x="-316.3650793650794" y="216.35714285714272">Model.Items.Blocks.Coal</node>
+    <node x="-685.7936507936505" y="362.7142857142853">Model.Items.Blocks.Furnace</node>
+    <node x="-332.00000000000006" y="-646.0">Model.Gameplay.Inventory.CraftingTableInventory</node>
+    <node x="-301.7222222222223" y="84.57142857142833">Model.Items.Blocks.CraftingTable</node>
+    <node x="-519.5079365079366" y="-742.9285714285716">Model.Items.Item</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Model.Items.Blocks.Grass" target="Model.Items.Blocks.Block">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Model.Items.Items.Pickaxe" target="Model.Items.Item">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Model.Items.Blocks.Coal" target="Model.Items.Blocks.Block">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Control.GameplayHandler.WorldHandler" target="Model.DrawableObject">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Model.Items.Blocks.Brushes" target="Model.Items.Blocks.Block">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Model.Items.Blocks.Dirt" target="Model.Items.Blocks.Block">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Model.Gameplay.Inventory.Inventory" target="Model.DrawableObject">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Model.Gameplay.Inventory.Hotbar" target="Model.DrawableObject">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Model.Gameplay.Inventory.CraftingTableInventory" target="Model.DrawableObject">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Model.Items.Items.Stick" target="Model.Items.Item">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Control.GameplayHandler.InventoryHandler" target="Model.DrawableObject">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Model.Items.Blocks.Block" target="Model.Items.Item">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Model.Items.Item" target="Model.DrawableObject">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Model.Items.Blocks.Stone" target="Model.Items.Blocks.Block">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Control.Itemhandler.FurnaceHandler" target="Model.DrawableObject">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Model.Items.Blocks.Furnace" target="Model.Items.Blocks.Block">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Model.Items.Blocks.CraftingTable" target="Model.Items.Blocks.Block">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Model.Items.Blocks.Wood" target="Model.Items.Blocks.Block">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.4" x="387.75" y="-208.83333333333394" />
+  <SelectedNodes>
+    <node>MainProgram</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
